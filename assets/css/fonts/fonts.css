@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'Tahoma';
+    src: url('Tahoma.eot');
+    src: url('Tahoma.eot?#iefix') format('embedded-opentype'),
+        url('Tahoma.woff2') format('woff2'),
+        url('Tahoma.woff') format('woff'),
+        url('Tahoma.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Tahoma';
+    src: url('Tahoma_1.eot');
+    src: url('Tahoma_1.eot?#iefix') format('embedded-opentype'),
+        url('Tahoma_1.woff2') format('woff2'),
+        url('Tahoma_1.woff') format('woff'),
+        url('Tahoma_1.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Tahoma Bold';
+    src: url('Tahoma-Bold.eot');
+    src: url('Tahoma-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Tahoma-Bold.woff2') format('woff2'),
+        url('Tahoma-Bold.woff') format('woff'),
+        url('Tahoma-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Tahoma';
+    src: url('Tahoma-Bold_1.eot');
+    src: url('Tahoma-Bold_1.eot?#iefix') format('embedded-opentype'),
+        url('Tahoma-Bold_1.woff2') format('woff2'),
+        url('Tahoma-Bold_1.woff') format('woff'),
+        url('Tahoma-Bold_1.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
