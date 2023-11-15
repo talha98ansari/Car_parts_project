@@ -6,7 +6,7 @@
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
-            <img src="{{ asset('argon') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">
+            <img src="{{asset('front/images/logo.png')}}" style="background:#ff4e00" class="navbar-brand-img" alt="...">
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
@@ -84,27 +84,112 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
-                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Laravel Examples') }}</span>
+                    <a class="nav-link " href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+                        <i class="ni ni-single-02" style="color: #f4645f;"></i>
+                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Vendors') }}</span>
                     </a>
 
-                    <div class="collapse show" id="navbar-examples">
+                    <div class="collapse hide" id="navbar-examples">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('profile.edit') }}">
-                                    {{ __('User profile') }}
+                                <a class="nav-link" href="{{ route('vendors.index') }}">
+                                    {{ __('List') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">
-                                    {{ __('User Management') }}
+                                <a class="nav-link" href="{{ route('vendors.create') }}">
+                                    {{ __('Add New Vendor') }}
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link " href="#navbar-users" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-users">
+                        <i class="ni ni-circle-08" style="color: #f4645f;"></i>
+                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Users') }}</span>
+                    </a>
+
+                    <div class="collapse " id="navbar-users">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.index') }}">
+                                    {{ __('List') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.create') }}">
+                                    {{ __('Add New User') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="#navbar-categories" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-categories">
+                        <i class="ni ni-basket" style="color: #f4645f;"></i>
+                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Categories') }}</span>
+                    </a>
+
+                    <div class="collapse " id="navbar-categories">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('categories.index') }}">
+                                    {{ __('List') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('categories.create') }}">
+                                    {{ __('Add New Category') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="#navbar-partType" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-partType">
+                        <i class="ni ni-settings" style="color: #f4645f;"></i>
+                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Part Type') }}</span>
+                    </a>
+
+                    <div class="collapse " id="navbar-partType">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('partType.index') }}">
+                                    {{ __('List') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('partType.create') }}">
+                                    {{ __('Add New Type') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="#navbar-parts" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-parts">
+                        <i class="ni ni-settings-gear-65" style="color: #f4645f;"></i>
+                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Parts') }}</span>
+                    </a>
+
+                    <div class="collapse " id="navbar-parts">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('parts.index') }}">
+                                    {{ __('List') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('parts.create') }}">
+                                    {{ __('Add New Part') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+{{--
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('icons') }}">
                         <i class="ni ni-planet text-blue"></i> {{ __('Icons') }}
@@ -125,17 +210,17 @@
                     <a class="nav-link" href="#">
                         <i class="ni ni-circle-08 text-pink"></i> {{ __('Register') }}
                     </a>
-                </li>
-                <li class="nav-item mb-5 mr-4 ml-4 pl-1 bg-danger" style="position: absolute; bottom: 0;">
+                </li> --}}
+                {{-- <li class="nav-item mb-5 mr-4 ml-4 pl-1 bg-danger" style="position: absolute; bottom: 0;">
                     <a class="nav-link text-white" href="https://www.creative-tim.com/product/argon-dashboard-pro-laravel" target="_blank">
                         <i class="ni ni-cloud-download-95"></i> Upgrade to PRO
                     </a>
-                </li>
+                </li> --}}
             </ul>
             <!-- Divider -->
             <hr class="my-3">
             <!-- Heading -->
-            <h6 class="navbar-heading text-muted">Documentation</h6>
+            {{-- <h6 class="navbar-heading text-muted">Documentation</h6>
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
@@ -153,7 +238,7 @@
                         <i class="ni ni-ui-04"></i> Components
                     </a>
                 </li>
-            </ul>
+            </ul> --}}
         </div>
     </div>
 </nav>

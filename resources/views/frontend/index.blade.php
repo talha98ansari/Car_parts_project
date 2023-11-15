@@ -12,9 +12,9 @@
                                 <h1 class="text-uppercase">ORiginal <span class="orange-text"> car </span> parts</h1>
                                 <h6>YOUR cars specialist</h6>
                                 <h3 class="mt-4">25% off</h3>
-                                <p class="semi-bold">Lorem Ipsum es simplemente el texto de relleno de las <br>
-                                    imprentas y archivos de texto. Lorem Ipsum ha sido el <br> texto de relleno estándar
-                                    de las industrias desde el <br> año 1500</p>
+                                <p class="semi-bold col-md-5" >Lorem Ipsum es simplemente el texto de relleno de las
+                                    imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar
+                                    de las industrias desde el año 1500</p>
                                 <button class="site-btn mt-4">SHOP NOW</button>
                             </div>
                         </div>
@@ -131,119 +131,25 @@
                 <div class="col-12">
                     <h6 class="p-md mb-3 text-uppercase">AUTODOC car parts catalogue</h6>
                 </div>
+                @foreach ($categories as $c )
+
                 <div class="col-lg-3 col-md-4 col-sm-6 my-3">
                     <a href="#_" class="d-block">
                         <div class="catalogue-card">
                             <div class="catalogue-card-inner">
                                 <div class="catalogue-img">
-                                    <img src="{{asset('front/images/catalogue-1.png')}}" alt="" class="img-fluid">
+                                    <img src="{{asset($c->image)}}" alt="" class="img-fluid">
                                 </div>
                                 <div class="mt-3">
-                                    <p class="p-lg mb-0">Engine</p>
+                                    <p class="p-lg mb-0">{{$c->name ?? ''}}</p>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 my-3">
-                    <a href="#_" class="d-block">
-                        <div class="catalogue-card">
-                            <div class="catalogue-card-inner">
-                                <div class="catalogue-img">
-                                    <img src="{{asset('front/images/catalogue-2.png')}}" alt="" class="img-fluid">
-                                </div>
-                                <div class="mt-3">
-                                    <p class="p-lg mb-0">Brakes</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 my-3">
-                    <a href="#_" class="d-block">
-                        <div class="catalogue-card">
-                            <div class="catalogue-card-inner">
-                                <div class="catalogue-img">
-                                    <img src="{{asset('front/images/catalogue-3.png')}}" alt="" class="img-fluid">
-                                </div>
-                                <div class="mt-3">
-                                    <p class="p-lg mb-0">Filter</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 my-3">
-                    <a href="#_" class="d-block">
-                        <div class="catalogue-card">
-                            <div class="catalogue-card-inner">
-                                <div class="catalogue-img">
-                                    <img src="{{asset('front/images/catalogue-4.png')}}" alt="" class="img-fluid">
-                                </div>
-                                <div class="mt-3">
-                                    <p class="p-lg mb-0">Oils</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 my-3">
-                    <a href="#_" class="d-block">
-                        <div class="catalogue-card">
-                            <div class="catalogue-card-inner">
-                                <div class="catalogue-img">
-                                    <img src="{{asset('front/images/catalogue-5.png')}}" alt="" class="img-fluid">
-                                </div>
-                                <div class="mt-3">
-                                    <p class="p-lg mb-0">Tyres</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 my-3">
-                    <a href="#_" class="d-block">
-                        <div class="catalogue-card">
-                            <div class="catalogue-card-inner">
-                                <div class="catalogue-img">
-                                    <img src="{{asset('front/images/catalogue-6.png')}}" alt="" class="img-fluid">
-                                </div>
-                                <div class="mt-3">
-                                    <p class="p-lg mb-0">Electrics</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 my-3">
-                    <a href="#_" class="d-block">
-                        <div class="catalogue-card">
-                            <div class="catalogue-card-inner">
-                                <div class="catalogue-img">
-                                    <img src="{{asset('front/images/catalogue-7.png')}}" alt="" class="img-fluid">
-                                </div>
-                                <div class="mt-3">
-                                    <p class="p-lg mb-0">Suspension</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 my-3">
-                    <a href="#_" class="d-block">
-                        <div class="catalogue-card">
-                            <div class="catalogue-card-inner">
-                                <div class="catalogue-img">
-                                    <img src="{{asset('front/images/catalogue-8.png')}}" alt="" class="img-fluid">
-                                </div>
-                                <div class="mt-3">
-                                    <p class="p-lg mb-0">Wipers</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-12 text-center mt-md-5 mt-4 mb-3">
+                @endforeach
+
+                                <div class="col-12 text-center mt-md-5 mt-4 mb-3">
                     <button class="site-btn">Shop Now</button>
                 </div>
             </div>
@@ -299,114 +205,23 @@
                 </div>
                 <div class="col-12">
                     <div class="owl-carousel product-carousel owl-theme">
+                       @foreach ($categories as $c )
+
                         <div class="item">
                             <div class="catalogue-card">
                                 <div class="catalogue-card-inner">
                                     <div class="catalogue-img">
-                                        <img src="{{asset('front/images/catalogue-1.png')}}" alt="" class="img-fluid">
+                                        <img src="{{asset($c->image)}}" alt="" class="img-fluid">
                                     </div>
                                     <div class="mt-3">
-                                        <p class="p-lg mb-0">Engine</p>
+                                        <p class="p-lg mb-0">{{$c->name ?? ''}}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="item">
-                            <div class="catalogue-card">
-                                <div class="catalogue-card-inner">
-                                    <div class="catalogue-img">
-                                        <img src="{{asset('front/images/catalogue-2.png')}}" alt="" class="img-fluid">
-                                    </div>
-                                    <div class="mt-3">
-                                        <p class="p-lg mb-0">Brakes</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="catalogue-card">
-                                <div class="catalogue-card-inner">
-                                    <div class="catalogue-img">
-                                        <img src="{{asset('front/images/catalogue-3.png')}}" alt="" class="img-fluid">
-                                    </div>
-                                    <div class="mt-3">
-                                        <p class="p-lg mb-0">Filters</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="catalogue-card">
-                                <div class="catalogue-card-inner">
-                                    <div class="catalogue-img">
-                                        <img src="{{asset('front/images/catalogue-1.png')}}" alt="" class="img-fluid">
-                                    </div>
-                                    <div class="mt-3">
-                                        <p class="p-lg mb-0">Engine</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="catalogue-card">
-                                <div class="catalogue-card-inner">
-                                    <div class="catalogue-img">
-                                        <img src="{{asset('front/images/catalogue-2.png')}}" alt="" class="img-fluid">
-                                    </div>
-                                    <div class="mt-3">
-                                        <p class="p-lg mb-0">Brakes</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="catalogue-card">
-                                <div class="catalogue-card-inner">
-                                    <div class="catalogue-img">
-                                        <img src="{{asset('front/images/catalogue-3.png')}}" alt="" class="img-fluid">
-                                    </div>
-                                    <div class="mt-3">
-                                        <p class="p-lg mb-0">Filters</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="catalogue-card">
-                                <div class="catalogue-card-inner">
-                                    <div class="catalogue-img">
-                                        <img src="{{asset('front/images/catalogue-1.png')}}" alt="" class="img-fluid">
-                                    </div>
-                                    <div class="mt-3">
-                                        <p class="p-lg mb-0">Engine</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="catalogue-card">
-                                <div class="catalogue-card-inner">
-                                    <div class="catalogue-img">
-                                        <img src="{{asset('front/images/catalogue-2.png')}}" alt="" class="img-fluid">
-                                    </div>
-                                    <div class="mt-3">
-                                        <p class="p-lg mb-0">Brakes</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="catalogue-card">
-                                <div class="catalogue-card-inner">
-                                    <div class="catalogue-img">
-                                        <img src="{{asset('front/images/catalogue-3.png')}}" alt="" class="img-fluid">
-                                    </div>
-                                    <div class="mt-3">
-                                        <p class="p-lg mb-0">Filters</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       @endforeach
+
+
                     </div>
                 </div>
             </div>
@@ -427,6 +242,8 @@
                 </div>
                 <div class="col-12 mt-4">
                     <div class="owl-carousel testimonial-carousel owl-theme">
+                        @foreach ($reviews as $r )
+
                         <div class="item">
                             <div class="testimonial-card">
                                 <div class="testimonial-card-inner">
@@ -437,104 +254,14 @@
                                         <i class="fas fa-star p-lg orange-text"></i>
                                         <i class="fas fa-star p-lg orange-text"></i>
                                     </div>
-                                    <p class="p-lg my-4">Nam eu bibendum nulla. <br> Cras faucibus <br> neque a lacus
-                                        sollicit</p>
+                                    <p class="p-lg my-4">{{$r->text ?? ''}}</p>
                                     <div class="testimonial-img">
-                                        <img src="{{asset('front/images/testimonial-img.png')}}" alt="" class="img-fluid">
+                                        <img src="{{asset($r->image)}}" alt="" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="item">
-                            <div class="testimonial-card">
-                                <div class="testimonial-card-inner">
-                                    <div class="d-flex px-4 align-items-center justify-content-between">
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                    </div>
-                                    <p class="p-lg my-4">Nam eu bibendum nulla. <br> Cras faucibus <br> neque a lacus
-                                        sollicit</p>
-                                    <div class="testimonial-img">
-                                        <img src="{{asset('front/images/testimonial-img.png')}}" alt="" class="img-fluid">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimonial-card">
-                                <div class="testimonial-card-inner">
-                                    <div class="d-flex px-4 align-items-center justify-content-between">
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                    </div>
-                                    <p class="p-lg my-4">Nam eu bibendum nulla. <br> Cras faucibus <br> neque a lacus
-                                        sollicit</p>
-                                    <div class="testimonial-img">
-                                        <img src="{{asset('front/images/testimonial-img.png')}}" alt="" class="img-fluid">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimonial-card">
-                                <div class="testimonial-card-inner">
-                                    <div class="d-flex px-4 align-items-center justify-content-between">
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                    </div>
-                                    <p class="p-lg my-4">Nam eu bibendum nulla. <br> Cras faucibus <br> neque a lacus
-                                        sollicit</p>
-                                    <div class="testimonial-img">
-                                        <img src="{{asset('front/images/testimonial-img.png')}}" alt="" class="img-fluid">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimonial-card">
-                                <div class="testimonial-card-inner">
-                                    <div class="d-flex px-4 align-items-center justify-content-between">
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                    </div>
-                                    <p class="p-lg my-4">Nam eu bibendum nulla. <br> Cras faucibus <br> neque a lacus
-                                        sollicit</p>
-                                    <div class="testimonial-img">
-                                        <img src="{{asset('front/images/testimonial-img.png')}}" alt="" class="img-fluid">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimonial-card">
-                                <div class="testimonial-card-inner">
-                                    <div class="d-flex px-4 align-items-center justify-content-between">
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                        <i class="fas fa-star p-lg orange-text"></i>
-                                    </div>
-                                    <p class="p-lg my-4">Nam eu bibendum nulla. <br> Cras faucibus <br> neque a lacus
-                                        sollicit</p>
-                                    <div class="testimonial-img">
-                                        <img src="{{asset('front/images/testimonial-img.png')}}" alt="" class="img-fluid">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -553,12 +280,10 @@
                 </div>
                 <div class="col-12">
                     <div class="d-flex flex-lg-nowrap flex-wrap align-items-center justify-content-between gap-5">
-                        <img src="{{asset('front/images/partner-1.png')}}" alt="" class="img-fluid partner-img mt-3">
-                        <img src="{{asset('front/images/partner-2.png')}}" alt="" class="img-fluid partner-img mt-3">
-                        <img src="{{asset('front/images/partner-3.png')}}" alt="" class="img-fluid partner-img mt-3">
-                        <img src="{{asset('front/images/partner-4.png')}}" alt="" class="img-fluid partner-img mt-3">
-                        <img src="{{asset('front/images/partner-5.png')}}" alt="" class="img-fluid partner-img mt-3">
-                        <img src="{{asset('front/images/partner-6.png')}}" alt="" class="img-fluid partner-img mt-3">
+                        @foreach ($partners as $p )
+                        <img src="{{asset($p->image)}}" alt="" class="img-fluid partner-img mt-3">
+                        @endforeach
+
                     </div>
                 </div>
             </div>
