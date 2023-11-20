@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use Illuminate\Support\Str;
+use Hash;
 
 class CategoriesController extends Controller
 {
@@ -11,9 +14,10 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+     public function index()
     {
-        //
+        $categories = Category::get();
+        return view('backend.categories.index', compact('categories'));
     }
 
     /**
@@ -23,7 +27,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.categories.create');
     }
 
     /**
@@ -34,7 +38,24 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $path = '';
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+
+            $randomString = Str::random(10);
+            $extension = $file->getClientOriginalExtension();
+            $fileName = $randomString . '_' . time() . '.' . $extension;
+
+            $path = $file->move('uploads/categories', $fileName);
+        }
+
+        $data = [
+            'name' => $request->name,
+            'image' => $path,
+        ];
+        Category::create($data);
+        return redirect('admin/categories/')->with('success', 'Category Added!');
     }
 
     /**
@@ -56,7 +77,8 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Category::find($id);
+        return view('backend.categories.edit', compact('data'));
     }
 
     /**
@@ -68,7 +90,24 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $path = '';
+        $Category = Category::find($id);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+
+            $randomString = Str::random(10);
+            $extension = $file->getClientOriginalExtension();
+            $fileName = $randomString . '_' . time() . '.' . $extension;
+
+            $path = $file->move('uploads/categories', $fileName);
+            $data['image'] =$path;
+
+        }
+        $data['name'] = $request->name;
+       
+        $Category->update($data);
+
+        return redirect('admin/categories/')->with('success', 'Category Added!');
     }
 
     /**
@@ -79,6 +118,26 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Category = Category::find($id);
+        if ($Category) {
+            $Category->delete();
+            return redirect('admin/categories/')->with('error', 'Category Deleted!');
+        }
+        return redirect('admin/categories/')->with('error', 'Unable to Delete Category!');
+    }
+    public function status($id)
+    {
+        $Category = Category::find($id);
+        if ($Category->is_active == 0) {
+            $Category->is_active = 1;
+            $Category->save();
+            return redirect('admin/categories/')->with('success', 'Category Has Been Changed To Active!');
+        } elseif ($Category->is_active == 1) {
+            $Category->is_active = 0;
+            $Category->save();
+            return redirect('admin/categories/')->with('success', 'Category Has Been Changed To In-Active!');
+        } else {
+            return redirect('admin/categories/')->with('error', 'Unable to Change Status!');
+        }
     }
 }

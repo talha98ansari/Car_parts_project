@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class PartType extends Model
 {
-    use HasFactory;
+    protected $fillable = ['name', 'image','is_active'];
 }

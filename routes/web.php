@@ -32,7 +32,11 @@ Auth::routes();
 Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () {
     Route::get('/dashboard', 'App\Http\Controllers\HomeController@index')->name('home');
 
-    Route::resource('users', 'App\Http\Controllers\UserController', ['except' => ['show']]);
+    Route::resource('users', 'App\Http\Controllers\UserController');
+    Route::post('/update/users/{id}', 'App\Http\Controllers\UserController@update')->name('users.up');
+    Route::get('/users/delete/{id}', 'App\Http\Controllers\UserController@destroy')->name('users.remove');
+    Route::get('/users/status/{id}', 'App\Http\Controllers\UserController@status')->name('users.status');
+
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
@@ -58,11 +62,26 @@ Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () 
         'uses' => 'App\Http\Controllers\ProfileController@password'
     ]);
 
-    Route::resource('vendors', VendorController::class);
-    Route::resource('categories', CatgoriesController::class);
-    Route::resource('partType', partTypeController::class);
-    Route::resource('parts', PartsController::class);
+    Route::resource('vendors', 'App\Http\Controllers\VendorController');
+    Route::post('/update/vendors/{id}', 'App\Http\Controllers\VendorController@update')->name('vendors.up');
+    Route::get('/vendors/delete/{id}', 'App\Http\Controllers\VendorController@destroy')->name('vendors.remove');
+    Route::get('/vendors/status/{id}', 'App\Http\Controllers\VendorController@status')->name('vendors.status');
 
+
+    Route::resource('categories', 'App\Http\Controllers\CategoriesController');
+    Route::post('/update/categories/{id}', 'App\Http\Controllers\CategoriesController@update')->name('categories.up');
+    Route::get('/categories/delete/{id}', 'App\Http\Controllers\CategoriesController@destroy')->name('categories.remove');
+    Route::get('/categories/status/{id}', 'App\Http\Controllers\CategoriesController@status')->name('categories.status');
+
+    Route::resource('partType', 'App\Http\Controllers\partTypeController');
+    Route::post('/update/partType/{id}', 'App\Http\Controllers\partTypeController@update')->name('partType.up');
+    Route::get('/partType/delete/{id}', 'App\Http\Controllers\partTypeController@destroy')->name('partType.remove');
+    Route::get('/partType/status/{id}', 'App\Http\Controllers\partTypeController@status')->name('partType.status');
+
+    Route::resource('parts', 'App\Http\Controllers\PartsController');
+    Route::post('/update/parts/{id}', 'App\Http\Controllers\partsController@update')->name('parts.up');
+    Route::get('/parts/delete/{id}', 'App\Http\Controllers\partsController@destroy')->name('parts.remove');
+    Route::get('/parts/status/{id}', 'App\Http\Controllers\partsController@status')->name('parts.status');
 });
 
 // Vendor Routes

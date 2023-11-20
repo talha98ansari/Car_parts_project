@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Part extends Model
 {
-    use HasFactory;
+protected $fillable =['name','image','description','part_type_id','category_id','price'];
+
+public function category(){
+        return $this->belongsTo(Category::class);
+
+}
+
+public function partType(){
+        return $this->belongsTo(partType::class);
+
+}
 }
