@@ -7,6 +7,8 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\partTypeController;
 use App\Http\Controllers\PartsController;
+use App\Http\Controllers\SiteController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +24,33 @@ use App\Http\Controllers\PartsController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', [FrontController::class, 'index']);
+Route::get('/', 'App\Http\Controllers\FrontController@index')->name('index');
+Route::get('/about-us', 'App\Http\Controllers\FrontController@about_us')->name('about.us');
+Route::get('/contact-us', 'App\Http\Controllers\FrontController@contact')->name('contact.us');
+Route::get('/legal-terms', 'App\Http\Controllers\FrontController@legel_terms')->name('legal_terms');
+Route::get('/terms-and-condition', 'App\Http\Controllers\FrontController@terms_condition')->name('terms_condition');
+Route::get('/privacy-policy', 'App\Http\Controllers\FrontController@privacy_policy')->name('privacy_policy');
+Route::get('/view/part/{id}', 'App\Http\Controllers\FrontController@partview')->name('parts');
+Route::get('/view/category/{id}', 'App\Http\Controllers\FrontController@catrgoryview')->name('category.index');
+Route::get('/view/detail/{id}', 'App\Http\Controllers\FrontController@partdetail')->name('part.detail');
+
+Route::get('/user/login', 'App\Http\Controllers\UserRegistrationController@loginPage')->name('user.login');
+Route::get('/user/registration', 'App\Http\Controllers\UserRegistrationController@registerationPage')->name('user.registration');
+Route::post('/user/registration/save', 'App\Http\Controllers\UserRegistrationController@saveUser')->name('user.registration.save');
+
+Route::post('/user/login/check', 'App\Http\Controllers\FrontLoginController@login')->name('user.login.check');
+
+
+
+Route::get('/vendor/login', 'App\Http\Controllers\vendorRegistrationController@loginPage')->name('vendor.login');
+Route::get('/vendor/registration', 'App\Http\Controllers\vendorRegistrationController@registerationPage')->name('vendor.registration');
+Route::post('/vendor/registration/save', 'App\Http\Controllers\vendorRegistrationController@savevendor')->name('vendor.registration.save');
 
 
 
 Auth::routes();
+Route::post('/password', 'App\Http\Controllers\Auth\ResetPasswordController@password')->name('password.save');
+Route::get('change/password', 'App\Http\Controllers\Auth\ResetPasswordController@passwordView')->name('password.change');
 
 // Admin routes
 Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () {
@@ -67,7 +91,6 @@ Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () 
     Route::get('/vendors/delete/{id}', 'App\Http\Controllers\VendorController@destroy')->name('vendors.remove');
     Route::get('/vendors/status/{id}', 'App\Http\Controllers\VendorController@status')->name('vendors.status');
 
-
     Route::resource('categories', 'App\Http\Controllers\CategoriesController');
     Route::post('/update/categories/{id}', 'App\Http\Controllers\CategoriesController@update')->name('categories.up');
     Route::get('/categories/delete/{id}', 'App\Http\Controllers\CategoriesController@destroy')->name('categories.remove');
@@ -82,6 +105,29 @@ Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () 
     Route::post('/update/parts/{id}', 'App\Http\Controllers\partsController@update')->name('parts.up');
     Route::get('/parts/delete/{id}', 'App\Http\Controllers\partsController@destroy')->name('parts.remove');
     Route::get('/parts/status/{id}', 'App\Http\Controllers\partsController@status')->name('parts.status');
+
+    Route::get('/site-setting/about-us', 'App\Http\Controllers\SiteController@aboutUs')->name('site.about');
+    Route::post('/site-setting/about-us/{id}', 'App\Http\Controllers\SiteController@storeAboutUs')->name('store.site.about');
+
+    Route::get('/site-setting/contact-us', 'App\Http\Controllers\SiteController@contactUs')->name('site.contact');
+    Route::post('/site-setting/contact-us/{id}', 'App\Http\Controllers\SiteController@storecontactUs')->name('store.site.contact');
+    Route::post('/update/contact/{id}', 'App\Http\Controllers\SiteController@update')->name('contact.up');
+    Route::get('/update/contact/{id}', 'App\Http\Controllers\SiteController@edit')->name('contact.edit');
+    Route::get('/contact/delete/{id}', 'App\Http\Controllers\SiteController@destroy')->name('contact.remove');
+    Route::get('/contact/add', 'App\Http\Controllers\SiteController@create')->name('contact.create');
+    Route::post('/contact/address/store', 'App\Http\Controllers\SiteController@store')->name('contact_us.store');
+
+    Route::get('/site-setting/others', 'App\Http\Controllers\SiteController@othersIndex')->name('site.other.index');
+    Route::get('/site-setting/others/create-page', 'App\Http\Controllers\SiteController@othersCreate')->name('site.other.create');
+    Route::post('/site-setting/others/store', 'App\Http\Controllers\SiteController@Otherstore')->name('site.other.store');
+    Route::get('/site-setting/others/update{data}', 'App\Http\Controllers\SiteController@Otheredit')->name('site.other.edit');
+    Route::post('/site-setting/others/update{id}', 'App\Http\Controllers\SiteController@Otherupdate')->name('site.other.up');
+    Route::get('site-setting/others/delete/{id}', 'App\Http\Controllers\SiteController@Otherdestroy')->name('site.other.remove');
+
+    Route::resource('follow', 'App\Http\Controllers\followController');
+    Route::post('/update/follow/{id}', 'App\Http\Controllers\followController@update')->name('follow.up');
+    Route::get('/follow/delete/{id}', 'App\Http\Controllers\followController@destroy')->name('follow.remove');
+    Route::get('/follow/status/{id}', 'App\Http\Controllers\followController@status')->name('follow.status');
 });
 
 // Vendor Routes

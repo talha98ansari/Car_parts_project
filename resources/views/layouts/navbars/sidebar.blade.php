@@ -189,6 +189,32 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="#navbar-site" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-site">
+                        <i class="ni ni-lock-circle-open" style="color: #f4645f;"></i>
+                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Site Settings') }}</span>
+                    </a>
+
+                    <div class="collapse " id="navbar-site">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('site.about') }}">
+                                    {{ __('About Us') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('site.contact') }}">
+                                    {{ __('Contact Us') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('site.other.index') }}">
+                                    {{ __('Others') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 {{--
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('icons') }}">

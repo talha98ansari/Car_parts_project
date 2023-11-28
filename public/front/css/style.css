@@ -844,7 +844,7 @@ footer .blue-text{color: #0067D6;}
 .section-products .header h2 {
   font-size: 2.2rem;
   font-weight: 400;
-  color: #444444; 
+  color: #444444;
 }
 
 .section-products .single-product {
@@ -886,7 +886,7 @@ footer .blue-text{color: #0067D6;}
   /* transform: scale(1.2,1.2) rotate(5deg); */
   color: #fff !important;
   transition: 0.3s all;
-  
+
 }
 
 
@@ -1068,3 +1068,94 @@ footer .blue-text{color: #0067D6;}
   height: 16px;
   margin: 0px 3px;
 }
+
+.contact_address img{
+    filter: invert(1);
+  }
+  .orange-bg{
+    background-color: #FF4E00 !important;
+    padding: 5px 10px;
+    color: #fff;
+    word-spacing: 5px;
+  }
+  .maps iframe{
+    width: 100% !important;
+    height: 400px !important;
+  }
+  #contact_form input, #contact_form textarea{
+    margin: 5px 10px;
+    border: 1px solid #FF4E00 !important;
+    max-height: 150px;
+  }
+  ::placeholder{
+    color: #000 !important;
+  }
+  .btn-submit{
+    background-color: #FF4E00;
+    color: #fff;
+
+  }
+  .img-about{
+    background-image: url(../images/about_img.avif) !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    height: 400px !important;
+    background-position: center center;
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+    animation: spinner;
+    animation-duration: 5s;
+    animation-direction: alternate;
+    animation-play-state: running;
+    animation-delay: 2s;
+    border-radius:50%  !important;
+    margin-bottom: 50px;
+  }
+  .img-about img{
+    max-width: 100%;
+    height: 105px;
+    width: fit-content;
+    position: absolute;
+    top: 38%;
+    left: 37%;
+    /* transform: translate(37%, -38%); */
+  }
+  #Vlogin{
+    background-color: #000;
+    max-width: 100% ;
+    position: sticky;
+    top: 0;
+  }
+  #Vlogin h2{
+      color: #FF4E00 !important;
+      font-size: 35px !important;
+  }
+  #Vlogin_form .btn-submit{
+    background-color: #FF4E00;
+    color: #fff;
+    margin-top: 15px !important;
+  }
+  .anchor{
+    font-size: 12px !important;
+    text-decoration: none !important;
+    margin-top: 3px !important;
+  }
+  .anchor:hover{
+    font-size: 12px !important;
+    text-decoration: underline !important;
+    transition: 0.3s ease-in ;
+  }
+
+
+  #Vregistration{
+    background-color: #000;
+    max-width: 100% ;
+    position: sticky;
+    top: 0;
+  }
+  #Vregistration h2{
+      color: #FF4E00 !important;
+      font-size: 35px !important;
+  }
+  /* vendor login and signup  */

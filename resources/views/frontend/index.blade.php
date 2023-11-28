@@ -1,4 +1,5 @@
 @extends('frontend.includes.layout')
+
 @section('content')
     <!-- banner starts here  -->
     <section class="banner">
@@ -134,7 +135,7 @@
                 @foreach ($categories as $c )
 
                 <div class="col-lg-3 col-md-4 col-sm-6 my-3">
-                    <a href="#_" class="d-block">
+                    <a href="{{route('category.index',$c->id)}}" class="d-block">
                         <div class="catalogue-card">
                             <div class="catalogue-card-inner">
                                 <div class="catalogue-img">

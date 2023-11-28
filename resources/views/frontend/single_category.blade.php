@@ -1,4 +1,5 @@
-<?php include './assets/includes/header.php' ?>
+@extends('frontend.includes.layout')
+@section('content')
 <section class="banner">
     <div class="banner-carousel2">
         <div class="item">
@@ -9,17 +10,17 @@
                             <h4>Your Trucks Specialist</h4>
                             <h1 class="text-uppercase">Synthetic <span class="orange-text">Oil </span></h1>
                             <!-- <h6>YOUR Truck specialist</h6> -->
-                            
+
                             <!-- <button class="site-btn mt-4">SHOP NOW</button> -->
                         </div>
                     </div>
                 </div>
             </div>
-            <img src="assets/images/categoryBanner.png" alt="" class="img-fluid banner-img"> 
+            <img src="{{asset('front/images/categoryBanner.png')}}" alt="" class="img-fluid banner-img">
             <!-- banner needs to be changed -->
         </div>
-       
-        
+
+
     </div>
 </section>
 
@@ -222,5 +223,4 @@
 				</div>
 		</div>
 </section>
-
-<?php include './assets/includes/footer.php' ?>
+@endsection

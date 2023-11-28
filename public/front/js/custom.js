@@ -68,3 +68,27 @@ $('.product-carousel').owlCarousel({
 $(document).ready(function() {
   $('.js-example-basic-single').select2();
 });
+
+$('#new-password, #confirm-new-password').on('keyup', function() {
+    if ($('#new-password').val() == '' || $('#new-password').val() == null) {
+        $('#message').html('').css('color', 'green');
+        $("#password").prop('disabled', true);
+
+        return;
+    }
+    if ($('#new-password').val() == $('#confirm-new-password').val()) {
+        $(".password").removeClass("common");
+
+        $("#password").prop('disabled', false);
+        $('#message').html('Matching').css('color', 'green');
+
+
+    } else {
+        $(".password").addClass("common");
+
+        $('#message').html('Not Matching').css('color', 'red');
+        $("#password").prop('disabled', true);
+
+        // $('.submit-button').prop('disabled', true);
+    }
+});

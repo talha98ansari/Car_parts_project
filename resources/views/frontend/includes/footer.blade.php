@@ -101,9 +101,9 @@
                                 <li><a href="">AUTOPARTS Club</a></li>
                                 <li><a href="">Blog</a></li>
                                 <li><a href="">Car repair manuals & video tutorials</a></li>
-                                <li><a href="">Terms &amp; conditions</a></li>
+                                <li><a href="{{route('terms_condition')}}">Terms &amp; conditions</a></li>
                                 <li><a href="">Right of withdrawal</a></li>
-                                <li><a href="">Privacy policy</a></li>
+                                <li><a href="{{route('privacy_policy')}}">Privacy policy</a></li>
                                 <li><a href="">Cookie settings</a></li>
                                 <li><a href="">Code of Conduct</a></li>
                             </ul>
@@ -113,7 +113,7 @@
                             <ul>
                                 <li><a href="">Payment</a></li>
                                 <li><a href="">Delivery</a></li>
-                                <li><a href="">Contact us</a></li>
+                                <li><a href="{{route('contact.us')}}">Contact us</a></li>
                                 <li><a href="">Returns &amp; refunds</a></li>
                                 <li><a href="">Core exchange </a></li>
                             </ul>
