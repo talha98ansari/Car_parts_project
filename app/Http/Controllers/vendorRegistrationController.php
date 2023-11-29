@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\BusinessInfo;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -41,6 +42,10 @@ class vendorRegistrationController extends Controller
     {
         $this->middleware('guest');
     }
+    public function registerationPageType(){
+        return view('auth.vendor_accnt_type');
+
+    }
     public function loginPage()
     {
         return view('auth.vendor_login');
@@ -48,6 +53,10 @@ class vendorRegistrationController extends Controller
     public function registerationPage()
     {
         return view('auth.vendor_registration');
+    }
+    public function BusinessregisterationPage()
+    {
+        return view('auth.vendor_registration_business');
     }
     /**
      * Get a validator for an incoming registration request.
@@ -59,8 +68,8 @@ class vendorRegistrationController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8'],
         ]);
     }
 
@@ -79,7 +88,7 @@ class vendorRegistrationController extends Controller
     //         'password' => Hash::make($data['password']),
     //     ]);
     // }
-    protected function saveUser(Request $request)
+    protected function savevendor(Request $request)
     {
         $validate = $this->validator($request->all());
         if ($validate->fails()) {
@@ -87,17 +96,55 @@ class vendorRegistrationController extends Controller
                 ->back()
                 ->withErrors($validate->errors());
         }
+        $business = BusinessInfo::create([
+
+            'b_name' => $request->b_name,
+            'niche' => $request->niche,
+            'phone' => $request->phone,
+            'address' => $request->address,
+
+        ]);
+        $password = mt_rand(1e15, 1e16 - 1);
+        $user = User::create([
+            'business_id' => $business->id,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->p_phone,
+            'vendor_type' => $request->vendor_type ?? 'business',
+            'password' => Hash::make($password),
+            'is_active' => 0,
+            'role_id'=>2
+        ]);
+        return redirect()
+                ->back()
+                ->with('success', 'Account Created Successfully , You will recieve a confirmation Email shortly when account is activated!');
+
+    }
+    protected function savevendorNB(Request $request)
+    {
+        $validate = $this->validator($request->all());
+        if ($validate->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validate->errors());
+        }
+        $password = mt_rand(1e15, 1e16 - 1);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'password' => $request->password,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'vendor_type' => $request->vendor_type ?? 'non_business',
+            'password' => Hash::make($password),
             'is_active' => 0,
             'role_id'=>2
         ]);
-        if ($user) {
-            Auth::login($user);
-            return redirect('/');
-        }
+        return redirect()
+                ->back()
+                ->with('success', 'Account Created Successfully , You will recieve a confirmation Email shortly when account is activated!');
+
     }
 }

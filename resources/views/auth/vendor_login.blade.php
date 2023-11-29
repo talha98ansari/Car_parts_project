@@ -22,6 +22,23 @@
                     <img src="{{asset('front/images/vendorLogin.svg')}}" alt="" class="img-fluid w-75">
                 </div>
                 <div class="col-md-6 d-flex justify-content-center align-items-center flex-column">
+                    @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                     <form action="">
                         <div class="row">
                             <div class="col-md-12">
@@ -33,7 +50,7 @@
                                 <input type="password" class="form-control">
                             </div>
                             <div class="col-md-6 d-flex justify-content-start">
-                                <a href="{{route('vendor.registration')}}" class="orange-text anchor">Don't Have An Account? Sign up Here</a>
+                                <a href="{{route('vendor.registration.type')}}" class="orange-text anchor">Don't Have An Account? Sign up Here</a>
 
                             </div>
                             <div class="col-md-6 d-flex justify-content-end">

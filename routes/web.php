@@ -43,14 +43,15 @@ Route::post('/user/login/check', 'App\Http\Controllers\FrontLoginController@logi
 
 
 Route::get('/vendor/login', 'App\Http\Controllers\vendorRegistrationController@loginPage')->name('vendor.login');
+Route::get('/vendor/registration/type', 'App\Http\Controllers\vendorRegistrationController@registerationPageType')->name('vendor.registration.type');
 Route::get('/vendor/registration', 'App\Http\Controllers\vendorRegistrationController@registerationPage')->name('vendor.registration');
+Route::get('/vendor/registration/business', 'App\Http\Controllers\vendorRegistrationController@BusinessregisterationPage')->name('vendor.registration.business');
 Route::post('/vendor/registration/save', 'App\Http\Controllers\vendorRegistrationController@savevendor')->name('vendor.registration.save');
+Route::post('/vendor/registration/save/nb', 'App\Http\Controllers\vendorRegistrationController@savevendorNB')->name('vendor.registration.nb');
 
 
 
 Auth::routes();
-Route::post('/password', 'App\Http\Controllers\Auth\ResetPasswordController@password')->name('password.save');
-Route::get('change/password', 'App\Http\Controllers\Auth\ResetPasswordController@passwordView')->name('password.change');
 
 // Admin routes
 Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () {
@@ -141,3 +142,5 @@ Route::middleware(['check.role:2'])->group(function () {
 Route::get('/unauthorized', function () {
     return 'Unauthorized access!';
 })->name('unauthorized');
+Route::post('/password', 'App\Http\Controllers\Auth\ResetPasswordController@password')->name('password.save')->middleware('checklogin');
+Route::get('change/password', 'App\Http\Controllers\Auth\ResetPasswordController@passwordView')->name('password.change')->middleware('checklogin');

@@ -80,7 +80,7 @@
                                         <span>{{ __('Logout') }}</span>
                                     </a>
                                   </li>
-                                  <li><a class="dropdown-item" href="{{route('password.change')}}">Something else here</a></li>
+                                  <li><a class="dropdown-item" href="{{route('password.change')}}">Change Password</a></li>
 
                                 </ul>
                             </div>

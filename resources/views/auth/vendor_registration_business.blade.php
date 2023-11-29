@@ -40,9 +40,10 @@
                         </ul>
                     </div>
                 @endif
-                    <form method="POST" action="{{route('vendor.registration.nb')}}">
+                    <form method="POST" action="{{route('vendor.registration.save')}}">
                         @csrf
-                        <input type="hidden" name="vendor_type" value="non_business">
+                       <input type="hidden" name="vendor_type" value="business">
+
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="Fname" class="form-label">First Name:</label>
@@ -58,14 +59,29 @@
                             </div>
 
                             <div class="col-md-6">
+                                <label for="Business" class="form-label">Business Name:</label>
+                                <input type="text" class="form-control" name="b_name">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="Niche" class="form-label">Business Niche:</label>
+                                <input type="text" class="form-control" name="niche">
+                            </div>
+                            <div class="col-md-6">
                                 <label for="Email" class="form-label">Email:</label>
                                 <input type="email" class="form-control" name="email">
                             </div>
                             <div class="col-md-6">
                                 <label for="Contact" class="form-label">Personal Contact Number:</label>
+                                <input type="number" class="form-control" name="p_phone">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="BusinessC" class="form-label">Business Contact Number:</label>
                                 <input type="number" class="form-control" name="phone">
                             </div>
-
+                            <div class="col-md-12">
+                                <label for="Businessaddress" class="form-label">Business Address:</label>
+                                <input type="text" class="form-control" name="address">
+                            </div>
                             <div class="col-md-12">
                                 <input type="submit" value="Submit" class="btn btn-submit">
                             </div>

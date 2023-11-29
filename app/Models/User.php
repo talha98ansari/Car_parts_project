@@ -24,7 +24,11 @@ class User extends Authenticatable
         'profile_picture',
         'role_id',
         'address',
-        'phone'
+        'phone',
+        'vendor_type',
+        'business_id',
+        'first_name',
+        'last_name'
     ];
 
     /**
