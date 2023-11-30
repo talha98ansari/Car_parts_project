@@ -39,10 +39,12 @@ Route::get('/user/registration', 'App\Http\Controllers\UserRegistrationControlle
 Route::post('/user/registration/save', 'App\Http\Controllers\UserRegistrationController@saveUser')->name('user.registration.save');
 
 Route::post('/user/login/check', 'App\Http\Controllers\FrontLoginController@login')->name('user.login.check');
+Route::post('/vendor/login', 'App\Http\Controllers\FrontLoginController@Vendorlogin')->name('vendor.login.check');
 
 
 
 Route::get('/vendor/login', 'App\Http\Controllers\vendorRegistrationController@loginPage')->name('vendor.login');
+
 Route::get('/vendor/registration/type', 'App\Http\Controllers\vendorRegistrationController@registerationPageType')->name('vendor.registration.type');
 Route::get('/vendor/registration', 'App\Http\Controllers\vendorRegistrationController@registerationPage')->name('vendor.registration');
 Route::get('/vendor/registration/business', 'App\Http\Controllers\vendorRegistrationController@BusinessregisterationPage')->name('vendor.registration.business');

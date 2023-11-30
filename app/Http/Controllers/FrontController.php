@@ -33,7 +33,7 @@ class FrontController extends Controller
     }
     public function terms_condition(){
         $data = OtherPages::where('title' , 'terms_conditions')->first();
-        return view('frontend.web_pages.termsandcondition' , compact('data'));
+        return view('frontend.web_pages.termsandconditions' , compact('data'));
     }
     public function privacy_policy(){
         $data = OtherPages::where('title' , 'privacy_policy')->first();

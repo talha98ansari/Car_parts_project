@@ -65,7 +65,7 @@ class FrontLoginController extends Controller
                 ->back()
                 ->withErrors($validate->errors());
         }
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->where('role_id',3)->where('is_active' , 1 )->first();
         if ($user != null) {
             if (!Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
                 return redirect()
@@ -82,5 +82,29 @@ class FrontLoginController extends Controller
                 ->with('error', 'User not found');
         }
     }
-    
+    protected function Vendorlogin(Request $request)
+    {
+        $validate = $this->validator($request->all());
+        if ($validate->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validate->errors());
+        }
+        $user = User::where('email', $request->email)->where('role_id',2)->where('is_active' , 1)->first();
+        if ($user != null) {
+            if (!Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
+                return redirect()
+                    ->back()
+                    ->with('error', 'Invalid Credentials');
+            } else {
+                if ($this->attemptLogin($request)) {
+                    return redirect('/');
+                }
+            }
+        } else {
+            return redirect()
+                ->back()
+                ->with('error', 'User not found');
+        }
+    }
 }

@@ -39,15 +39,36 @@
                         </ul>
                     </div>
                 @endif
-                    <form action="">
-                        <div class="row">
+                <form role="form" method="POST" action="{{ route('vendor.login.check') }}">
+                    @csrf
+                    <div>
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
+                                    aria-label="Warning:">
+                                    <use xlink:href="#exclamation-triangle-fill" />
+                                </svg>
+                                {{ session('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="row">
                             <div class="col-md-12">
                                 <label for="email" class="form-label">Email:</label>
-                                <input type="email" class="form-control">
+                                <input type="email" class="form-control" name="email">
                             </div>
                             <div class="col-md-12">
                                 <label for="password" class="form-label">Password:</label>
-                                <input type="password" class="form-control">
+                                <input type="password" class="form-control" name="password">
                             </div>
                             <div class="col-md-6 d-flex justify-content-start">
                                 <a href="{{route('vendor.registration.type')}}" class="orange-text anchor">Don't Have An Account? Sign up Here</a>
@@ -58,7 +79,7 @@
 
                             </div>
                             <div class="col-md-12">
-                                <input type="button" value="Login" class="btn btn-submit">
+                                <input type="submit" value="Login" class="btn btn-submit">
                             </div>
 
                         </div>
