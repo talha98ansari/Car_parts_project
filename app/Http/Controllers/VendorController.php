@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\BusinessInfo;
 use Illuminate\Support\Str;
 use Hash;
 
@@ -39,7 +40,14 @@ class VendorController extends Controller
     public function store(Request $request)
     {
         $path = '';
+        $business = BusinessInfo::create([
 
+            'b_name' => $request->b_name,
+            'niche' => $request->niche,
+            'phone' => $request->phone,
+            'address' => $request->address,
+
+        ]);
         if ($request->hasFile('profile_picture')) {
             $file = $request->file('profile_picture');
 
@@ -52,12 +60,18 @@ class VendorController extends Controller
 
         $data = [
             'role_id' => 2,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
             'profile_picture' => $path,
+            'business_id' => $business->id ?? '',
             'password' => Hash::make($request->password),
+            'is_active' => 0,
+            'vendor_type' => $request->vendor_type,
+
         ];
         User::create($data);
         return redirect('admin/vendors/')->with('success', 'Vendor Added!');

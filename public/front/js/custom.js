@@ -92,3 +92,52 @@ $('#new-password, #confirm-new-password').on('keyup', function() {
         // $('.submit-button').prop('disabled', true);
     }
 });
+$(document).ready(function () {
+    // Attach a click event to the Search button
+    $("#searchButton").on("click", function (e) {
+        // Prevent the default form submission behavior
+        e.preventDefault();
+
+        // Get selected values from the dropdowns
+        var modelId = $("#model").val();
+        var state = $("#state").val();
+        var x = '/view/part?';
+
+
+        if(modelId != null){
+            var x = x + 'model=' + modelId;
+        }
+        if(state != null){
+            var x = x + '&state=' + state;
+        }
+        window.location.href  = x ;
+
+    });
+    $(".searchButton2").on("click", function (e) {
+        // Prevent the default form submission behavior
+        e.preventDefault();
+
+        // Get selected values from the dropdowns
+        var vehicle_type = $(".vehicle_type").val();
+        var statechange = $(".statechange").val();
+        var manufacturer = $(".manufacturer").val();
+        var price = $(".price").val();
+
+        var x = '/view/part?';
+
+        if(vehicle_type != null){
+            var x = x + 'vehicle_type=' + vehicle_type;
+        }
+        if(statechange != null){
+            var x = x + '&state=' + statechange;
+        }
+        if(price != null){
+            var x = x + '&price=' + price;
+        }
+        if(manufacturer != null){
+            var x = x + '&manufacturer=' + manufacturer;
+        }
+        window.location.href  = x ;
+
+    });
+});

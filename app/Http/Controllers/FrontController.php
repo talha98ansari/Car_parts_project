@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Category, Partner, Review, AboutUs, ContactUs, OtherPages, Part, PartType};
+use App\Models\{Category, Partner, Review, AboutUs, ContactUs, OtherPages, Part, PartType, SubCate, CarModel, Maker};
 
 class FrontController extends Controller
 {
@@ -14,7 +14,9 @@ class FrontController extends Controller
         $categories = Category::get();
         $reviews = Review::get();
         $partners = Partner::get();
-        return view('frontend.index' , compact('categories','partners', 'reviews'));
+        $model = CarModel::get();
+        $maker = Maker::get();
+        return view('frontend.index' , compact('categories','partners', 'reviews', 'model', 'maker'));
     }
 
     public function about_us(){
@@ -39,15 +41,56 @@ class FrontController extends Controller
         $data = OtherPages::where('title' , 'privacy_policy')->first();
         return view('frontend.web_pages.privacyPolicy' , compact('data'));
     }
-    public function partview($id){
-        $data = Part::where('part_type_id' , $id)->get();
-        $partInfo = PartType::where('id' , $id)->first();
+    public function catrgoryview(Request $request, $id=null){
+
+        $data = SubCate::where('category_id' , $id)->get();
+        $partInfo = OtherPages::where('title' , 'part_type')->first();
+        return view('frontend.single_category' , compact('data','partInfo'));
+    }
+    public function partview(Request $request, $id=null){
+        $partInfo = OtherPages::where('title' , 'part_type')->first();
+        $data = Part::where('is_active', 1);
+
+        if($id != null){
+        $data = $data->where('sub_cat' , $id)->get();
         return view('frontend.category' , compact('data' , 'partInfo'));
+
+        }
+
+        $model =$request->model ?? '';
+        $state =$request->state ?? '';
+        $vehicle_type =$request->vehicle_type ?? '';
+        $manufacturer =$request->manufacturer ?? '';
+        $price =$request->price ?? '';
+
+        if($model != null && !empty($request->all())){
+            $data = $data->where('model' , $model);
+        }
+        if($state != null && !empty($request->all())){
+            $data = $data->where('area' , $state);
+        }
+        if($vehicle_type != null && !empty($request->all())){
+            $data = $data->where('part_type_id' , $vehicle_type);
+        }
+        if($manufacturer != null && !empty($request->all())){
+            $data = $data->where('manufacturer_id' , $manufacturer);
+        }
+        if($price != null && !empty($request->all())){
+            $p = explode('-' , $price);
+            $price1 = $p[0] ?? 0;
+            $price2 = $p[1] ?? 0;
+            if($price1 == 1200){
+                $price2 = $price1;
+            }
+            $data = $data->where('price' ,'<', $price2.'00');
+        }
+
+        $data = $data->get();
+
+        return view('frontend.category' , compact('data' , 'partInfo'));
+
     }
-    public function catrgoryview($id){
-        $data = Part::where('category_id' , $id)->get();
-        return view('frontend.single_category' , compact('data'));
-    }
+
     public function partdetail($id){
         $data = Part::where('id' , $id)->first();
         $categories = Category::get();

@@ -33,7 +33,10 @@
     </div>
 </div>
 <!-- preloader ends here  -->
-
+<?php
+                            use App\Models\PartType;
+                            $parttypes = PartType::get();
+                            ?>
 <!-- header starts here  -->
 <header>
     <div class="header-top">
@@ -126,16 +129,21 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav gap-4 ms-auto">
+
                                 <li class="nav-item">
-                                    <select name="" id="" class="header-select">
-                                        <option value="">Car Parts</option>
-                                    </select>
+                                    <select name="" id="" class="header-select vehicle_type">
+                                        <option value="" selected disabled>Vechicle Type</option>
+
+                                        @foreach ($parttypes as $m )
+                                        <option {{isset($_REQUEST['vehicle_type']) && $_REQUEST['vehicle_type'] == $m->id ? 'selected' : '' }} value="{{$m->id}}">{{$m->name}}</option>
+                                        @endforeach
+                                                                        </select>
                                 </li>
                                 <li class="nav-item">
                                     <div class="d-flex gap-1 align-items-center">
                                         <input type="text" placeholder="Enter the part number or name"
                                             class="header-input">
-                                        <button class="site-btn header-btn">Search</button>
+                                        <button class="site-btn header-btn searchButton2">Search</button>
                                     </div>
                                 </li>
                                 {{-- <li class="nav-item">
@@ -173,9 +181,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav2">
                         <ul class="navbar-nav w-100 gap-4 justify-content-between">
-                            <?php use App\Models\PartType;
-                                    $parttypes = PartType::get();
-                                    ?>
+
                             @foreach ($parttypes as $p)
                             <li class="nav-item">
                                 <a href="{{route('parts' , $p->id)}}">{{$p->name ?? ''}}</a>

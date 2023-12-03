@@ -30,8 +30,8 @@ Route::get('/contact-us', 'App\Http\Controllers\FrontController@contact')->name(
 Route::get('/legal-terms', 'App\Http\Controllers\FrontController@legel_terms')->name('legal_terms');
 Route::get('/terms-and-condition', 'App\Http\Controllers\FrontController@terms_condition')->name('terms_condition');
 Route::get('/privacy-policy', 'App\Http\Controllers\FrontController@privacy_policy')->name('privacy_policy');
-Route::get('/view/part/{id}', 'App\Http\Controllers\FrontController@partview')->name('parts');
-Route::get('/view/category/{id}', 'App\Http\Controllers\FrontController@catrgoryview')->name('category.index');
+Route::get('/view/part/{id?}', 'App\Http\Controllers\FrontController@partview')->name('parts');
+Route::get('/view/category/{id?}', 'App\Http\Controllers\FrontController@catrgoryview')->name('category.index');
 Route::get('/view/detail/{id}', 'App\Http\Controllers\FrontController@partdetail')->name('part.detail');
 
 Route::get('/user/login', 'App\Http\Controllers\UserRegistrationController@loginPage')->name('user.login');
@@ -99,6 +99,26 @@ Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () 
     Route::get('/categories/delete/{id}', 'App\Http\Controllers\CategoriesController@destroy')->name('categories.remove');
     Route::get('/categories/status/{id}', 'App\Http\Controllers\CategoriesController@status')->name('categories.status');
 
+    Route::resource('subcategories', 'App\Http\Controllers\SubCatController');
+    Route::post('/update/subcategories/{id}', 'App\Http\Controllers\SubCatController@update')->name('subcategories.up');
+    Route::get('/subcategories/delete/{id}', 'App\Http\Controllers\SubCatController@destroy')->name('subcategories.remove');
+    Route::get('/subcategories/status/{id}', 'App\Http\Controllers\SubCatController@status')->name('subcategories.status');
+
+    Route::resource('manufacturer', 'App\Http\Controllers\ManufacturerController');
+    Route::post('/update/manufacturer/{id}', 'App\Http\Controllers\ManufacturerController@update')->name('manufacturer.up');
+    Route::get('/manufacturer/delete/{id}', 'App\Http\Controllers\ManufacturerController@destroy')->name('manufacturer.remove');
+    Route::get('/manufacturer/status/{id}', 'App\Http\Controllers\ManufacturerController@status')->name('manufacturer.status');
+
+    Route::resource('makers', 'App\Http\Controllers\MakerController');
+    Route::post('/update/makers/{id}', 'App\Http\Controllers\MakerController@update')->name('makers.up');
+    Route::get('/makers/delete/{id}', 'App\Http\Controllers\MakerController@destroy')->name('makers.remove');
+    Route::get('/makers/status/{id}', 'App\Http\Controllers\MakerController@status')->name('makers.status');
+
+    Route::resource('models', 'App\Http\Controllers\ModelController');
+    Route::post('/update/model/{id}', 'App\Http\Controllers\ModelController@update')->name('models.up');
+    Route::get('/model/delete/{id}', 'App\Http\Controllers\ModelController@destroy')->name('models.remove');
+    Route::get('/model/status/{id}', 'App\Http\Controllers\ModelController@status')->name('models.status');
+
     Route::resource('partType', 'App\Http\Controllers\partTypeController');
     Route::post('/update/partType/{id}', 'App\Http\Controllers\partTypeController@update')->name('partType.up');
     Route::get('/partType/delete/{id}', 'App\Http\Controllers\partTypeController@destroy')->name('partType.remove');
@@ -131,6 +151,9 @@ Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () 
     Route::post('/update/follow/{id}', 'App\Http\Controllers\followController@update')->name('follow.up');
     Route::get('/follow/delete/{id}', 'App\Http\Controllers\followController@destroy')->name('follow.remove');
     Route::get('/follow/status/{id}', 'App\Http\Controllers\followController@status')->name('follow.status');
+
+    Route::get('/get-SubCat-options/{parentId}', 'App\Http\Controllers\DropdownController@getSubCats')->name('get.subcat.options');
+
 });
 
 // Vendor Routes

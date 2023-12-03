@@ -7,220 +7,178 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="banner-inner">
-                            <h4>Your Trucks Specialist</h4>
-                            <h1 class="text-uppercase">Synthetic <span class="orange-text">Oil </span></h1>
-                            <!-- <h6>YOUR Truck specialist</h6> -->
+                            @php
+                            $words = explode(' ', $partInfo->sub_title);
+                            $firstWord = array_shift($words);
+                            @endphp
+                            <h1 class="text-uppercase">{{$firstWord}} <span class="orange-text">
+                                @if (!empty($words))
+                                {{ implode(' ', $words)}}
+                                @endif</span>
+                            </h1>
+                            <h6>{{$partInfo->content}}</h6>
 
-                            <!-- <button class="site-btn mt-4">SHOP NOW</button> -->
                         </div>
                     </div>
                 </div>
             </div>
-            <img src="{{asset('front/images/categoryBanner.png')}}" alt="" class="img-fluid banner-img">
-            <!-- banner needs to be changed -->
+            <img src="{{asset($partInfo->image ?? '')}}" alt="" class="img-fluid banner-img">
         </div>
+    </div>
+</section>
+<section id="category">
+    <div class="container">
+        <div class="container-fluid">
+            <div class="row py-5">
+                <div class="col-md-12">
+                    <h1 class="text-center fs-2">Best <span class="orange-text">Selling</span>Parts</h1>
+                </div>
+                @foreach ($data as $d)
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="product-card">
+                        <div class="badge">Hot</div>
+                        <a href="{{route('parts' , $d->id)}}" style="width:100%">
+
+                            <div class="product-tumb">
+                                <img src="{{asset($d->image)}}" alt="" class="img-fluid">
+                            </div>
+                            <div class="product-details">
+                                <span class="product-catagory">{{$d->category->name ??''}} </span>
+                                <h4><a href="">{{$d->name ?? ''}}</a></h4>
+                                <p>{{$d->description ?? ''}}</p>
+                                <div class="product-bottom-details">
+                                    <div class="product-price">
+                                        <p class="small">Starting From</p><small></small>{{$d->price}}
+                                    </div>
+                                    <div class="product-links ">
+                                        <a href=""><i class="fa fa-heart"></i></a>
+
+                                    </div>
+                                </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
+            {{-- <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="product-card">
+                        <div class="badge">Hot</div>
+                        <div class="product-tumb">
+                            <img src="{{asset('front/images/brakes.png')}}" alt="" class="img-fluid">
+        </div>
+        <div class="product-details">
+            <span class="product-catagory">Brakes </span>
+            <h4><a href="">Brakes</a></h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus nostrum!</p>
+            <div class="product-bottom-details">
+                <div class="product-price">
+                    <p class="small">Starting From</p><small>$230.99</small>190.00
+                </div>
+                <div class="product-links ">
+                    <a href=""><i class="fa fa-heart"></i></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="product-card">
+            <div class="badge">Hot</div>
+            <div class="product-tumb">
+                <img src="{{asset('front/images/tyres.png')}}" alt="" class="img-fluid">
+            </div>
+            <div class="product-details">
+                <span class="product-catagory">All Season Tyres,Tyres </span>
+                <h4><a href="">Tyres</a></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus nostrum!</p>
+                <div class="product-bottom-details">
+                    <div class="product-price">
+                        <p class="small">Starting From</p><small>$230.99</small>190.00
+                    </div>
+                    <div class="product-links ">
+                        <a href=""><i class="fa fa-heart"></i></a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="product-card">
+            <div class="badge">Sale</div>
+            <div class="product-tumb">
+                <img src="{{asset('front/images/engine.png')}}" alt="" class="img-fluid">
+            </div>
+            <div class="product-details">
+                <span class="product-catagory">Engines, Engine Parts</span>
+                <h4><a href="">Engines</a></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus nostrum!</p>
+                <div class="product-bottom-details">
+                    <div class="product-price">
+                        <p class="small">Starting From</p><small>$2300.99</small>1900.00
+                    </div>
+                    <div class="product-links ">
+                        <a href=""><i class="fa fa-heart"></i></a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="product-card">
+            <div class="badge">New</div>
+            <div class="product-tumb">
+                <img src="{{asset('front/images/electric.png')}}" alt="" class="img-fluid">
+            </div>
+            <div class="product-details">
+                <span class="product-catagory">Electronics, Generators/Sensors</span>
+                <h4><a href="">Electronics</a></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus nostrum!</p>
+                <div class="product-bottom-details">
+                    <div class="product-price">
+                        <p class="small">Starting From</p><small>$2300.99</small>1900.00
+                    </div>
+                    <div class="product-links ">
+                        <a href=""><i class="fa fa-heart"></i></a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="product-card">
+            <div class="badge">New</div>
+            <div class="product-tumb">
+                <img src="{{asset('front/images/suspention.png')}}" alt="" class="img-fluid">
+            </div>
+            <div class="product-details">
+                <span class="product-catagory">Suspensions, Camber Kits </span>
+                <h4><a href="">Suspensions</a></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus nostrum!</p>
+                <div class="product-bottom-details">
+                    <div class="product-price">
+                        <p class="small">Starting From</p><small>$2300.99</small>1900.00
+                    </div>
+                    <div class="product-links ">
+                        <a href=""><i class="fa fa-heart"></i></a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
 
 
     </div>
+
+    </div>
+    </div>
 </section>
 
-<section class="section-products">
-		<div class="container">
-				<div class="row justify-content-center text-center">
-						<div class="col-md-8 col-lg-6">
-								<div class="header">
-										<h3>Featured Product</h3>
-										<h2>Popular Products</h2>
-								</div>
-						</div>
-						<div class="col-12 mb-3">
-                            <div class="row">
-                                <div class=" col-md-3 col-sm-12 col-xs-12 my-2 my-md-0">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Sort By Manufacturer</option>
-                                        <option value="Shell">Shell</option>
-                                        <option value="Total">Total</option>
-                                        <option value="Liqui">Liqui Moly</option>
-                                    </select>
-                                </div>
-                                <div class=" col-md-3 col-sm-12 col-xs-12 my-2 my-md-0">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Sort By Vechicle Type</option>
-                                        <option value="Shell">Trucks</option>
-                                        <option value="Total">Cars</option>
-                                        <option value="Liqui">Bikes</option>
-                                        <option value="Liqui">Cross Overs</option>
-                                        <option value="Liqui">SUVs</option>
-                                        <option value="Liqui">Motor Homes</option>
-                                        <option value="Liqui">Others</option>
-                                    </select>
-                                </div>
-                                <div class=" col-md-3 col-sm-12 col-xs-12 my-2 my-md-0">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Sort By Price</option>
-                                        <option value="Shell">100-500</option>
-                                        <option value="Total">500-800</option>
-                                        <option value="Liqui">800-1200</option>
-                                        <option value="Liqui">1200-more</option>
-                                    </select>
-                                </div>
-                                <div class=" col-md-3 col-sm-12 col-xs-12 my-2 my-md-0">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Sort By Area</option>
-                                        <option value="Shell">Dubai</option>
-                                        <option value="Total">Sharjah</option>
-                                        <option value="Liqui">Ajman</option>
-                                    </select>
-                                </div>
-                            </div>
-						</div>
-				</div>
-				<div class="row">
-						<!-- Single Product -->
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-1" class="single-product">
-										<div class="part-1">
-												<ul>
-														<li><a href="#"><i class="fas fa-phone-alt"></i></a></li>
-														<li><a href="#"><i class="fas fa-heart"></i></a></li>
-														<li><a href="#"><i class="fas fa-plus"></i></a></li>
-														<li><a href="#"><i class="fas fa-expand"></i></a></li>
-												</ul>
-										</div>
-										<div class="part-2">
-												<h3 class="product-title">Here Product Title</h3>
-												<h4 class="product-old-price">$79.99</h4>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-						<!-- Single Product -->
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-2" class="single-product">
-										<div class="part-1">
-												<span class="discount">15% off</span>
-												<ul>
-														<li><a href="#"><i class="fas fa-phone-alt"></i></a></li>
-														<li><a href="#"><i class="fas fa-heart"></i></a></li>
-														<li><a href="#"><i class="fas fa-plus"></i></a></li>
-														<li><a href="#"><i class="fas fa-expand"></i></a></li>
-												</ul>
-										</div>
-										<div class="part-2">
-												<h3 class="product-title">Here Product Title</h3>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-						<!-- Single Product -->
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-3" class="single-product">
-										<div class="part-1">
-												<ul>
-														<li><a href="#"><i class="fas fa-phone-alt"></i></a></li>
-														<li><a href="#"><i class="fas fa-heart"></i></a></li>
-														<li><a href="#"><i class="fas fa-plus"></i></a></li>
-														<li><a href="#"><i class="fas fa-expand"></i></a></li>
-												</ul>
-										</div>
-										<div class="part-2">
-												<h3 class="product-title">Here Product Title</h3>
-												<h4 class="product-old-price">$79.99</h4>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-						<!-- Single Product -->
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-4" class="single-product">
-										<div class="part-1">
-												<span class="new">new</span>
-												<ul>
-														<li><a href="#"><i class="fas fa-phone-alt"></i></a></li>
-														<li><a href="#"><i class="fas fa-heart"></i></a></li>
-														<li><a href="#"><i class="fas fa-plus"></i></a></li>
-														<li><a href="#"><i class="fas fa-expand"></i></a></li>
-												</ul>
-										</div>
-										<div class="part-2">
-												<h3 class="product-title">Here Product Title</h3>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-						<!-- Single Product -->
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-5" class="single-product">
-										<div class="part-1">
-												<ul>
-														<li><a href="#"><i class="fas fa-phone-alt"></i></a></li>
-														<li><a href="#"><i class="fas fa-heart"></i></a></li>
-														<li><a href="#"><i class="fas fa-plus"></i></a></li>
-														<li><a href="#"><i class="fas fa-expand"></i></a></li>
-												</ul>
-										</div>
-										<div class="part-2">
-												<h3 class="product-title">Here Product Title</h3>
-												<h4 class="product-old-price">$79.99</h4>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-						<!-- Single Product -->
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-6" class="single-product">
-										<div class="part-1">
-												<span class="discount">15% off</span>
-												<ul>
-														<li><a href="#"><i class="fas fa-phone-alt"></i></a></li>
-														<li><a href="#"><i class="fas fa-heart"></i></a></li>
-														<li><a href="#"><i class="fas fa-plus"></i></a></li>
-														<li><a href="#"><i class="fas fa-expand"></i></a></li>
-												</ul>
-										</div>
-										<div class="part-2">
-												<h3 class="product-title">Here Product Title</h3>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-						<!-- Single Product -->
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-7" class="single-product">
-										<div class="part-1">
-												<ul>
-														<li><a href="#"><i class="fas fa-phone-alt"></i></a></li>
-														<li><a href="#"><i class="fas fa-heart"></i></a></li>
-														<li><a href="#"><i class="fas fa-plus"></i></a></li>
-														<li><a href="#"><i class="fas fa-expand"></i></a></li>
-												</ul>
-										</div>
-										<div class="part-2">
-												<h3 class="product-title">Here Product Title</h3>
-												<h4 class="product-old-price">$79.99</h4>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-						<!-- Single Product -->
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-8" class="single-product">
-										<div class="part-1">
-												<span class="new">new</span>
-												<ul>
-														<li><a href="#"><i class="fas fa-phone-alt"></i></a></li>
-														<li><a href="#"><i class="fas fa-heart"></i></a></li>
-														<li><a href="#"><i class="fas fa-plus"></i></a></li>
-														<li><a href="#"><i class="fas fa-expand"></i></a></li>
-												</ul>
-										</div>
-										<div class="part-2">
-												<h3 class="product-title">Here Product Title</h3>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-				</div>
-		</div>
-</section>
+
 @endsection

@@ -7,22 +7,86 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="banner-inner">
-                            <h4>LIMITED EDITION </h4>
-                            <h1 class="text-uppercase">ORiginal <span class="orange-text">{{$partInfo->name}} </span>
+                            @php
+                            $words = explode(' ', $partInfo->sub_title);
+                            $firstWord = array_shift($words);
+                            @endphp
+                            <h1 class="text-uppercase">{{$firstWord}} <span class="orange-text">
+                                @if (!empty($words))
+                                {{ implode(' ', $words)}}
+                                @endif</span>
                             </h1>
-                            <h6>YOUR {{$partInfo->name}} specialist</h6>
+                            <h6>{{$partInfo->content}}</h6>
 
-                            <button class="site-btn mt-4">SHOP NOW</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <img src="{{asset($partInfo->image)}}" alt="" class="img-fluid banner-img">
+            <img src="{{asset($partInfo->image ?? '')}}" alt="" class="img-fluid banner-img">
         </div>
     </div>
 </section>
 <section id="category">
     <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-md-8 col-lg-6">
+                    <div class="header">
+                            <h3>Featured Product</h3>
+                        </div>
+            </div>
+            <div class="col-12 mb-3">
+                <?php
+                use App\Models\{PartType , Manufacturer};
+                $parttypes = PartType::get();
+                $manufacturer = Manufacturer::get();
+                 ?>
+                <div class="row">
+                    <div class=" col-md-2 col-sm-12 col-xs-12 my-2 my-md-0">
+                        <select class="form-select price" aria-label="Default select example">
+                            <option value="" selected selected disabled >Sort By Price</option>
+                            <option {{isset($_REQUEST['price']) && $_REQUEST['price'] == '100-500' ? 'selected' : '' }} value="100-500">100-500</option>
+                            <option {{isset($_REQUEST['price']) && $_REQUEST['price'] == '500-800' ? 'selected' : '' }} value="500-800">500-800</option>
+                            <option {{isset($_REQUEST['price']) && $_REQUEST['price'] == '800-1200' ? 'selected' : '' }} value="800-1200">800-1200</option>
+                            <option {{isset($_REQUEST['price']) && $_REQUEST['price'] == '1200' ? 'selected' : '' }} value="1200+">1200-more</option>
+                        </select>
+                    </div>
+                    <div class=" col-md-3 col-sm-12 col-xs-12 my-2 my-md-0">
+                        <select class="form-select manufacturer" aria-label="Default select example">
+                            <option value=""  selected disabled>Sort By Manufacturer</option>
+                            @foreach ($manufacturer as $m )
+                            <option {{isset($_REQUEST['manufacturer']) && $_REQUEST['manufacturer'] == $m->id ? 'selected' : '' }} value="{{$m->id}}">{{$m->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
+                    <div class=" col-md-2 col-sm-12 col-xs-12 my-2 my-md-0">
+                        <select class="form-select statechange"  aria-label="Default select example">
+                            <option value=""  selected disabled>Select State</option>
+                            <option {{isset($_REQUEST['state']) && $_REQUEST['state'] == 'AbuDhabi' ? 'selected' : '' }} value="AbuDhabi">Abu Dhabi</option>
+                            <option {{isset($_REQUEST['state']) && $_REQUEST['state'] == 'Dubai' ? 'selected' : '' }} value="Dubai">Dubai</option>
+                            <option {{isset($_REQUEST['state']) && $_REQUEST['state'] == 'Sharjah' ? 'selected' : '' }} value="Sharjah">Sharjah</option>
+                            <option {{isset($_REQUEST['state']) && $_REQUEST['state'] == 'Ajman' ? 'selected' : '' }} value="Ajman">Ajman</option>
+                            <option {{isset($_REQUEST['state']) && $_REQUEST['state'] == 'UmmAl-Quwain' ? 'selected' : '' }} value="UmmAl-Quwain">Umm Al-Quwain</option>
+                            <option {{isset($_REQUEST['state']) && $_REQUEST['state'] == 'Fujairah' ? 'selected' : '' }} value="Fujairah">Fujairah</option>
+                        </select>
+                    </div>
+                    <div class=" col-md-3 col-sm-12 col-xs-12 my-2 my-md-0">
+                        <select class="form-select vehicle_type" aria-label="Default select example">
+                            <option value="" selected disabled>Sort By Vechicle Type</option>
+                            @foreach ($parttypes as $m )
+                            <option {{isset($_REQUEST['vehicle_type']) && $_REQUEST['vehicle_type'] == $m->id ? 'selected' : '' }} value="{{$m->id}}">{{$m->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class=" col-md-1 col-sm-12 col-xs-12 my-2 my-md-0">
+                        <button class="site-btn p-sm py-2 searchButton2" id="searchButton2"><i class="fas fa-search me-3"></i>
+                            Search</button>
+                    </div>
+                </div>
+            </div>
+    </div>
         <div class="container-fluid">
             <div class="row py-5">
                 <div class="col-md-12">
@@ -39,7 +103,7 @@
                             </div>
                             <div class="product-details">
                                 <span class="product-catagory">{{$d->category->name ??''}} </span>
-                                <h4><a href="">{{$d->name ?? ''}}</a></h4>
+                                <h4><a>{{$d->name ?? ''}}</a></h4>
                                 <p>{{$d->description ?? ''}}</p>
                                 <div class="product-bottom-details">
                                     <div class="product-price">

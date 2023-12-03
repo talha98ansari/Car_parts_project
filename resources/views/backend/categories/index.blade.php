@@ -84,7 +84,7 @@
                                         </div>
                                     </div>
                                 </th>
-                              
+
                                 <td>
                                     <span class="badge badge-dot mr-4">
                                         @if($u->is_active == 1)

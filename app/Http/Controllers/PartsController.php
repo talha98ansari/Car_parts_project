@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Part,partType,Category};
+use App\Models\{Part,partType,Category, SubCate, Manufacturer, CarModel};
 use Illuminate\Support\Str;
 use Hash;
 
@@ -28,9 +28,12 @@ class PartsController extends Controller
     public function create()
     {
         $categories = Category::get();
+        $sub_categories = SubCate::get();
         $partType = partType::get();
+        $manufacturer = Manufacturer::get();
+        $models = CarModel::get();
 
-        return view('backend.parts.create' , compact('categories','partType'));
+        return view('backend.parts.create' ,compact('sub_categories','categories','partType','manufacturer','models'));
     }
 
     /**
@@ -52,13 +55,16 @@ class PartsController extends Controller
 
             $path = $file->move('uploads/Parts', $fileName);
         }
-
+        $data['price'] = $request->price;
         $data['name'] = $request->name;
         $data['category_id'] = $request->category_id;
+        $data['sub_cat'] = $request->sub_cat;
+        $data['manufacturer_id'] = $request->manufacturer_id;
+        $data['model'] = $request->model;
+        $data['state'] = $request->model;
         $data['part_type_id'] = $request->part_type_id;
         $data['description'] = $request->description;
-        $data['price'] = $request->price;
-        $data['image'] = $path;
+        $data['area'] = $request->state;
 
         Part::create($data);
         return redirect('admin/parts/')->with('success', 'Part Added!');
@@ -83,11 +89,15 @@ class PartsController extends Controller
      */
     public function edit($id)
     {
+
         $data = Part::find($id);
         $categories = Category::get();
+        $sub_categories = SubCate::get();
         $partType = partType::get();
+        $manufacturer = Manufacturer::get();
+        $models = CarModel::get();
 
-        return view('backend.parts.edit', compact('categories','partType','data'));
+        return view('backend.parts.edit', compact('sub_categories','categories','partType','data','manufacturer','models'));
     }
 
     /**
@@ -113,11 +123,16 @@ class PartsController extends Controller
             $data['image'] =$path;
 
         }
+        $data['price'] = $request->price;
         $data['name'] = $request->name;
         $data['category_id'] = $request->category_id;
+        $data['sub_cat'] = $request->sub_cat;
+        $data['manufacturer_id'] = $request->manufacturer_id;
+        $data['model'] = $request->model;
+        $data['state'] = $request->model;
         $data['part_type_id'] = $request->part_type_id;
         $data['description'] = $request->description;
-        $data['price'] = $request->price;
+        $data['area'] = $request->state;
 
 
         $part->update($data);

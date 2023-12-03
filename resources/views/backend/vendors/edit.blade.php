@@ -104,6 +104,37 @@
                                     </span>
                                 @endif
                             </div>
+
+                            <div class="form-group {{ $errors->has('vendor_type') ? ' has-danger' : '' }} col-md-9">
+                                <label class="form-control-label" for="input-vendor_type">{{ __('Select Category') }}</label>
+                                <select name="vendor_type" id="input-vendor_type" class="vendor_type form-control form-control-alternative{{ $errors->has('vendor_type') ? ' is-invalid' : '' }}" placeholder="{{ __('category') }}"  required autofocus>
+                                    <option {{$data->business_id == '' ? 'selected' : ''}} value="non_business">Non Business</option>
+                                    <option {{$data->business_id != '' ? 'selected' : ''}} value="business">Business</option>
+                                </select>
+                                @if ($errors->has('vendor_type'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('vendor_type') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        <div class="{{$data->business_id == '' ? 'd-none' : ''}} business_container">
+                            <div class="form-group {{ $errors->has('b_name') ? ' has-danger' : '' }} col-md-9">
+                                <label for="Business" class="form-label">Business Name:</label>
+                                <input type="text" class="form-control form-control-alternative"value="{{$data->business->address}}"  name="b_name">
+                            </div>
+                            <div class="form-group {{ $errors->has('niche') ? ' has-danger' : '' }} col-md-9">
+                                <label for="Niche" class="form-label">Business Niche:</label>
+                                <input type="text" class="form-control form-control-alternative" value="{{$data->business->address}}" name="niche">
+                            </div>
+                            <div class="form-group {{ $errors->has('phone') ? ' has-danger' : '' }} col-md-9">
+                                <label for="BusinessC" class="form-label">Business Contact Number:</label>
+                                <input type="number" class="form-control form-control-alternative" value="{{$data->business->phone}}" name="phone">
+                            </div>
+                            <div class="form-group {{ $errors->has('address') ? ' has-danger' : '' }} col-md-9">
+                                <label for="Businessaddress" class="form-label">Business Address:</label>
+                                <input type="text" class="form-control form-control-alternative" value="{{$data->business->address}}" name="address">
+                            </div>
+                        </div>
                         </div>
                             <div class="text-right">
                                 <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>

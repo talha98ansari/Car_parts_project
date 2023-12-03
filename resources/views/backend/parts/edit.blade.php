@@ -68,7 +68,7 @@
 
                             <div class="form-group {{ $errors->has('category_id') ? ' has-danger' : '' }} col-md-9">
                                 <label class="form-control-label" for="input-category_id">{{ __('Select Category') }}</label>
-                                <select name="category_id" id="input-category_id" class="form-control form-control-alternative{{ $errors->has('category_id') ? ' is-invalid' : '' }}" placeholder="{{ __('category') }}"  required autofocus>
+                                <select name="category_id" id="input-category_id" class="categroy_dropdown form-control form-control-alternative{{ $errors->has('category_id') ? ' is-invalid' : '' }}" placeholder="{{ __('category') }}"  required autofocus>
                                     @foreach ($categories as $u )
                                     <option {{$u->id==$data->category_id ? 'selected' : '' }}  value="{{$u->id}}">
                                     {{$u->name ?? ''}}
@@ -78,6 +78,69 @@
                                 @if ($errors->has('category_id'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('category_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="form-group {{ $errors->has('sub_cat') ? ' has-danger' : '' }} col-md-9">
+                                <label class="form-control-label" for="input-sub_cat">{{ __('Select Sub Category') }}</label>
+                                <select name="sub_cat" id="input-sub_cat" class="subCatDropDown form-control form-control-alternative{{ $errors->has('sub_cat') ? ' is-invalid' : '' }}" placeholder="{{ __('category') }}"  required autofocus>
+                                    @foreach ($sub_categories as $u )
+                                    <option {{$u->id==$data->sub_cat ? 'selected' : '' }}  value="{{$u->id}}">
+                                    {{$u->name ?? ''}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('sub_cat'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('sub_cat') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-danger' : '' }} col-md-9">
+                                <label class="form-control-label" for="input-manufacturer_id">{{ __('Select Manufacturer') }}</label>
+                                <select name="manufacturer_id" id="input-manufacturer_id" class="subCatDropDown form-control form-control-alternative{{ $errors->has('manufacturer_id') ? ' is-invalid' : '' }}" placeholder="{{ __('category') }}"  required autofocus>
+                                    @foreach ($manufacturer as $u )
+                                    <option {{$u->id==$data->manufacturer_id ? 'selected' : '' }}  value="{{$u->id}}">
+                                    {{$u->name ?? ''}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('manufacturer_id'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('manufacturer_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="form-group {{ $errors->has('model') ? ' has-danger' : '' }} col-md-9">
+                                <label class="form-control-label" for="input-model">{{ __('Select Model') }}</label>
+                                <select name="model" id="input-model" class="subCatDropDown form-control form-control-alternative{{ $errors->has('model') ? ' is-invalid' : '' }}" placeholder="{{ __('category') }}"  required autofocus>
+                                    @foreach ($models as $u )
+                                    <option {{$u->id==$data->model ? 'selected' : '' }}  value="{{$u->id}}">
+                                    {{$u->name ?? ''}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('model'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('model') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="form-group {{ $errors->has('state') ? ' has-danger' : '' }} col-md-9">
+                                <label class="form-control-label" for="input-state">{{ __('Select Area') }}</label>
+                                <select name="state" id="input-state" class="subCatDropDown form-control form-control-alternative{{ $errors->has('state') ? ' is-invalid' : '' }}" placeholder="{{ __('category') }}"  required autofocus>
+
+                                    <option value="" selected disabled>Select State</option>
+                                    <option {{'AbuDhabi'==$data->area ? 'selected' : '' }} value="AbuDhabi">Abu Dhabi</option>
+                                    <option {{'Dubai'==$data->area ? 'selected' : '' }} value="Dubai">Dubai</option>
+                                    <option {{'Sharjah'==$data->area ? 'selected' : '' }} value="Sharjah">Sharjah</option>
+                                    <option {{'Ajman'==$data->area ? 'selected' : '' }} value="Ajman">Ajman</option>
+                                    <option {{'UmmAl-Quwain'==$data->area ? 'selected' : '' }} value="UmmAl-Quwain">Umm Al-Quwain</option>
+                                    <option {{'Fujairah'==$data->area ? 'selected' : '' }} value="Fujairah">Fujairah</option>
+                                 </select>
+                                @if ($errors->has('state'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('state') }}</strong>
                                     </span>
                                 @endif
                             </div>

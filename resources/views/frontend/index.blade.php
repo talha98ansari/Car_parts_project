@@ -80,25 +80,38 @@
                                         <div class="row justify-content-center">
                                             <div class="col-md-4 col-sm-6 my-3">
                                                 <select name="" id="" class="site-input p-sm">
-                                                    <option value="" selected disabled>Select Model</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-4 col-sm-6 my-3">
-                                                <select name="" id="" class="site-input p-sm">
+
                                                     <option value="" selected disabled>Select Maker</option>
+                                                    @foreach ($maker as $m )
+                                                    <option value="{{$m->id}}">{{$m->name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="col-md-4 col-sm-6 my-3">
-                                                <select name="" id="" class="site-input p-sm">
-                                                    <option value="" selected disabled>Select Engine</option>
+                                                <select name="" id="model" class="site-input p-sm">
+                                                    <option value="" selected disabled>Select Model</option>
+                                                    @foreach ($model as $m )
+                                                    <option value="{{$m->id}}">{{$m->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 my-3">
+                                                <select name="" id="state" class="site-input p-sm">
+                                                    <option value="" selected disabled>Select State</option>
+                                                    <option value="AbuDhabi">Abu Dhabi</option>
+                                                    <option value="Dubai">Dubai</option>
+                                                    <option value="Sharjah">Sharjah</option>
+                                                    <option value="Ajman">Ajman</option>
+                                                    <option value="UmmAl-Quwain">Umm Al-Quwain</option>
+                                                    <option value="Fujairah">Fujairah</option>
                                                 </select>
                                             </div>
                                             <div class="col-12 text-center my-3">
-                                                <button class="site-btn p-sm py-2"><i class="fas fa-search me-3"></i>
+                                                <button class="site-btn p-sm py-2" id="searchButton"><i class="fas fa-search me-3"></i>
                                                     Search</button>
                                             </div>
                                         </div>
-                                        <div class="row justify-content-center align-items-center mt-2">
+                                        {{-- <div class="row justify-content-center align-items-center mt-2">
                                             <div class="col-12 text-center">
                                                 <p class="mb-0 p-sm medium text-uppercase">By Registration Number</p>
                                             </div>
@@ -109,12 +122,12 @@
                                                 <button class="site-btn"><i class="fas fa-search me-3"></i>
                                                     Search</button>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </form>
-                                    <div class="text-center">
+                                    {{-- <div class="text-center">
                                         <a href="#_" class="blue-text medium p-sm">CAN’T FIND YOUR CAR IN THE
                                             CATALOGUE?</a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
