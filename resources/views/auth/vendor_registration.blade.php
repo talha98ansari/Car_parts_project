@@ -46,25 +46,30 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="Fname" class="form-label">First Name:</label>
-                                <input type="name" class="form-control" name="first_name">
+                                <input type="name" class="form-control" name="first_name" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="Lname" class="form-label">Last Name:</label>
-                                <input type="text" class="form-control" name="last_name">
+                                <input type="text" class="form-control" name="last_name" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="username" class="form-label">Username:</label>
-                                <input type="text" class="form-control" name="name">
+                                <input type="text" class="form-control" name="name" required>
                             </div>
 
                             <div class="col-md-6">
                                 <label for="Email" class="form-label">Email:</label>
-                                <input type="email" class="form-control" name="email">
+                                <input type="email" class="form-control" name="email" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="Contact" class="form-label">Personal Contact Number:</label>
-                                <input type="number" class="form-control" name="phone">
+                                <input type="number" class="form-control" name="phone" required>
                             </div>
+                            <div class="col-md-6">
+                                <label for="password" class="form-label">Password:</label>
+                                <input type="text" class="form-control" name="password"
+                                required
+                                    value="">
 
                             <div class="col-md-12">
                                 <input type="submit" value="Submit" class="btn btn-submit">

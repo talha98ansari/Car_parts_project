@@ -87,7 +87,7 @@
                             </div>
                             <div class="col-md-12">
                                 <button type="submit" value="Login" class="btn btn-submit" id="password"
-                                    disabled>Login</button>
+                                    disabled>Confirm</button>
                             </div>
                         </div>
                     </form>

@@ -24,7 +24,7 @@ use App\Http\Controllers\SiteController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', 'App\Http\Controllers\FrontController@index')->name('index');
+Route::get('/', 'App\Http\Controllers\FrontController@index')->name('index.f');
 Route::get('/about-us', 'App\Http\Controllers\FrontController@about_us')->name('about.us');
 Route::get('/contact-us', 'App\Http\Controllers\FrontController@contact')->name('contact.us');
 Route::get('/legal-terms', 'App\Http\Controllers\FrontController@legel_terms')->name('legal_terms');
@@ -41,8 +41,6 @@ Route::post('/user/registration/save', 'App\Http\Controllers\UserRegistrationCon
 Route::post('/user/login/check', 'App\Http\Controllers\FrontLoginController@login')->name('user.login.check');
 Route::post('/vendor/login', 'App\Http\Controllers\FrontLoginController@Vendorlogin')->name('vendor.login.check');
 
-
-
 Route::get('/vendor/login', 'App\Http\Controllers\vendorRegistrationController@loginPage')->name('vendor.login');
 
 Route::get('/vendor/registration/type', 'App\Http\Controllers\vendorRegistrationController@registerationPageType')->name('vendor.registration.type');
@@ -51,22 +49,31 @@ Route::get('/vendor/registration/business', 'App\Http\Controllers\vendorRegistra
 Route::post('/vendor/registration/save', 'App\Http\Controllers\vendorRegistrationController@savevendor')->name('vendor.registration.save');
 Route::post('/vendor/registration/save/nb', 'App\Http\Controllers\vendorRegistrationController@savevendorNB')->name('vendor.registration.nb');
 
-
+Route::get('/vendor/registration/type', 'App\Http\Controllers\vendorRegistrationController@registerationPageType')->name('vendor.registration.type');
+Route::get('/reset/password', 'App\Http\Controllers\FrontLoginController@forgotPass')->name('reset.check');
+Route::post('/verify/email', 'App\Http\Controllers\FrontLoginController@forgotPass')->name('reset.email.check');
+Route::get('/reset/user/password/{id}', 'App\Http\Controllers\FrontLoginController@resetPass')->name('set.pass');
+Route::post('/user/password/{id}', 'App\Http\Controllers\FrontLoginController@passReset')->name('password.reset.user');
 
 Auth::routes();
 
+Route::post('profile/password', [
+        'as' => 'profile.password',
+        'uses' => 'App\Http\Controllers\ProfileController@password'
+    ]);
+    Route::post('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
+    Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\Admin\ProfileController@edit']);
+
 // Admin routes
 Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', 'App\Http\Controllers\HomeController@index')->name('home');
+    Route::get('/dashboard', 'App\Http\Controllers\Admin\HomeController@index')->name('home');
 
-    Route::resource('users', 'App\Http\Controllers\UserController');
-    Route::post('/update/users/{id}', 'App\Http\Controllers\UserController@update')->name('users.up');
-    Route::get('/users/delete/{id}', 'App\Http\Controllers\UserController@destroy')->name('users.remove');
-    Route::get('/users/status/{id}', 'App\Http\Controllers\UserController@status')->name('users.status');
+    Route::resource('users', 'App\Http\Controllers\Admin\UserController');
+    Route::post('/update/users/{id}', 'App\Http\Controllers\Admin\UserController@update')->name('users.up');
+    Route::get('/users/delete/{id}', 'App\Http\Controllers\Admin\UserController@destroy')->name('users.remove');
+    Route::get('/users/status/{id}', 'App\Http\Controllers\Admin\UserController@status')->name('users.status');
 
 
-    Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
-    Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
 
     Route::get('upgrade', function () {
         return view('pages.upgrade');
@@ -84,84 +91,92 @@ Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () 
         return view('pages.tables');
     })->name('table');
 
-    Route::put('profile/password', [
-        'as' => 'profile.password',
-        'uses' => 'App\Http\Controllers\ProfileController@password'
-    ]);
 
-    Route::resource('vendors', 'App\Http\Controllers\VendorController');
-    Route::post('/update/vendors/{id}', 'App\Http\Controllers\VendorController@update')->name('vendors.up');
-    Route::get('/vendors/delete/{id}', 'App\Http\Controllers\VendorController@destroy')->name('vendors.remove');
-    Route::get('/vendors/status/{id}', 'App\Http\Controllers\VendorController@status')->name('vendors.status');
+    Route::resource('vendors', 'App\Http\Controllers\Admin\VendorController');
+    Route::post('/update/vendors/{id}', 'App\Http\Controllers\Admin\VendorController@update')->name('vendors.up');
+    Route::get('/vendors/delete/{id}', 'App\Http\Controllers\Admin\VendorController@destroy')->name('vendors.remove');
+    Route::get('/vendors/status/{id}', 'App\Http\Controllers\Admin\VendorController@status')->name('vendors.status');
 
-    Route::resource('categories', 'App\Http\Controllers\CategoriesController');
-    Route::post('/update/categories/{id}', 'App\Http\Controllers\CategoriesController@update')->name('categories.up');
-    Route::get('/categories/delete/{id}', 'App\Http\Controllers\CategoriesController@destroy')->name('categories.remove');
-    Route::get('/categories/status/{id}', 'App\Http\Controllers\CategoriesController@status')->name('categories.status');
+    Route::resource('categories', 'App\Http\Controllers\Admin\CategoriesController');
+    Route::post('/update/categories/{id}', 'App\Http\Controllers\Admin\CategoriesController@update')->name('categories.up');
+    Route::get('/categories/delete/{id}', 'App\Http\Controllers\Admin\CategoriesController@destroy')->name('categories.remove');
+    Route::get('/categories/status/{id}', 'App\Http\Controllers\Admin\CategoriesController@status')->name('categories.status');
 
-    Route::resource('subcategories', 'App\Http\Controllers\SubCatController');
-    Route::post('/update/subcategories/{id}', 'App\Http\Controllers\SubCatController@update')->name('subcategories.up');
-    Route::get('/subcategories/delete/{id}', 'App\Http\Controllers\SubCatController@destroy')->name('subcategories.remove');
-    Route::get('/subcategories/status/{id}', 'App\Http\Controllers\SubCatController@status')->name('subcategories.status');
+    Route::resource('subcategories', 'App\Http\Controllers\Admin\SubCatController');
+    Route::post('/update/subcategories/{id}', 'App\Http\Controllers\Admin\SubCatController@update')->name('subcategories.up');
+    Route::get('/subcategories/delete/{id}', 'App\Http\Controllers\Admin\SubCatController@destroy')->name('subcategories.remove');
+    Route::get('/subcategories/status/{id}', 'App\Http\Controllers\Admin\SubCatController@status')->name('subcategories.status');
 
-    Route::resource('manufacturer', 'App\Http\Controllers\ManufacturerController');
-    Route::post('/update/manufacturer/{id}', 'App\Http\Controllers\ManufacturerController@update')->name('manufacturer.up');
-    Route::get('/manufacturer/delete/{id}', 'App\Http\Controllers\ManufacturerController@destroy')->name('manufacturer.remove');
-    Route::get('/manufacturer/status/{id}', 'App\Http\Controllers\ManufacturerController@status')->name('manufacturer.status');
+    Route::resource('manufacturer', 'App\Http\Controllers\Admin\ManufacturerController');
+    Route::post('/update/manufacturer/{id}', 'App\Http\Controllers\Admin\ManufacturerController@update')->name('manufacturer.up');
+    Route::get('/manufacturer/delete/{id}', 'App\Http\Controllers\Admin\ManufacturerController@destroy')->name('manufacturer.remove');
+    Route::get('/manufacturer/status/{id}', 'App\Http\Controllers\Admin\ManufacturerController@status')->name('manufacturer.status');
 
-    Route::resource('makers', 'App\Http\Controllers\MakerController');
-    Route::post('/update/makers/{id}', 'App\Http\Controllers\MakerController@update')->name('makers.up');
-    Route::get('/makers/delete/{id}', 'App\Http\Controllers\MakerController@destroy')->name('makers.remove');
-    Route::get('/makers/status/{id}', 'App\Http\Controllers\MakerController@status')->name('makers.status');
+    Route::resource('makers', 'App\Http\Controllers\Admin\MakerController');
+    Route::post('/update/makers/{id}', 'App\Http\Controllers\Admin\MakerController@update')->name('makers.up');
+    Route::get('/makers/delete/{id}', 'App\Http\Controllers\Admin\MakerController@destroy')->name('makers.remove');
+    Route::get('/makers/status/{id}', 'App\Http\Controllers\Admin\MakerController@status')->name('makers.status');
 
-    Route::resource('models', 'App\Http\Controllers\ModelController');
-    Route::post('/update/model/{id}', 'App\Http\Controllers\ModelController@update')->name('models.up');
-    Route::get('/model/delete/{id}', 'App\Http\Controllers\ModelController@destroy')->name('models.remove');
-    Route::get('/model/status/{id}', 'App\Http\Controllers\ModelController@status')->name('models.status');
+    Route::resource('models', 'App\Http\Controllers\Admin\ModelController');
+    Route::post('/update/model/{id}', 'App\Http\Controllers\Admin\ModelController@update')->name('models.up');
+    Route::get('/model/delete/{id}', 'App\Http\Controllers\Admin\ModelController@destroy')->name('models.remove');
+    Route::get('/model/status/{id}', 'App\Http\Controllers\Admin\ModelController@status')->name('models.status');
 
-    Route::resource('partType', 'App\Http\Controllers\partTypeController');
-    Route::post('/update/partType/{id}', 'App\Http\Controllers\partTypeController@update')->name('partType.up');
-    Route::get('/partType/delete/{id}', 'App\Http\Controllers\partTypeController@destroy')->name('partType.remove');
-    Route::get('/partType/status/{id}', 'App\Http\Controllers\partTypeController@status')->name('partType.status');
+    Route::resource('partType', 'App\Http\Controllers\Admin\partTypeController');
+    Route::post('/update/partType/{id}', 'App\Http\Controllers\Admin\partTypeController@update')->name('partType.up');
+    Route::get('/partType/delete/{id}', 'App\Http\Controllers\Admin\partTypeController@destroy')->name('partType.remove');
+    Route::get('/partType/status/{id}', 'App\Http\Controllers\Admin\partTypeController@status')->name('partType.status');
 
-    Route::resource('parts', 'App\Http\Controllers\PartsController');
-    Route::post('/update/parts/{id}', 'App\Http\Controllers\partsController@update')->name('parts.up');
-    Route::get('/parts/delete/{id}', 'App\Http\Controllers\partsController@destroy')->name('parts.remove');
-    Route::get('/parts/status/{id}', 'App\Http\Controllers\partsController@status')->name('parts.status');
+    Route::resource('parts', 'App\Http\Controllers\Admin\PartsController');
+    Route::post('/update/parts/{id}', 'App\Http\Controllers\Admin\partsController@update')->name('parts.up');
+    Route::get('/parts/delete/{id}', 'App\Http\Controllers\Admin\partsController@destroy')->name('parts.remove');
+    Route::get('/parts/status/{id}', 'App\Http\Controllers\Admin\partsController@status')->name('parts.status');
 
-    Route::get('/site-setting/about-us', 'App\Http\Controllers\SiteController@aboutUs')->name('site.about');
-    Route::post('/site-setting/about-us/{id}', 'App\Http\Controllers\SiteController@storeAboutUs')->name('store.site.about');
+    Route::get('/site-setting/about-us', 'App\Http\Controllers\Admin\SiteController@aboutUs')->name('site.about');
+    Route::post('/site-setting/about-us/{id}', 'App\Http\Controllers\Admin\SiteController@storeAboutUs')->name('store.site.about');
 
-    Route::get('/site-setting/contact-us', 'App\Http\Controllers\SiteController@contactUs')->name('site.contact');
-    Route::post('/site-setting/contact-us/{id}', 'App\Http\Controllers\SiteController@storecontactUs')->name('store.site.contact');
-    Route::post('/update/contact/{id}', 'App\Http\Controllers\SiteController@update')->name('contact.up');
-    Route::get('/update/contact/{id}', 'App\Http\Controllers\SiteController@edit')->name('contact.edit');
-    Route::get('/contact/delete/{id}', 'App\Http\Controllers\SiteController@destroy')->name('contact.remove');
-    Route::get('/contact/add', 'App\Http\Controllers\SiteController@create')->name('contact.create');
-    Route::post('/contact/address/store', 'App\Http\Controllers\SiteController@store')->name('contact_us.store');
+    Route::get('/site-setting/contact-us', 'App\Http\Controllers\Admin\SiteController@contactUs')->name('site.contact');
+    Route::post('/site-setting/contact-us/{id}', 'App\Http\Controllers\Admin\SiteController@storecontactUs')->name('store.site.contact');
+    Route::post('/update/contact/{id}', 'App\Http\Controllers\Admin\SiteController@update')->name('contact.up');
+    Route::get('/update/contact/{id}', 'App\Http\Controllers\Admin\SiteController@edit')->name('contact.edit');
+    Route::get('/contact/delete/{id}', 'App\Http\Controllers\Admin\SiteController@destroy')->name('contact.remove');
+    Route::get('/contact/add', 'App\Http\Controllers\Admin\SiteController@create')->name('contact.create');
+    Route::post('/contact/address/store', 'App\Http\Controllers\Admin\SiteController@store')->name('contact_us.store');
 
-    Route::get('/site-setting/others', 'App\Http\Controllers\SiteController@othersIndex')->name('site.other.index');
-    Route::get('/site-setting/others/create-page', 'App\Http\Controllers\SiteController@othersCreate')->name('site.other.create');
-    Route::post('/site-setting/others/store', 'App\Http\Controllers\SiteController@Otherstore')->name('site.other.store');
-    Route::get('/site-setting/others/update{data}', 'App\Http\Controllers\SiteController@Otheredit')->name('site.other.edit');
-    Route::post('/site-setting/others/update{id}', 'App\Http\Controllers\SiteController@Otherupdate')->name('site.other.up');
-    Route::get('site-setting/others/delete/{id}', 'App\Http\Controllers\SiteController@Otherdestroy')->name('site.other.remove');
+    Route::get('/site-setting/others', 'App\Http\Controllers\Admin\SiteController@othersIndex')->name('site.other.index');
+    Route::get('/site-setting/others/create-page', 'App\Http\Controllers\Admin\SiteController@othersCreate')->name('site.other.create');
+    Route::post('/site-setting/others/store', 'App\Http\Controllers\Admin\SiteController@Otherstore')->name('site.other.store');
+    Route::get('/site-setting/others/update{data}', 'App\Http\Controllers\Admin\SiteController@Otheredit')->name('site.other.edit');
+    Route::post('/site-setting/others/update{id}', 'App\Http\Controllers\Admin\SiteController@Otherupdate')->name('site.other.up');
+    Route::get('site-setting/others/delete/{id}', 'App\Http\Controllers\Admin\SiteController@Otherdestroy')->name('site.other.remove');
 
-    Route::resource('follow', 'App\Http\Controllers\followController');
-    Route::post('/update/follow/{id}', 'App\Http\Controllers\followController@update')->name('follow.up');
-    Route::get('/follow/delete/{id}', 'App\Http\Controllers\followController@destroy')->name('follow.remove');
-    Route::get('/follow/status/{id}', 'App\Http\Controllers\followController@status')->name('follow.status');
+    Route::resource('carrepair', 'App\Http\Controllers\Admin\CarRepairController');
+    Route::post('/update/carrepair/{id}', 'App\Http\Controllers\Admin\CarRepairController@update')->name('carrepair.up');
+    Route::get('/carrepair/delete/{id}', 'App\Http\Controllers\Admin\CarRepairController@destroy')->name('carrepair.remove');
+    Route::get('/carrepair/status/{id}', 'App\Http\Controllers\Admin\CarRepairController@status')->name('carrepair.status');
+
+    Route::resource('follow', 'App\Http\Controllers\Admin\followController');
+    Route::post('/update/follow/{id}', 'App\Http\Controllers\Admin\followController@update')->name('follow.up');
+    Route::get('/follow/delete/{id}', 'App\Http\Controllers\Admin\followController@destroy')->name('follow.remove');
+    Route::get('/follow/status/{id}', 'App\Http\Controllers\Admin\followController@status')->name('follow.status');
+
 
     Route::get('/get-SubCat-options/{parentId}', 'App\Http\Controllers\DropdownController@getSubCats')->name('get.subcat.options');
 
 });
 
 // Vendor Routes
-Route::middleware(['check.role:2'])->group(function () {
-    Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
-
-});
-
+// Route::middleware(['auth', 'check.role:2',''])->prefix('vendor')->group(function () {
+//     Route::resource('vparts', 'App\Http\Controllers\Merch\PartsController');
+    // Route::post('/v/update/parts/{id}', 'App\Http\Controllers\Merch\partsController@update')->name('v.parts.up');
+    // Route::get('/v/parts/delete/{id}', 'App\Http\Controllers\Merch\partsController@destroy')->name('v.parts.remove');
+    // Route::get('/v/parts/status/{id}', 'App\Http\Controllers\Merch\partsController@status')->name('v.parts.status');
+// });
+Route::middleware(['auth', 'check.role:2'])->prefix('vendor')->group(function () {
+    Route::resource('vparts', 'App\Http\Controllers\Merch\vPartsController');
+    Route::post('/v/update/parts/{id}', 'App\Http\Controllers\Merch\vPartsController@update')->name('vparts.up');
+    Route::get('/v/parts/delete/{id}', 'App\Http\Controllers\Merch\vPartsController@destroy')->name('vparts.remove');
+    Route::get('/v/parts/status/{id}', 'App\Http\Controllers\Merch\vPartsController@status')->name('vparts.status');});
 
 // Route for unauthorized access
 Route::get('/unauthorized', function () {
@@ -169,3 +184,5 @@ Route::get('/unauthorized', function () {
 })->name('unauthorized');
 Route::post('/password', 'App\Http\Controllers\Auth\ResetPasswordController@password')->name('password.save')->middleware('checklogin');
 Route::get('change/password', 'App\Http\Controllers\Auth\ResetPasswordController@passwordView')->name('password.change')->middleware('checklogin');
+Route::get('/get-model-options/{parentId}', 'App\Http\Controllers\DropdownController@getModel')->name('get.model.options');
+Route::get('/get-state-options/{parentId}', 'App\Http\Controllers\DropdownController@getstate')->name('get.state.options');

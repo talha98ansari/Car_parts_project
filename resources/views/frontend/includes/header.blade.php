@@ -120,7 +120,7 @@
             <div class="row">
                 <div class="col-xl-11 ms-auto">
                     <nav class="navbar navbar-expand-lg navbar-dark">
-                        <a class="navbar-brand" href="{{route('index')}}"><img src="{{asset('front/images/logo.png')}}"
+                        <a class="navbar-brand" href="{{route('index.f')}}"><img src="{{asset('front/images/logo.png')}}"
                                 alt="" class="img-fluid site-logo"></a>
                         <button class="navbar-toggler transparent-btn" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"

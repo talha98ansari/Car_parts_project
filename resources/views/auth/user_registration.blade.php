@@ -57,8 +57,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="password" class="form-label">Password:</label>
-                                    <input type="password" class="form-control" name="password"
-                                        value="{{ old('password') }}">
+                                    <input type="text" class="form-control" name="password"
+                                        value="">
                                 </div>
                                 <div class="col-md-12">
                                     <button type="submit" value="Submit" class="btn btn-submit">Submit</button>

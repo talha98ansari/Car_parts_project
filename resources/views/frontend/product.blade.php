@@ -22,8 +22,9 @@
     <div class="text-center mt-4 ">
         <span>
             <a class="btn text-white rounded-circle btn-sm1 "
-                style="background-color: white; border-radius: 60%; border: 1px solid #FF4E00;" href="tel:{{$data->creator->phone ?? '' }}"
-                role="button"><i class="fa-solid fa-phone " style="color: #FF4E00;"></i></a>
+                style="background-color: white; border-radius: 60%; border: 1px solid #FF4E00;"
+                href="{{Auth::user() && $data->creator ? 'tel:'.$data->creator->phone : '' }}" role="button"><i
+                    class="fa-solid fa-phone " style="color: #FF4E00;"></i></a>
             <a class="btn text-white rounded-circle btn-sm1 mx-3 "
                 style="background-color: white; border-radius: 60%; border: 1px solid #FF4E00;" href="#!"
                 role="button"><span style="color: #FF4E00; font-size: 15px;"><i id="ic" class="fa-regular fa-heart"
@@ -40,20 +41,22 @@
                 <div class="col-12 d-flex justify-content-center">
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-                            aria-labelledby="nav-home-tab"><img src="{{asset($data->image)}}"
-                                class="img-fluid" alt=""></div>
+                            aria-labelledby="nav-home-tab"><img src="{{asset($data->image)}}" class="img-fluid" alt="">
+                        </div>
                         {{-- <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <img src="{{asset('front/images/oil1.png')}}" class="img-fluid" alt=""></div>
-                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                            <img src="{{asset('front/images/oil2.png')}}" class="img-fluid" alt=""></div>
-                        <div class="tab-pane fade" id="nav-view" role="tabpanel" aria-labelledby="nav-view-tab"><img
-                                src="{{asset('front/images/oil3.png')}}" class="img-fluid" alt=""></div>
-                        <div class="tab-pane fade" id="nav-side" role="tabpanel" aria-labelledby="nav-side-tab"><img
-                                src="{{asset('front/images/oil4.png')}}" class="img-fluid" alt=""></div> --}}
+                            <img src="{{asset('front/images/oil1.png')}}" class="img-fluid" alt="">
                     </div>
-
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <img src="{{asset('front/images/oil2.png')}}" class="img-fluid" alt="">
+                    </div>
+                    <div class="tab-pane fade" id="nav-view" role="tabpanel" aria-labelledby="nav-view-tab"><img
+                            src="{{asset('front/images/oil3.png')}}" class="img-fluid" alt=""></div>
+                    <div class="tab-pane fade" id="nav-side" role="tabpanel" aria-labelledby="nav-side-tab"><img
+                            src="{{asset('front/images/oil4.png')}}" class="img-fluid" alt=""></div> --}}
                 </div>
-                {{-- <div class="col-12 d-flex justify-content-center">
+
+            </div>
+            {{-- <div class="col-12 d-flex justify-content-center">
                     <div class="d-flex mt-5 ms-5">
                         <nav class="glasses">
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -61,82 +64,94 @@
                                         id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
                                         role="tab" aria-controls="nav-home" aria-selected="true">
                                         <img src="{{asset('front/images/oil.png')}}" class="img-fluid" alt="">
-                                    </button> </p>
-                                <p class="nav1 d-grid text-center"><button class="border1 mx-2 nav-link"
-                                        id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
-                                        type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
-                                        <img src="{{asset('front/images/oil1.png')}}" class="img-fluid" alt="">
-                                    </button></p>
-                                <p class="nav1 d-grid text-center"> <button class="border1 mx-2 nav-link"
-                                        id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
-                                        type="button" role="tab" aria-controls="nav-contact" aria-selected="false">
-                                        <img src="{{asset('front/images/oil2.png')}}" class="img-fluid" alt="">
-                                    </button></p>
-                                <p class="nav1 d-grid text-center"> <button class="border1 mx-2 nav-link"
-                                        id="nav-view-tab" data-bs-toggle="tab" data-bs-target="#nav-view" type="button"
-                                        role="tab" aria-controls="nav-view" aria-selected="false">
-                                        <img src="{{asset('front/images/oil3.png')}}" class="img-fluid" alt="">
-                                    </button>
-                                </p>
+            </button> </p>
+            <p class="nav1 d-grid text-center"><button class="border1 mx-2 nav-link" id="nav-profile-tab"
+                    data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab"
+                    aria-controls="nav-profile" aria-selected="false">
+                    <img src="{{asset('front/images/oil1.png')}}" class="img-fluid" alt="">
+                </button></p>
+            <p class="nav1 d-grid text-center"> <button class="border1 mx-2 nav-link" id="nav-contact-tab"
+                    data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab"
+                    aria-controls="nav-contact" aria-selected="false">
+                    <img src="{{asset('front/images/oil2.png')}}" class="img-fluid" alt="">
+                </button></p>
+            <p class="nav1 d-grid text-center"> <button class="border1 mx-2 nav-link" id="nav-view-tab"
+                    data-bs-toggle="tab" data-bs-target="#nav-view" type="button" role="tab" aria-controls="nav-view"
+                    aria-selected="false">
+                    <img src="{{asset('front/images/oil3.png')}}" class="img-fluid" alt="">
+                </button>
+            </p>
 
-                            </div>
-                        </nav>
-
-                    </div>
-                </div> --}}
-            </div>
         </div>
+        </nav>
+
+    </div>
+</div> --}}
+</div>
+</div>
 
 
-        <div class="col-md-4 mt-2">
-            <p class="color fst-italic">SKU #1161014</p>
-            <h6 class="texts">{{$data->name}}</h6>
-            <div class="d-flex text-muted mt-2" id="stars">
-                <img src="{{asset('front/images/star.png')}}" alt="" class="img-fluid">
-                <img src="{{asset('front/images/star.png')}}" alt="" class="img-fluid">
-                <img src="{{asset('front/images/star.png')}}" alt="" class="img-fluid">
-                <img src="{{asset('front/images/star.png')}}" alt="" class="img-fluid">
-                <img src="{{asset('front/images/star_alt.png')}}" alt="" class="img-fluid">
-                <div class="mx-3">reviews (3)</div>
+<div class="col-md-4 mt-2">
+    <p class="color fst-italic">SKU #1161014</p>
+    <h6 class="texts">{{$data->name}}</h6>
+    <div class="d-flex text-muted mt-2" id="stars">
+        <img src="{{asset('front/images/star.png')}}" alt="" class="img-fluid">
+        <img src="{{asset('front/images/star.png')}}" alt="" class="img-fluid">
+        <img src="{{asset('front/images/star.png')}}" alt="" class="img-fluid">
+        <img src="{{asset('front/images/star.png')}}" alt="" class="img-fluid">
+        <img src="{{asset('front/images/star_alt.png')}}" alt="" class="img-fluid">
+        <div class="mx-3">reviews (3)</div>
+    </div>
+    <p class="mt-5"></p>
+    <div class="fw-bold">PRICE</div>
+    <p class="color fs-3">USD {{$data->price}}</p>
+    <p class="fw-bold mt-5">DESCRIPTION</p>
+    <p class="text lead">{{$data->description ?? ''}}</p>
+    <div class="d-flex mt-4">
+        <button type="button" class="btn1 btn btn-light  text-dark mx-2">3 liters</button>
+        <button type="button" class="btn1 btn btn-light text-dark">4 liters</button>
+        <button type="button" class="btn btn-sm bg-light" style="border: none ;"> <img
+                src="{{asset('front/ages/Group 171.png')}}" alt=""><span class="color1"> Product
+                Usage</span></button>
+    </div>
+
+
+    <!-- <p class="small text-muted mt-5"><img src="{{asset('front/ages/Group 172.png')}}" width="74px" height="19px" alt="" class="img-fluid me-2">Pay in 4 interest-free payments on purchases of $30-$1,500. <span class="color1" style="text-decoration: underline; font-size: smaller;">Learn More</span></p> -->
+    @guest
+    <div class="gap d-flex mt-4"> <a href="{{route('user.login')}}" class="btn2 btn btn-lg text-white">Sign In To See
+            Number</a>
+        @else
+        <div class="gap d-flex mt-4"> <a href="tel:{{$data->creator->phone ?? ''}}"
+                class="btn2 btn btn-lg text-white">Phone
+                #
+                {{$data->creator->phone ?? ''}}</a>
+            @endguest
+            {{-- <button type="button" class="btn3 btn btn-lg mx-3">Quick Details</button> --}}
+        </div>
+        <h6 class="fw-bold mt-5">FOLLOW US</h6>
+        <div class="d-flex">
+            <div id="social">
+                <ul>
+                    <?php use App\Models\Follow;
+                $fb = Follow::where('name' ,'facebook')->where('is_active' , 1)->first();
+                $ins = Follow::where('name' ,'instagram')->where('is_active' , 1)->first();
+                $twi = Follow::where('name' ,'twitter')->where('is_active' , 1)->first();
+                ?>
+                    <li>
+                        <a href="{{url($fb->link ?? '#')}}"><i class="fa-brands fa-facebook-f"></i></a>
+                    </li>
+                    <li>
+                        <a href="{{url($ins->link ?? '#')}}"><i class="fa-brands fa-instagram"></i></a>
+                    </li>
+                    <li>
+                        <a href="{{url($twi->link ?? '#')}}"><i class="fa-brands fa-twitter"></i></a>
+                    </li>
+                </ul>
             </div>
-            <p class="mt-5"></p>
-            <div class="fw-bold">PRICE</div>
-            <p class="color fs-3">USD {{$data->price}}</p>
-            <p class="fw-bold mt-5">DESCRIPTION</p>
-            <p class="text lead">{{$data->description ?? ''}}</p>
-            <div class="d-flex mt-4">
-                <button type="button" class="btn1 btn btn-light  text-dark mx-2">3 liters</button>
-                <button type="button" class="btn1 btn btn-light text-dark">4 liters</button>
-                <button type="button" class="btn btn-sm bg-light" style="border: none ;"> <img
-                        src="{{asset('front/ages/Group 171.png')}}" alt=""><span class="color1"> Product
-                        Usage</span></button>
-            </div>
 
-
-            <!-- <p class="small text-muted mt-5"><img src="{{asset('front/ages/Group 172.png')}}" width="74px" height="19px" alt="" class="img-fluid me-2">Pay in 4 interest-free payments on purchases of $30-$1,500. <span class="color1" style="text-decoration: underline; font-size: smaller;">Learn More</span></p> -->
-            <div class="gap d-flex mt-4"> <a href="tel:{{$data->creator->phone ?? ''}}" class="btn2 btn btn-lg text-white">Phone #
-                        {{$data->creator->phone ?? ''}}</a>
-                <button type="button" class="btn3 btn btn-lg mx-3" >Quick Details</button>
-            </div>
-            <h6 class="fw-bold mt-5">FOLLOW US</h6>
-            <div class="d-flex">
-                <div id="social">
-                    <ul>
-                        <li>
-                            <a href="javascript:void(0)"><i class="fa-brands fa-facebook-f"></i></a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="fa-brands fa-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="fa-brands fa-twitter"></i></a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
         </div>
     </div>
+</div>
 </div>
 
 

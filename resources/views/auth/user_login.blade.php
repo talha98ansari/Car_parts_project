@@ -58,7 +58,7 @@
                                         Account? Sign up Here</a>
                                 </div>
                                 <div class="col-md-6 d-flex justify-content-end">
-                                    <a href="#" class="orange-text anchor">Forget Password?</a>
+                                    <a href="{{route('reset.check')}}" class="orange-text anchor">Forget Password?</a>
                                 </div>
                                 <div class="col-md-12">
                                     <button type="submit" value="Login" class="btn btn-submit">Login</button>

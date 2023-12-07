@@ -6,12 +6,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Brand -->
-        <a class="navbar-brand pt-0" href="{{ route('home') }}">
+        <a class="navbar-brand pt-0" href="#">
             <img src="{{asset('front/images/logo.png')}}" style="background:#ff4e00" class="navbar-brand-img" alt="...">
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
-            <li class="nav-item dropdown">
+            <li class="nav  -item dropdown">
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <div class="media align-items-center">
@@ -24,7 +24,7 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">{{ __('Welcome!') }}</h6>
                     </div>
-                    <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                    {{-- <a href="{{ route('profile.edit') }}" class="dropdown-item">
                         <i class="ni ni-single-02"></i>
                         <span>{{ __('My profile') }}</span>
                     </a>
@@ -39,7 +39,7 @@
                     <a href="#" class="dropdown-item">
                         <i class="ni ni-support-16"></i>
                         <span>{{ __('Support') }}</span>
-                    </a>
+                    </a> --}}
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
@@ -81,13 +81,15 @@
                     </div>
                 </div>
             </form>
-            <!-- Navigation -->
+            <!-- Navigation Admin -->
+            @if(Auth::user()->role_id == 1)
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">
                         <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link " href="#navbar-examples" data-toggle="collapse" role="button"
                         aria-expanded="true" aria-controls="navbar-examples">
@@ -155,11 +157,12 @@
                         </ul>
                     </div>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link " href="#navbar-subcategories" data-toggle="collapse" role="button"
                         aria-expanded="true" aria-controls="navbar-subcategories">
                         <i class="ni ni-basket" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('subcategories') }}</span>
+                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Sub Categories') }}</span>
                     </a>
 
                     <div class="collapse " id="navbar-subcategories">
@@ -287,6 +290,7 @@
                         </ul>
                     </div>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link " href="#navbar-site" data-toggle="collapse" role="button" aria-expanded="true"
                         aria-controls="navbar-site">
@@ -304,6 +308,16 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('site.contact') }}">
                                     {{ __('Contact Us') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('carrepair.index') }}">
+                                    {{ __('Car Repair Section') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('follow.index') }}">
+                                    {{ __('Follow Link') }}
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -342,6 +356,36 @@
                     </a>
                 </li> --}}
             </ul>
+            @endif
+            @if(Auth::user()->role_id == 2)
+
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link " href="#navbar-parts" data-toggle="collapse" role="button" aria-expanded="true"
+                        aria-controls="navbar-parts">
+                        <i class="ni ni-settings-gear-65" style="color: #f4645f;"></i>
+                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Parts') }}</span>
+                    </a>
+
+                    <div class="collapse " id="navbar-parts">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('vparts.index') }}">
+                                    {{ __('List') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('vparts.create') }}">
+                                    {{ __('Add New Part') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                         </ul>
+@endif
             <!-- Divider -->
             <hr class="my-3">
             <!-- Heading -->

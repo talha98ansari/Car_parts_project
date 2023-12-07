@@ -22,44 +22,27 @@
                     <img src="{{asset('front/images/vendorLogin.svg')}}" alt="" class="img-fluid w-75">
                 </div>
                 <div class="col-md-6 d-flex justify-content-center align-items-center flex-column">
-                    @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+
                 <form role="form" method="POST" action="{{ route('vendor.login.check') }}">
                     @csrf
                     <div>
                         @if (session('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                {{ session('success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
-                        @if (session('error'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
-                                    aria-label="Warning:">
-                                    <use xlink:href="#exclamation-triangle-fill" />
-                                </svg>
-                                {{ session('error') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     </div>
                     <div class="row">
                             <div class="col-md-12">
@@ -75,7 +58,7 @@
 
                             </div>
                             <div class="col-md-6 d-flex justify-content-end">
-                                <a href="#" class="orange-text anchor">Forget Password?</a>
+                                <a href="{{route('reset.check')}}" class="orange-text anchor">Forget Password?</a>
 
                             </div>
                             <div class="col-md-12">

@@ -113,7 +113,7 @@ class vendorRegistrationController extends Controller
             'email' => $request->email,
             'phone' => $request->p_phone,
             'vendor_type' => $request->vendor_type ?? 'business',
-            'password' => Hash::make($password),
+            'password' => Hash::make($request->password),
             'is_active' => 0,
             'role_id'=>2
         ]);
@@ -130,7 +130,7 @@ class vendorRegistrationController extends Controller
                 ->back()
                 ->withErrors($validate->errors());
         }
-        $password = mt_rand(1e15, 1e16 - 1);
+        // $password = mt_rand(1e15, 1e16 - 1);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -138,7 +138,7 @@ class vendorRegistrationController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'vendor_type' => $request->vendor_type ?? 'non_business',
-            'password' => Hash::make($password),
+            'password' => Hash::make($request->password),
             'is_active' => 0,
             'role_id'=>2
         ]);

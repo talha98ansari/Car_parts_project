@@ -141,3 +141,59 @@ $(document).ready(function () {
 
     });
 });
+
+$(document).ready(function () {
+    $('.maker_change').change(function () {
+        var parentId = $(this).val();
+
+        if (parentId) {
+            $.ajax({
+                type: 'GET',
+                url: '/get-model-options/' + parentId,
+                success: function (data) {
+                    // Clear existing child options
+                    $('.mode_change').empty();
+
+                    // Append new child options
+                    $.each(data, function (id, name) {
+                        $('.mode_change').append(new Option(name, id));
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        } else {
+            // If no parent selected, clear child options
+            $('.mode_change').empty();
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('.mode_change').click(function () {
+        var parentId = $(this).val();
+
+        if (parentId) {
+            $.ajax({
+                type: 'GET',
+                url: '/get-state-options/' + parentId,
+                success: function (data) {
+                    // Clear existing child options
+                    $('.st_change').empty();
+
+                    // Append new child options
+                    $.each(data, function (index, area) {
+                        $('.st_change').append(new Option(area, area));
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        } else {
+            // If no parent selected, clear child options
+            $('.st_change').empty();
+        }
+    });
+});

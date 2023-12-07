@@ -79,8 +79,7 @@
                                     <form action="#_">
                                         <div class="row justify-content-center">
                                             <div class="col-md-4 col-sm-6 my-3">
-                                                <select name="" id="" class="site-input p-sm">
-
+                                            <select name="" id="" class="site-input p-sm maker_change" >
                                                     <option value="" selected disabled>Select Maker</option>
                                                     @foreach ($maker as $m )
                                                     <option value="{{$m->id}}">{{$m->name}}</option>
@@ -88,7 +87,7 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-4 col-sm-6 my-3">
-                                                <select name="" id="model" class="site-input p-sm">
+                                                <select name="" id="model" class="site-input p-sm mode_change">
                                                     <option value="" selected disabled>Select Model</option>
                                                     @foreach ($model as $m )
                                                     <option value="{{$m->id}}">{{$m->name}}</option>
@@ -96,7 +95,7 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-4 col-sm-6 my-3">
-                                                <select name="" id="state" class="site-input p-sm">
+                                                <select name="" id="state" class="site-input p-sm st_change">
                                                     <option value="" selected disabled>Select State</option>
                                                     <option value="AbuDhabi">Abu Dhabi</option>
                                                     <option value="Dubai">Dubai</option>
