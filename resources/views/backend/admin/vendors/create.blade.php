@@ -147,11 +147,11 @@
                             </div>
                             <div class="form-group {{ $errors->has('phone') ? ' has-danger' : '' }} col-md-9">
                                 <label for="BusinessC" class="form-label">Business Contact Number:</label>
-                                <input type="number" class="form-control form-control-alternative" name="phone">
+                                <input type="number" class="form-control form-control-alternative" name="b_phone">
                             </div>
                             <div class="form-group {{ $errors->has('address') ? ' has-danger' : '' }} col-md-9">
                                 <label for="Businessaddress" class="form-label">Business Address:</label>
-                                <input type="text" class="form-control form-control-alternative" name="address">
+                                <input type="text" class="form-control form-control-alternative" name="b_address">
                             </div>
                         </div>
                         </div>

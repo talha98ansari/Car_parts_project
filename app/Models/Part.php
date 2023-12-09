@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Part extends Model
 {
-protected $fillable =['name','image','description','part_type_id','category_id','price','sub_cat','creator_id','manufacturer_id','model','area'];
+protected $fillable =['name','image','description','part_type_id','category_id','price','sub_cat','creator_id','manufacturer_id','model','area',
+'manufacturer_name','model_name','maker_id'
+];
 
 public function category(){
         return $this->belongsTo(Category::class);

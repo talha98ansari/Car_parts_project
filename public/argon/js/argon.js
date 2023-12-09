@@ -1068,7 +1068,7 @@ $(document).ready(function () {
         if (parentId) {
             $.ajax({
                 type: 'GET',
-                url: '/admin/get-SubCat-options/' + parentId,
+                url: '/get-SubCat-options/' + parentId,
                 success: function (data) {
                     // Clear existing child options
                     $('.subCatDropDown').empty();
@@ -1088,33 +1088,33 @@ $(document).ready(function () {
         }
     });
 });
-$(document).ready(function () {
-    $('.categroy_dropdown').change(function () {
-        var parentId = $(this).val();
+// $(document).ready(function () {
+//     $('.categroy_dropdown').change(function () {
+//         var parentId = $(this).val();
 
-        if (parentId) {
-            $.ajax({
-                type: 'GET',
-                url: '/admin/get-SubCat-options/' + parentId,
-                success: function (data) {
-                    // Clear existing child options
-                    $('.subCatDropDown').empty();
+//         if (parentId) {
+//             $.ajax({
+//                 type: 'GET',
+//                 url: '/admin/get-SubCat-options/' + parentId,
+//                 success: function (data) {
+//                     // Clear existing child options
+//                     $('.subCatDropDown').empty();
 
-                    // Append new child options
-                    $.each(data, function (id, name) {
-                        $('.subCatDropDown').append(new Option(name, id));
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.error(error);
-                }
-            });
-        } else {
-            // If no parent selected, clear child options
-            $('.subCatDropDown').empty();
-        }
-    });
-});
+//                     // Append new child options
+//                     $.each(data, function (id, name) {
+//                         $('.subCatDropDown').append(new Option(name, id));
+//                     });
+//                 },
+//                 error: function (xhr, status, error) {
+//                     console.error(error);
+//                 }
+//             });
+//         } else {
+//             // If no parent selected, clear child options
+//             $('.subCatDropDown').empty();
+//         }
+//     });
+// });
 $(document).ready(function () {
     $('.vendor_type').change(function () {
         $('.business_container').toggleClass('d-none');

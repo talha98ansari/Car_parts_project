@@ -27,7 +27,7 @@
             <div class="card bg-secondary shadow">
 
                 <div class="card-body">
-                    <form method="post" action="{{ route('vendors.up' , $data->id) }}" autocomplete="off"  enctype="multipart/form-data">
+                    <form method="post" action="{{ route('vendors.up' , $data->id ?? '' ) }}" autocomplete="off"  enctype="multipart/form-data">
                         @csrf
 
                         <h6 class="heading-small text-muted mb-4">{{ __('Vendor') }}</h6>
@@ -45,7 +45,7 @@
 
                             <div class="form-group {{ $errors->has('name') ? ' has-danger' : '' }} col-md-9">
                                 <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
-                                <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name',$data->name) }}" required autofocus>
+                                <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name',$data->name ?? '' ) }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
@@ -55,7 +55,7 @@
                             </div>
                             <div class="form-group {{ $errors->has('email') ? ' has-danger' : '' }} col-md-9">
                                 <label class="form-control-label" for="input-email">{{ __('Email') }}</label>
-                                <input type="email" name="email" id="input-email" class="form-control form-control-alternative{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" value="{{ old('email',$data->email) }}" required>
+                                <input type="email" name="email" id="input-email" class="form-control form-control-alternative{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" value="{{ old('email',$data->email ?? '' ) }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
@@ -65,7 +65,7 @@
                             </div>
                             <div class="form-group {{ $errors->has('phone') ? ' has-danger' : '' }} col-md-9">
                                 <label class="form-control-label" for="input-phone">{{ __('phone') }}</label>
-                                <input type="number" name="phone" id="input-phone" class="form-control form-control-alternative{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="{{ __('phone') }}" value="{{ old('phone',$data->phone) }}" required>
+                                <input type="number" name="phone" id="input-phone" class="form-control form-control-alternative{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="{{ __('phone') }}" value="{{ old('phone',$data->phone ?? '' ) }}" required>
 
                                 @if ($errors->has('phone'))
                                     <span class="invalid-feedback" role="alert">
@@ -75,7 +75,7 @@
                             </div>
                             <div class="form-group {{ $errors->has('address') ? ' has-danger' : '' }} col-md-9">
                                 <label class="form-control-label" for="input-address">{{ __('Address') }}</label>
-                                <input type="text" name="address" id="input-address" class="form-control form-control-alternative{{ $errors->has('address') ? ' is-invalid' : '' }}" placeholder="{{ __('address') }}" value="{{ old('address',$data->address) }}" required>
+                                <input type="text" name="address" id="input-address" class="form-control form-control-alternative{{ $errors->has('address') ? ' is-invalid' : '' }}" placeholder="{{ __('address') }}" value="{{ old('address',$data->address ?? '' ) }}" required>
 
                                 @if ($errors->has('address'))
                                     <span class="invalid-feedback" role="alert">
@@ -108,8 +108,8 @@
                             <div class="form-group {{ $errors->has('vendor_type') ? ' has-danger' : '' }} col-md-9">
                                 <label class="form-control-label" for="input-vendor_type">{{ __('Select Category') }}</label>
                                 <select name="vendor_type" id="input-vendor_type" class="vendor_type form-control form-control-alternative{{ $errors->has('vendor_type') ? ' is-invalid' : '' }}" placeholder="{{ __('category') }}"  required autofocus>
-                                    <option {{$data->business_id == '' ? 'selected' : ''}} value="non_business">Non Business</option>
-                                    <option {{$data->business_id != '' ? 'selected' : ''}} value="business">Business</option>
+                                    <option {{$data->business_id ?? ''  == '' ? 'selected' : ''}} value="non_business">Non Business</option>
+                                    <option {{$data->business_id ?? ''  != '' ? 'selected' : ''}} value="business">Business</option>
                                 </select>
                                 @if ($errors->has('vendor_type'))
                                     <span class="invalid-feedback" role="alert">
@@ -117,22 +117,22 @@
                                     </span>
                                 @endif
                             </div>
-                        <div class="{{$data->business_id == '' ? 'd-none' : ''}} business_container">
+                        <div class="{{$data->business_id ?? 'd-none'}} business_container">
                             <div class="form-group {{ $errors->has('b_name') ? ' has-danger' : '' }} col-md-9">
                                 <label for="Business" class="form-label">Business Name:</label>
-                                <input type="text" class="form-control form-control-alternative"value="{{$data->business->address}}"  name="b_name">
+                                <input type="text" class="form-control form-control-alternative"value="{{$data->business->address ?? '' }}"  name="b_name">
                             </div>
                             <div class="form-group {{ $errors->has('niche') ? ' has-danger' : '' }} col-md-9">
                                 <label for="Niche" class="form-label">Business Niche:</label>
-                                <input type="text" class="form-control form-control-alternative" value="{{$data->business->address}}" name="niche">
+                                <input type="text" class="form-control form-control-alternative" value="{{$data->business->address ?? '' }}" name="niche">
                             </div>
                             <div class="form-group {{ $errors->has('phone') ? ' has-danger' : '' }} col-md-9">
                                 <label for="BusinessC" class="form-label">Business Contact Number:</label>
-                                <input type="number" class="form-control form-control-alternative" value="{{$data->business->phone}}" name="phone">
+                                <input type="number" class="form-control form-control-alternative" value="{{$data->business->phone ?? '' }}" name="b_phone">
                             </div>
                             <div class="form-group {{ $errors->has('address') ? ' has-danger' : '' }} col-md-9">
                                 <label for="Businessaddress" class="form-label">Business Address:</label>
-                                <input type="text" class="form-control form-control-alternative" value="{{$data->business->address}}" name="address">
+                                <input type="text" class="form-control form-control-alternative" value="{{$data->business->address ?? '' }}" name="b_address">
                             </div>
                         </div>
                         </div>

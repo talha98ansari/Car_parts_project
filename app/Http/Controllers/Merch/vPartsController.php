@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Merch;
 
 use Illuminate\Http\Request;
-use App\Models\{Part,partType,Category, SubCate, Manufacturer, CarModel};
+use App\Models\{Part, partType, Category, Maker, SubCate, Manufacturer, CarModel};
 use Illuminate\Support\Str;
 use Hash;
 use Auth;
@@ -36,9 +36,9 @@ class vPartsController extends Controller
         $sub_categories = SubCate::get();
         $partType = partType::get();
         $manufacturer = Manufacturer::get();
-        $models = CarModel::get();
+        $maker = Maker::get();
 
-        return view('backend.merch.parts.create' ,compact('sub_categories','categories','partType','manufacturer','models'));
+        return view('backend.merch.parts.create' ,compact('sub_categories','categories','partType','manufacturer','maker'));
     }
 
     /**
@@ -64,12 +64,18 @@ class vPartsController extends Controller
         $data['name'] = $request->name;
         $data['category_id'] = $request->category_id;
         $data['sub_cat'] = $request->sub_cat;
-        $data['manufacturer_id'] = $request->manufacturer_id;
+        // $data['manufacturer_id'] = $request->manufacturer_id;
         $data['model'] = $request->model;
         $data['state'] = $request->model;
         $data['part_type_id'] = $request->part_type_id;
         $data['description'] = $request->description;
         $data['area'] = $request->state;
+        $data['image'] = $path;
+
+        $data['manufacturer_name'] = $request->manufacturer_name;
+        $data['maker_id'] = $request->maker_id;
+        $data['mode_name'] = $request->model_name;
+
         $data['creator_id'] = Auth::user()->id;
 
         Part::create($data);
@@ -102,8 +108,9 @@ class vPartsController extends Controller
         $partType = partType::get();
         $manufacturer = Manufacturer::get();
         $models = CarModel::get();
+        $maker = Maker::get();
 
-        return view('backend.merch.parts.edit', compact('sub_categories','categories','partType','data','manufacturer','models'));
+        return view('backend.merch.parts.edit', compact('sub_categories','categories','partType','data','manufacturer','models','maker'));
     }
 
     /**
@@ -141,6 +148,9 @@ class vPartsController extends Controller
         $data['area'] = $request->state;
         $data['creator_id'] = Auth::user()->id;
 
+        $data['manufacturer_name'] = $request->manufacturer_name;
+        $data['maker_id'] = $request->maker_id;
+        $data['model_name'] = $request->model_name;
 
         $part->update($data);
 

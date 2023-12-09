@@ -61,7 +61,7 @@ Route::post('profile/password', [
         'as' => 'profile.password',
         'uses' => 'App\Http\Controllers\ProfileController@password'
     ]);
-    Route::post('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
+    Route::post('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\Admin\ProfileController@update']);
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\Admin\ProfileController@edit']);
 
 // Admin routes
@@ -161,7 +161,6 @@ Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () 
     Route::get('/follow/status/{id}', 'App\Http\Controllers\Admin\followController@status')->name('follow.status');
 
 
-    Route::get('/get-SubCat-options/{parentId}', 'App\Http\Controllers\DropdownController@getSubCats')->name('get.subcat.options');
 
 });
 
@@ -186,3 +185,5 @@ Route::post('/password', 'App\Http\Controllers\Auth\ResetPasswordController@pass
 Route::get('change/password', 'App\Http\Controllers\Auth\ResetPasswordController@passwordView')->name('password.change')->middleware('checklogin');
 Route::get('/get-model-options/{parentId}', 'App\Http\Controllers\DropdownController@getModel')->name('get.model.options');
 Route::get('/get-state-options/{parentId}', 'App\Http\Controllers\DropdownController@getstate')->name('get.state.options');
+Route::get('/get-SubCat-options/{parentId}', 'App\Http\Controllers\DropdownController@getSubCats')->name('get.subcat.options');
+Route::get('/get-state-options-mk/{parentId}', 'App\Http\Controllers\DropdownController@getstateMK')->name('get.subcat.options.mk');

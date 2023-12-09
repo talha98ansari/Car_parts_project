@@ -101,6 +101,8 @@ $(document).ready(function () {
         // Get selected values from the dropdowns
         var modelId = $("#model").val();
         var state = $("#state").val();
+        var maker = $(".maker_change_st").val();
+
         var x = '/view/part?';
 
 
@@ -109,6 +111,9 @@ $(document).ready(function () {
         }
         if(state != null){
             var x = x + '&state=' + state;
+        }
+        if(maker != null){
+            var x = x + '&maker_id=' + maker;
         }
         window.location.href  = x ;
 
@@ -121,8 +126,8 @@ $(document).ready(function () {
         var vehicle_type = $(".vehicle_type").val();
         var statechange = $(".statechange").val();
         var manufacturer = $(".manufacturer").val();
+        var maker = $(".maker_change_st").val();
         var price = $(".price").val();
-
         var x = '/view/part?';
 
         if(vehicle_type != null){
@@ -131,6 +136,7 @@ $(document).ready(function () {
         if(statechange != null){
             var x = x + '&state=' + statechange;
         }
+
         if(price != null){
             var x = x + '&price=' + price;
         }
@@ -178,6 +184,36 @@ $(document).ready(function () {
             $.ajax({
                 type: 'GET',
                 url: '/get-state-options/' + parentId,
+                success: function (data) {
+                    // Clear existing child options
+                    $('.st_change').empty();
+
+                    // Append new child options
+                    $.each(data, function (index, area) {
+                        $('.st_change').append(new Option(area, area));
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        } else {
+            // If no parent selected, clear child options
+            $('.st_change').empty();
+        }
+    });
+});
+
+
+
+$(document).ready(function () {
+    $('.maker_change_st').click(function () {
+        var parentId = $(this).val();
+
+        if (parentId) {
+            $.ajax({
+                type: 'GET',
+                url: '/get-state-options-mk/' + parentId,
                 success: function (data) {
                     // Clear existing child options
                     $('.st_change').empty();

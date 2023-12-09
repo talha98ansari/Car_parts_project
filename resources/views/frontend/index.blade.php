@@ -79,21 +79,21 @@
                                     <form action="#_">
                                         <div class="row justify-content-center">
                                             <div class="col-md-4 col-sm-6 my-3">
-                                            <select name="" id="" class="site-input p-sm maker_change" >
+                                            <select name="" id="" class="site-input p-sm maker_change maker_change_st" >
                                                     <option value="" selected disabled>Select Maker</option>
                                                     @foreach ($maker as $m )
                                                     <option value="{{$m->id}}">{{$m->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-md-4 col-sm-6 my-3">
+                                            {{-- <div class="col-md-4 col-sm-6 my-3">
                                                 <select name="" id="model" class="site-input p-sm mode_change">
                                                     <option value="" selected disabled>Select Model</option>
                                                     @foreach ($model as $m )
                                                     <option value="{{$m->id}}">{{$m->name}}</option>
                                                     @endforeach
                                                 </select>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-md-4 col-sm-6 my-3">
                                                 <select name="" id="state" class="site-input p-sm st_change">
                                                     <option value="" selected disabled>Select State</option>

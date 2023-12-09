@@ -62,6 +62,7 @@ class FrontController extends Controller
         $vehicle_type =$request->vehicle_type ?? '';
         $manufacturer =$request->manufacturer ?? '';
         $price =$request->price ?? '';
+        $maker_id =$request->maker_id ?? '';
 
         if($model != null && !empty($request->all())){
             $data = $data->where('model' , $model);
@@ -71,6 +72,9 @@ class FrontController extends Controller
         }
         if($vehicle_type != null && !empty($request->all())){
             $data = $data->where('part_type_id' , $vehicle_type);
+        }
+        if($maker_id != null && !empty($request->all())){
+            $data = $data->where('maker_id' , $maker_id);
         }
         if($manufacturer != null && !empty($request->all())){
             $data = $data->where('manufacturer_id' , $manufacturer);

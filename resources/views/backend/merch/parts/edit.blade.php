@@ -96,7 +96,62 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-danger' : '' }} col-md-9">
+                            <div class="form-group {{ $errors->has('brand_name') ? ' has-danger' : '' }} col-md-9">
+                                <label class="form-control-label"
+                                    for="input-brand_name">{{ __('Set Brand Name') }}</label>
+                                       <input type="text" name="manufacturer_name" id="input-brand_name"
+                                    class="form-control form-control-alternative{{ $errors->has('brand_name') ? ' is-invalid' : '' }}"
+                                    placeholder="{{ __('Model Name') }}" value="{{ $data->manufacturer_name }}" required autofocus>
+
+                                {{-- <select name="manufacturer_name" id="input-brand_name"
+                                    class=" form-control form-control-alternative{{ $errors->has('brand_name') ? ' is-invalid' : '' }}"
+                                    placeholder="{{ __('category') }}" required autofocus>
+                                    <option value="" selected disabled>Select Manufacturer</option> --}}
+    {{--
+                                    @foreach ($manufacturer as $u )
+                                    <option value="{{$u->id}}">
+                                        {{$u->name ?? ''}}
+                                    </option>
+                                    @endforeach --}}
+                                </select>
+                                @if ($errors->has('brand_name'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('brand_name') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                            <div class="form-group {{ $errors->has('maker') ? ' has-danger' : '' }} col-md-9">
+                                <label class="form-control-label" for="input-maker">{{ __('Select Maker') }}</label>
+                                <select name="maker_id" id="input-maker"
+                                    class=" form-control form-control-alternative{{ $errors->has('maker') ? ' is-invalid' : '' }}"
+                                    placeholder="{{ __('') }}" required autofocus>
+                                    <option value="" selected disabled>Select Maker</option>
+
+                                    @foreach ($maker as $u )
+                                    <option {{$u->id == $data->maker_id ? 'selected' : ''}} value="{{$u->id}}">
+                                        {{$u->name ?? ''}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('maker'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('maker') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                            <div class="form-group {{ $errors->has('Model Name') ? ' has-danger' : '' }} col-md-9">
+                                <label class="form-control-label" for="input-model_name">{{ __('Model Name') }}</label>
+                                <input type="text" name="model_name" id="input-model_name"
+                                    class="form-control form-control-alternative{{ $errors->has('model_name') ? ' is-invalid' : '' }}"
+                                    placeholder="{{ __('Model Name') }}" value="{{ old('model_name' , $data->model_name) }}" required autofocus>
+
+                                @if ($errors->has('model_name'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('model_name') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                            {{-- <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-danger' : '' }} col-md-9">
                                 <label class="form-control-label" for="input-manufacturer_id">{{ __('Select Manufacturer') }}</label>
                                 <select name="manufacturer_id" id="input-manufacturer_id" class="subCatDropDown form-control form-control-alternative{{ $errors->has('manufacturer_id') ? ' is-invalid' : '' }}" placeholder="{{ __('category') }}"  required autofocus>
                                     @foreach ($manufacturer as $u )
@@ -110,8 +165,8 @@
                                         <strong>{{ $errors->first('manufacturer_id') }}</strong>
                                     </span>
                                 @endif
-                            </div>
-                            <div class="form-group {{ $errors->has('model') ? ' has-danger' : '' }} col-md-9">
+                            </div> --}}
+                            {{-- <div class="form-group {{ $errors->has('model') ? ' has-danger' : '' }} col-md-9">
                                 <label class="form-control-label" for="input-model">{{ __('Select Model') }}</label>
                                 <select name="model" id="input-model" class="subCatDropDown form-control form-control-alternative{{ $errors->has('model') ? ' is-invalid' : '' }}" placeholder="{{ __('category') }}"  required autofocus>
                                     @foreach ($models as $u )
@@ -125,7 +180,7 @@
                                         <strong>{{ $errors->first('model') }}</strong>
                                     </span>
                                 @endif
-                            </div>
+                            </div> --}}
                             <div class="form-group {{ $errors->has('state') ? ' has-danger' : '' }} col-md-9">
                                 <label class="form-control-label" for="input-state">{{ __('Select Area') }}</label>
                                 <select name="state" id="input-state" class="subCatDropDown form-control form-control-alternative{{ $errors->has('state') ? ' is-invalid' : '' }}" placeholder="{{ __('category') }}"  required autofocus>

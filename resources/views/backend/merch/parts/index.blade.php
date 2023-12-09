@@ -64,6 +64,7 @@
                                 <th scope="col" class="sort" data-sort="name">Name</th>
                                 <th scope="col" class="sort" data-sort="name">Category</th>
                                 <th scope="col" class="sort" data-sort="name">Part Type</th>
+                                <th scope="col" class="sort" data-sort="name">Manufacturer</th>
                                 <th scope="col" class="sort" data-sort="name">Description</th>
                                 <th scope="col" class="sort" data-sort="completion">Status</th>
                                 <th scope="col"></th>
@@ -98,6 +99,11 @@
                                 <td>
                                     <div class="media-body">
                                         <span class="name mb-0 text-sm">{{$u->partType->name ?? ''}}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="media-body">
+                                        <span class="name mb-0 text-sm">{{$u->manufacturer_name ?? ''}}</span>
                                     </div>
                                 </td>
                                 <td>

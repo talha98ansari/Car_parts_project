@@ -91,7 +91,7 @@
                                 for="input-sub_cat">{{ __('Select Sub Category') }}</label>
                             <select name="sub_cat" id="input-sub_cat"
                                 class="subCatDropDown form-control form-control-alternative{{ $errors->has('sub_cat') ? ' is-invalid' : '' }}"
-                                placeholder="{{ __('category') }}" required autofocus>
+                                placeholder="{{ __('category') }}"  autofocus>
                                 <option value="" selected disabled>Select Sub Category</option>
 
                                 @foreach ($sub_categories as $u )
@@ -108,17 +108,21 @@
                         </div>
                         <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-danger' : '' }} col-md-9">
                             <label class="form-control-label"
-                                for="input-manufacturer_id">{{ __('Select Manufacturer') }}</label>
-                            <select name="manufacturer_id" id="input-manufacturer_id"
+                                for="input-manufacturer_id">{{ __('Set Brand Name') }}</label>
+                                   <input type="text" name="manufacturer_name" id="input-brand_name"
+                                class="form-control form-control-alternative{{ $errors->has('brand_name') ? ' is-invalid' : '' }}"
+                                placeholder="{{ __('Model Name') }}" value="{{ old('brand_name') }}" required autofocus>
+
+                            {{-- <select name="manufacturer_name" id="input-manufacturer_id"
                                 class=" form-control form-control-alternative{{ $errors->has('manufacturer_id') ? ' is-invalid' : '' }}"
                                 placeholder="{{ __('category') }}" required autofocus>
-                                <option value="" selected disabled>Select Manufacturer</option>
-
+                                <option value="" selected disabled>Select Manufacturer</option> --}}
+{{--
                                 @foreach ($manufacturer as $u )
                                 <option value="{{$u->id}}">
                                     {{$u->name ?? ''}}
                                 </option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                             @if ($errors->has('manufacturer_id'))
                             <span class="invalid-feedback" role="alert">
@@ -126,22 +130,34 @@
                             </span>
                             @endif
                         </div>
-                        <div class="form-group {{ $errors->has('model') ? ' has-danger' : '' }} col-md-9">
-                            <label class="form-control-label" for="input-model">{{ __('Select Model') }}</label>
-                            <select name="model" id="input-model"
-                                class=" form-control form-control-alternative{{ $errors->has('model') ? ' is-invalid' : '' }}"
-                                placeholder="{{ __('category') }}" required autofocus>
-                                <option value="" selected disabled>Select Model</option>
+                        <div class="form-group {{ $errors->has('maker') ? ' has-danger' : '' }} col-md-9">
+                            <label class="form-control-label" for="input-maker">{{ __('Select Maker') }}</label>
+                            <select name="maker_id" id="input-maker"
+                                class=" form-control form-control-alternative{{ $errors->has('maker') ? ' is-invalid' : '' }}"
+                                placeholder="{{ __('') }}" required autofocus>
+                                <option value="" selected disabled>Select Maker</option>
 
-                                @foreach ($models as $u )
+                                @foreach ($maker as $u )
                                 <option value="{{$u->id}}">
                                     {{$u->name ?? ''}}
                                 </option>
                                 @endforeach
                             </select>
-                            @if ($errors->has('model'))
+                            @if ($errors->has('maker'))
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('model') }}</strong>
+                                <strong>{{ $errors->first('maker') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                        <div class="form-group {{ $errors->has('Model Name') ? ' has-danger' : '' }} col-md-9">
+                            <label class="form-control-label" for="input-model_name">{{ __('Model Name') }}</label>
+                            <input type="text" name="model_name" id="input-model_name"
+                                class="form-control form-control-alternative{{ $errors->has('model_name') ? ' is-invalid' : '' }}"
+                                placeholder="{{ __('Model Name') }}" value="{{ old('model_name') }}" required autofocus>
+
+                            @if ($errors->has('model_name'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('model_name') }}</strong>
                             </span>
                             @endif
                         </div>

@@ -44,10 +44,11 @@ class VendorController extends Controller
 
             'b_name' => $request->b_name,
             'niche' => $request->niche,
-            'phone' => $request->phone,
-            'address' => $request->address,
+            'phone' => $request->b_phone,
+            'address' => $request->b_address,
 
         ]);
+
         if ($request->hasFile('profile_picture')) {
             $file = $request->file('profile_picture');
 
@@ -111,6 +112,28 @@ class VendorController extends Controller
     {
         $path = '';
         $user = User::find($id);
+if($user->business_id != null && $user->business_id == 0 ){
+    $business = BusinessInfo::create([
+
+'b_name' => $request->b_name,
+'niche' => $request->niche,
+'phone' => $request->b_phone,
+'address' => $request->b_address,
+
+]);
+
+$data['business_id'] =$business->id;
+ddd($data);
+}else{
+    $business = BusinessInfo::where('id' , $user->business_id)->update([
+
+'b_name' => $request->b_name,
+'niche' => $request->niche,
+'phone' => $request->b_phone,
+'address' => $request->b_address,
+
+]);
+}
 
         if ($request->hasFile('profile_picture')) {
             $file = $request->file('profile_picture');
@@ -128,6 +151,7 @@ class VendorController extends Controller
             $data['email'] = $request->email;
             $data['phone'] = $request->phone;
             $data['address'] = $request->address;
+            $data['vendor_type'] = $request->vendor_type;
         if ($request->password != '') {
             $data['password'] = Hash::make($request->password);
         }

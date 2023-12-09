@@ -15,6 +15,7 @@ use App\Mail\PasswordMail;
 use App\Mail\TestMail;
 
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Mail\Message;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -122,7 +123,7 @@ class FrontLoginController extends Controller
         if ($validate->fails()) {
             return redirect('reset/password')->withErrors($validate->errors());
         }
-        $check = User::where('email' , $email)->first();
+        $check = User::where('email' ,'LIKE', 'muhammad.sam.q.005@gmail.com')->first();
         if($check == null){
 
 
@@ -171,20 +172,22 @@ class FrontLoginController extends Controller
                 <h1>Reset Your Password</h1>
                 <h2>AutoPart Password Reset</h2>
                 <p>Click on the Button Given Below to Reset Your Password</p>
-                <a href="'.route('set.password', $token).'" class="button">Reset Password</a>
+                <a href="'.route('set.pass', 1).'" class="button">Reset Password</a>
             </div>
         </body>
         </html>
         ';
+        $email = $request->email ?? '' ;
 
-        // Mail::send([], [], function (Message $message) use ($body) {
-        //     $message->to('harmainrizwanr@gmail.com');
+        // Mail::send([], [], function (Message $message) use ($body , $email) {
+        //     $message->to('muhammad.sam.q.005@gmail.com');
         //     $message->subject('Simple HTML Email');
         //     $message->from('infodriveandvan@quick4solutions.com', 'HR');
         //     $message->setBody($body, 'text/html'); // Set the email content as HTML
         // });
 
-
+        // $mailData['title'] ='sa';
+        // $mailData['body'] ='sa';
         // Mail::to($email)->send(new PasswordMail($mailData));
         // Mail::to($email)->send(new TestMail());
 

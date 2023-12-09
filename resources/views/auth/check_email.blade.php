@@ -40,7 +40,7 @@
 
                         </div>
                         <div class="col-md-12">
-                            <a type="button" href="{{('user/login')}}" class="col-12 btn btn-submit">Return To Sign
+                            <a type="button" href="{{('/user/login')}}" class="col-12 btn btn-submit">Return To Sign
                                 In</a>
                         </div>
                         @else

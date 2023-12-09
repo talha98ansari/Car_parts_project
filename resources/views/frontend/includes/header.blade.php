@@ -49,14 +49,14 @@
                                     <img src="{{asset('front/images/shop.png')}}" alt="" class="img-fluid">
                                     <p class="mb-0">Shop</p>
                                 </div> -->
-                            <div class="d-flex align-items-center">
+                            {{-- <div class="d-flex align-items-center">
                                 <img src="{{asset('front/images/partner.png')}}" alt="" class="img-fluid">
                                 <p class="mb-0">Partner</p>
                             </div>
                             <div class="d-flex align-items-center">
                                 <img src="{{asset('front/images/club.png')}}" alt="" class="img-fluid">
                                 <p class="mb-0">Club</p>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="flex-shrink-0">
@@ -181,14 +181,6 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav2">
                         <ul class="navbar-nav w-100 gap-4 justify-content-between">
-
-                            @foreach ($parttypes as $p)
-                            <li class="nav-item">
-                                <a href="{{route('parts' , $p->id)}}">{{$p->name ?? ''}}</a>
-                            </li>
-                            @endforeach
-
-
                             <li class="nav-item dropdown dropdown-mega position-relative">
                                 <a class="nav-link dropdown-toggle p-0" href="#_" data-bs-toggle="dropdown"
                                     data-bs-auto-close="outside">Tools</a>
@@ -313,6 +305,14 @@
                                     </div>
                                 </div>
                             </li>
+                            @foreach ($parttypes as $p)
+                            <li class="nav-item">
+                                <a href="{{url('view/part?vehicle_type='.$p->id)}}">{{$p->name ?? ''}}</a>
+                            </li>
+                            @endforeach
+
+
+
                         </ul>
                     </div>
                 </nav>
