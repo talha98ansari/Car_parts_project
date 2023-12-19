@@ -7,17 +7,17 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">Parts Listing</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">Tools Listing</h6>
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                            {{-- <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li> --}}
-                            {{-- <li class="breadcrumb-item"><a href="javasctipt:void(0)">parts</a></li> --}}
-                            <li class="breadcrumb-item active" aria-current="page">Parts</li>
+                            <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
+                            {{-- <li class="breadcrumb-item"><a href="javasctipt:void(0)">tool</a></li> --}}
+                            <li class="breadcrumb-item active" aria-current="page">tool</li>
                         </ol>
                     </nav>
                 </div>
                 <div class="col-lg-6 col-5 text-right">
-                    <a href="{{route('vparts.create')}}" class="btn btn-sm btn-neutral">
+                    <a href="{{route('tool.create')}}" class="btn btn-sm btn-neutral">
                         New
                         <i class="ni ni-fat-add"></i>
 
@@ -43,15 +43,15 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    @endif
-                    @if (session('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{ session('error') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    @endif
+                @endif
+                @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
 
                     {{-- <h3 class="mb-0">Light table</h3> --}}
                 </div>
@@ -62,17 +62,13 @@
                             <tr>
                                 <th>#</th>
                                 <th scope="col" class="sort" data-sort="name">Name</th>
-                                <th scope="col" class="sort" data-sort="name">Category</th>
-                                <th scope="col" class="sort" data-sort="name">Part Type</th>
-                                <th scope="col" class="sort" data-sort="name">Manufacturer</th>
-                                <th scope="col" class="sort" data-sort="name">Description</th>
                                 <th scope="col" class="sort" data-sort="completion">Status</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody class="list">
                             @php $i=1; @endphp
-                            @foreach ($parts as $u )
+                            @foreach ($tools as $u )
 
                             <tr>
                                 <td class="budget">
@@ -80,37 +76,15 @@
                                 </td>
                                 <th scope="row">
                                     <div class="media align-items-center">
-                                        <a href="#" class="avatar rounded-circle mr-3">
+                                        {{-- <a href="#" class="avatar rounded-circle mr-3">
                                             <img alt="Image placeholder" src="{{asset($u->image)}}">
-                                        </a>
+                                        </a> --}}
                                         <div class="media-body">
                                             <span class="name mb-0 text-sm">{{$u->name ?? ''}}</span>
                                         </div>
                                     </div>
                                 </th>
 
-
-
-                                <td>
-                                    <div class="media-body">
-                                        <span class="name mb-0 text-sm">{{$u->category->name ?? ''}}</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="media-body">
-                                        <span class="name mb-0 text-sm">{{$u->partType->name ?? ''}}</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="media-body">
-                                        <span class="name mb-0 text-sm">{{$u->manufacturer_name ?? ''}}</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="media-body">
-                                        <span class="name mb-0 text-sm">{{$u->description ?? ''}}</span>
-                                    </div>
-                                </td>
                                 <td>
                                     <span class="badge badge-dot mr-4">
                                         @if($u->is_active == 1)
@@ -129,11 +103,9 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="{{route('vparts.edit' , $u->id)}}">Edit</a>
-                                            <a class="dropdown-item"
-                                                href="{{route('vparts.remove' , $u->id)}}">Delete</a>
-                                            <a class="dropdown-item" href="{{route('vparts.status' , $u->id)}}">Change
-                                                Status</a>
+                                            <a class="dropdown-item" href="{{route('tool.edit' , $u->id)}}">Edit</a>
+                                            <a class="dropdown-item" href="{{route('tool.remove' , $u->id)}}">Delete</a>
+                                            <a class="dropdown-item" href="{{route('tool.status' , $u->id)}}">Change Status</a>
                                         </div>
                                     </div>
                                 </td>
@@ -147,30 +119,10 @@
                 </div>
                 <!-- Card footer -->
                 <div class="card-footer py-4">
-                    {{-- {{ $parts->links() }} --}}
-                    {{-- <nav aria-label="...">
-                        <ul class="pagination justify-content-end mb-0">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">
-                                    <i class="fas fa-angle-left"></i>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">
-                                    <i class="fas fa-angle-right"></i>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav> --}}
+                    <nav aria-label="...">
+                    {{-- {{ $tools->links() }} --}}
+
+                    </nav>
                 </div>
             </div>
         </div>
@@ -178,11 +130,9 @@
 
     @include('layouts.footers.auth')
 </div>
-
 @endsection
 
 @push('js')
-
 <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
 <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
 @endpush

@@ -5,6 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- TITLE -->
     <title>Auto Partz | Home</title>
@@ -58,7 +59,7 @@
 <!-- footer ends here -->
 
 <script src="{{asset('front/js/jquery.min.js')}}"></script>
-<script src="{{asset('front/js/bootstrap.bundle.min.js')}} "></script>
+    <script src="{{asset('front/js/bootstrap.bundle.min.js')}} "></script>
 <script src="{{asset('front/js/all.min.js')}}"></script>
 <script src="{{asset('front/js/owl.carousel.min.js')}}"></script>
 <script src="{{asset('front/js/select2.min.js')}}"></script>

@@ -226,6 +226,19 @@
                             </span>
                             @endif
                         </div>
+                        <div class="form-group {{ $errors->has('Location') ? ' has-danger' : '' }} col-md-9">
+                            <label class="form-control-label" for="input-location">{{ __('Location') }}</label>
+                            <input type="text" name="location" id="input-location"
+                                class="form-control form-control-alternative{{ $errors->has('location') ? ' is-invalid' : '' }}"
+                                placeholder="{{ __('Copy Your Location From Google Map and Paste it Here.') }}"
+                                value="{{ old('location') }}" required autofocus>
+
+                            @if ($errors->has('location'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('location') }}</strong>
+                                </span>
+                            @endif
+                        </div>
                     </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>

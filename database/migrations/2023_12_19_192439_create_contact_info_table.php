@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateToolsTable extends Migration
+class CreateContactInfoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateToolsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tools', function (Blueprint $table) {
+        Schema::create('contact_info', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('link')->nullable();
-            $table->string('is_active')->default(1);
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('subject')->nullable();
+            $table->longText('details')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateToolsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tools');
+        Schema::dropIfExists('contact_info');
     }
 }

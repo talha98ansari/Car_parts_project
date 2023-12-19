@@ -121,14 +121,14 @@
                         <div class="col-lg-3 col-sm-6 my-3">
                             <h6 class="orange-text">TOP PRODUCTS</h6>
                             <ul>
-                                <li><a href="">Lighting</a></li>
-                                <li><a href="">Shock absorber</a></li>
-                                <li><a href="">Clutch kit</a></li>
-                                <li><a href="">Suspension arm</a></li>
-                                <li><a href="">Wheel bearing</a></li>
-                                <li><a href="">Car care & cleaning products</a></li>
+                                <!-- <li><a href="">Lighting</a></li> -->
+                                <!-- <li><a href="">Shock absorber</a></li> -->
+                                <!-- <li><a href="">Clutch kit</a></li> -->
+                                <!-- <li><a href="">Suspension arm</a></li> -->
+                                <!-- <li><a href="">Wheel bearing</a></li> -->
+                                <!-- <li><a href="">Car care & cleaning products</a></li> -->
                                 <li><a href="">Shop by maker</a></li>
-                                <li><a href="">Shop by model</a></li>
+                                <li><a href="{{url('/get/part?shopByModel')}}">Shop by model</a></li>
                                 <li><a href="">Shop by car brand</a></li>
                                 <li><a href="">Car parts brands</a></li>
                             </ul>
@@ -189,7 +189,7 @@
     <script src="assets/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    
+
     <script src="assets/js/custom.js"></script>
 
 </body>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Category, Partner, Review, AboutUs, ContactUs, OtherPages, Part, PartType, SubCate, CarModel, Maker};
+use App\Models\{Category, Partner, Review, AboutUs, ContactUs, OtherPages, Part, PartType, SubCate, CarModel, Maker, ContactInfo};
 
 class FrontController extends Controller
 {
@@ -56,7 +56,9 @@ class FrontController extends Controller
         return view('frontend.category' , compact('data' , 'partInfo'));
 
         }
-
+        $shopByMaker = $request->shopByMaker ?? '';
+        $shopByModel = $request->shopByModel ?? '';
+        $shopByState = $request->shopByState ?? '';
         $model =$request->model ?? '';
         $state =$request->state ?? '';
         $vehicle_type =$request->vehicle_type ?? '';
@@ -64,6 +66,15 @@ class FrontController extends Controller
         $price =$request->price ?? '';
         $maker_id =$request->maker_id ?? '';
 
+        if($shopByMaker != null && !empty($request->all())){
+            $data = $data->where('maker_id' ,'!=', null);
+        }
+        if($shopByModel != null && !empty($request->all())){
+            $data = $data->where('model_name' ,'!=', null);
+        }
+        if($shopByState != null && !empty($request->all())){
+            $data = $data->where('area' ,'!=', null);
+        }
         if($model != null && !empty($request->all())){
             $data = $data->where('model' , $model);
         }
@@ -77,8 +88,9 @@ class FrontController extends Controller
             $data = $data->where('maker_id' , $maker_id);
         }
         if($manufacturer != null && !empty($request->all())){
-            $data = $data->where('manufacturer_id' , $manufacturer);
+            $data = $data->where('manufacturer_id' , $manufacturer );
         }
+
         if($price != null && !empty($request->all())){
             $p = explode('-' , $price);
             $price1 = $p[0] ?? 0;
@@ -101,4 +113,10 @@ class FrontController extends Controller
         return view('frontend.product' , compact('data' , 'categories'));
     }
 
+    public function saveContactForm(Request $request){
+$input =$request->all();
+// dd($request->all());
+ContactInfo::create($input);
+return 'ok';
+    }
 }

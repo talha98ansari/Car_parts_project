@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\{Part,partType,Category, SubCate, Manufacturer, CarModel};
+use App\Models\{Part,partType,Category, SubCate, Manufacturer, CarModel, Maker};
 use Illuminate\Support\Str;
 use Hash;
 use Auth;
@@ -16,7 +16,7 @@ class PartsController extends Controller
      */
      public function index()
     {
-        $parts = Part::paginate(25);
+        $parts = Part::get();
 
         return view('backend.admin.parts.index', compact('parts'));
     }
@@ -33,8 +33,9 @@ class PartsController extends Controller
         $partType = partType::get();
         $manufacturer = Manufacturer::get();
         $models = CarModel::get();
+        $maker = Maker::get();
 
-        return view('backend.admin.parts.create' ,compact('sub_categories','categories','partType','manufacturer','models'));
+        return view('backend.admin.parts.create' ,compact('sub_categories','categories','partType','manufacturer','models','maker'));
     }
 
     /**
@@ -66,8 +67,12 @@ class PartsController extends Controller
         $data['part_type_id'] = $request->part_type_id;
         $data['description'] = $request->description;
         $data['area'] = $request->state;
-        $data['creator_id'] = Auth::user()->id;
+        $data['manufacturer_name'] = $request->manufacturer_name;
+        $data['maker_id'] = $request->maker_id;
+        $data['mode_name'] = $request->model_name;
+        $data['location'] = $request->location;
 
+        $data['creator_id'] = Auth::user()->id;
         Part::create($data);
         return redirect('admin/parts/')->with('success', 'Part Added!');
     }
@@ -98,8 +103,9 @@ class PartsController extends Controller
         $partType = partType::get();
         $manufacturer = Manufacturer::get();
         $models = CarModel::get();
+        $maker = Maker::get();
 
-        return view('backend.admin.parts.edit', compact('sub_categories','categories','partType','data','manufacturer','models'));
+        return view('backend.admin.parts.edit', compact('sub_categories','categories','partType','data','manufacturer','models','maker'));
     }
 
     /**
@@ -135,8 +141,12 @@ class PartsController extends Controller
         $data['part_type_id'] = $request->part_type_id;
         $data['description'] = $request->description;
         $data['area'] = $request->state;
-        $data['creator_id'] = Auth::user()->id;
+        $data['manufacturer_name'] = $request->manufacturer_name;
+        $data['maker_id'] = $request->maker_id;
+        $data['mode_name'] = $request->model_name;
+        $data['location'] = $request->location;
 
+        $data['creator_id'] = Auth::user()->id;
 
         $part->update($data);
 

@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Auth;
 class Part extends Model
 {
 protected $fillable =['name','image','description','part_type_id','category_id','price','sub_cat','creator_id','manufacturer_id','model','area',
-'manufacturer_name','model_name','maker_id'
+'manufacturer_name','model_name','maker_id','location'
 ];
 
 public function category(){
@@ -21,5 +21,7 @@ public function partType(){
 public function creator(){
     return $this->belongsTo(User::class);
 }
-
+public function checkFav(){
+    return $this->belongsTo(Favourite::class,'id' , 'product_id')->where('user_id' , Auth::id());
+}
 }

@@ -19,7 +19,7 @@ class vPartsController extends Controller
         // $parts = Part::get();
 
         if(Auth::user()->role_id == 2){
-            $parts = Part::where('creator_id' , Auth::user()->id)->paginate(25);
+            $parts = Part::where('creator_id' , Auth::user()->id)->get();
 
         }
         return view('backend.merch.parts.index', compact('parts'));
@@ -75,6 +75,7 @@ class vPartsController extends Controller
         $data['manufacturer_name'] = $request->manufacturer_name;
         $data['maker_id'] = $request->maker_id;
         $data['mode_name'] = $request->model_name;
+        $data['location'] = $request->location;
 
         $data['creator_id'] = Auth::user()->id;
 
@@ -151,6 +152,7 @@ class vPartsController extends Controller
         $data['manufacturer_name'] = $request->manufacturer_name;
         $data['maker_id'] = $request->maker_id;
         $data['model_name'] = $request->model_name;
+        $data['location'] = $request->location;
 
         $part->update($data);
 

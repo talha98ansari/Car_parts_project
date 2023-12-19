@@ -112,16 +112,21 @@
                     <div class="col-lg-3 col-sm-6 my-3">
                         <h6 class="orange-text">TOP PRODUCTS</h6>
                         <ul>
-                            <li><a href="">Lighting</a></li>
+                            {{-- <li><a href="">Lighting</a></li>
                             <li><a href="">Shock absorber</a></li>
-                            <li><a href="">Clutch kit</a></li>
                             <li><a href="">Suspension arm</a></li>
                             <li><a href="">Wheel bearing</a></li>
-                            <li><a href="">Car care & cleaning products</a></li>
-                            <li><a href="">Shop by maker</a></li>
-                            <li><a href="">Shop by model</a></li>
-                            <li><a href="">Shop by car brand</a></li>
-                            <li><a href="">Car parts brands</a></li>
+                            <li><a href="">Car care & cleaning products</a></li> --}}
+                            <?php use App\Models\Category;
+                            $categories = Category::orderBy('id' , 'DESC')->take(6)->get();
+                            ?>
+                            @foreach ($categories as $c )
+                            <li><a href="{{route('category.index',$c->id)}}">{{$c->name}}</a></li>
+                            @endforeach
+                            <li><a href="{{url('/view/part?shopByMaker=yes')}}">Shop by maker</a></li>
+                            <li><a href="{{url('/view/part?shopByModel=yes')}}">Shop by model</a></li>
+                            <li><a href="{{url('/view/part?shopByState=yes')}}">Shop by Staate</a></li>
+                            {{-- <li><a href="">Car parts brands</a></li> --}}
                         </ul>
                     </div>
                 </div>

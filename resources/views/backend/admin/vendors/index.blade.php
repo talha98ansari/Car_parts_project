@@ -128,7 +128,7 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- Card footer -->
+                {{-- <!-- Card footer -->
                 <div class="card-footer py-4">
                     <nav aria-label="...">
                         <ul class="pagination justify-content-end mb-0">
@@ -153,7 +153,7 @@
                             </li>
                         </ul>
                     </nav>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

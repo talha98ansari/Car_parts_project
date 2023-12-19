@@ -41,9 +41,41 @@
     @guest()
     @include('layouts.footers.guest')
     @endguest
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
+<style>
+/* #DataTables_Table_0_length{
+    display: none;
+} */
+table.dataTable.no-footer {
+    /* border-bottom: 1px solid #111; */
+    border:none !important;
+}
+
+</style>
     <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
 
+    <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
+
+    <script src="https://nightly.datatables.net/js/dataTables.bootstrap4.min.js "></script>
     <script>
+          $(document).ready(function() {
+        // Select all tables and apply DataTable
+
+        $('table').DataTable({
+        responsive: true,
+        searching: false,
+        language: {
+    paginate: {
+        next: '<i class="fas fa-angle-right"></i>', // or '→'
+      previous: '<i class="fas fa-angle-left"></i>' // or '←'
+    }
+  }
+        // other DataTable options...
+
+    });
+    });
+
         const images = document.querySelectorAll('img');
 
         images.forEach(img => {

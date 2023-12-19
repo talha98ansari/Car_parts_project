@@ -136,6 +136,24 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link " href="#navbar-s_info" data-toggle="collapse" role="button" aria-expanded="true"
+                        aria-controls="navbar-s_info">
+                        <i class="ni ni-circle-08" style="color: #f4645f;"></i>
+                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Contact Queries') }}</span>
+                    </a>
+
+                    <div class="collapse " id="navbar-s_info">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('c_info.index') }}">
+                                    {{ __('List') }}
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link " href="#navbar-categories" data-toggle="collapse" role="button"
                         aria-expanded="true" aria-controls="navbar-categories">
                         <i class="ni ni-basket" style="color: #f4645f;"></i>
@@ -318,6 +336,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('follow.index') }}">
                                     {{ __('Follow Link') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('tool.index') }}">
+                                    {{ __('Tools') }}
                                 </a>
                             </li>
                             <li class="nav-item">

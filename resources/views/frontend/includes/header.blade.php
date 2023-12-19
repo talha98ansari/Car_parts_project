@@ -3,7 +3,7 @@
     <div id="ctn-preloader" class="ctn-preloader">
         <div class="animation-preloader">
             <div class="spinner"></div>
-            <img src="{{asset('front/images/logo.png')}}" alt="logo" class="img-fluid loader-logo">
+            <img src="{{ asset('front/images/logo.png') }}" alt="logo" class="img-fluid loader-logo">
             <div class="txt-loading">
                 <span data-text-preloader="L" class="letters-loading">
                     L
@@ -34,9 +34,9 @@
 </div>
 <!-- preloader ends here  -->
 <?php
-                            use App\Models\PartType;
-                            $parttypes = PartType::get();
-                            ?>
+use App\Models\PartType;
+$parttypes = PartType::get();
+?>
 <!-- header starts here  -->
 <header>
     <div class="header-top">
@@ -46,7 +46,7 @@
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1 pe-sm- 5 me-5 d-flex align-items-center gap-5 justify-content-center">
                             <!-- <div class="d-flex align-items-center">
-                                    <img src="{{asset('front/images/shop.png')}}" alt="" class="img-fluid">
+                                    <img src="{{ asset('front/images/shop.png') }}" alt="" class="img-fluid">
                                     <p class="mb-0">Shop</p>
                                 </div> -->
                             {{-- <div class="d-flex align-items-center">
@@ -62,31 +62,33 @@
                         <div class="flex-shrink-0">
                             @guest
 
-                            <a href="{{route('user.login')}}">User Sign in</a> |
+                                <a href="{{ route('user.login') }}">User Sign in</a> |
 
-                            <a href="{{route('vendor.login')}}">Vendor Sign in</a>
+                                <a href="{{ route('vendor.login') }}">Vendor Sign in</a>
                             @else
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{Auth::user()->name}}
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                  <li>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        style="display: none;">
-                                        @csrf
-                                    </form>
-                                    <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ Auth::user()->name }}
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                style="display: none;">
+                                                @csrf
+                                            </form>
+                                            <a href="{{ route('logout') }}" class="dropdown-item"
+                                                onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">
-                                        <i class="ni ni-user-run"></i>
-                                        <span>{{ __('Logout') }}</span>
-                                    </a>
-                                  </li>
-                                  <li><a class="dropdown-item" href="{{route('password.change')}}">Change Password</a></li>
+                                                <i class="ni ni-user-run"></i>
+                                                <span>{{ __('Logout') }}</span>
+                                            </a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ route('password.change') }}">Change
+                                                Password</a></li>
 
-                                </ul>
-                            </div>
+                                    </ul>
+                                </div>
                             @endguest
 
 
@@ -120,8 +122,9 @@
             <div class="row">
                 <div class="col-xl-11 ms-auto">
                     <nav class="navbar navbar-expand-lg navbar-dark">
-                        <a class="navbar-brand" href="{{route('index.f')}}"><img src="{{asset('front/images/logo.png')}}"
-                                alt="" class="img-fluid site-logo"></a>
+                        <a class="navbar-brand" href="{{ route('index.f') }}"><img
+                                src="{{ asset('front/images/logo.png') }}" alt=""
+                                class="img-fluid site-logo"></a>
                         <button class="navbar-toggler transparent-btn" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                             aria-label="Toggle navigation">
@@ -134,10 +137,12 @@
                                     <select name="" id="" class="header-select vehicle_type">
                                         <option value="" selected disabled>Vechicle Type</option>
 
-                                        @foreach ($parttypes as $m )
-                                        <option {{isset($_REQUEST['vehicle_type']) && $_REQUEST['vehicle_type'] == $m->id ? 'selected' : '' }} value="{{$m->id}}">{{$m->name}}</option>
+                                        @foreach ($parttypes as $m)
+                                            <option
+                                                {{ isset($_REQUEST['vehicle_type']) && $_REQUEST['vehicle_type'] == $m->id ? 'selected' : '' }}
+                                                value="{{ $m->id }}">{{ $m->name }}</option>
                                         @endforeach
-                                                                        </select>
+                                    </select>
                                 </li>
                                 <li class="nav-item">
                                     <div class="d-flex gap-1 align-items-center">
@@ -158,12 +163,12 @@
                         </div>
                 </div>
                 </li> --}}
-                </ul>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
             </div>
-            </nav>
         </div>
-    </div>
-    </div>
     </div>
 </header>
 <!-- header ends here  -->
@@ -184,131 +189,37 @@
                             <li class="nav-item dropdown dropdown-mega position-relative">
                                 <a class="nav-link dropdown-toggle p-0" href="#_" data-bs-toggle="dropdown"
                                     data-bs-auto-close="outside">Tools</a>
+                                    <?php Use App\Models\Tool;
+                                        $tools = Tool::where('is_active' , 1)->get();
+                                    ?>
                                 <div class="dropdown-menu mega-menuu shadow">
                                     <div class="mega-content px-4">
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="row">
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-6">
                                                             <ul>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
+                                                                @foreach ($tools as $t )
+                                                                <li><a href="{{url($t->link ?? '#')}}">{{$t->name}}</a></li>
+                                                                @endforeach
+
                                                             </ul>
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            <ul>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <ul>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                            </ul>
-                                                        </div>
+
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <ul>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <ul>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <ul>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <ul>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <ul>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <ul>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <ul>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <ul>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <ul>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                                <li><a href="#_">Test</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
                             @foreach ($parttypes as $p)
-                            <li class="nav-item">
-                                <a href="{{url('view/part?vehicle_type='.$p->id)}}">{{$p->name ?? ''}}</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('view/part?vehicle_type=' . $p->id) }}">{{ $p->name ?? '' }}</a>
+                                </li>
                             @endforeach
 
 

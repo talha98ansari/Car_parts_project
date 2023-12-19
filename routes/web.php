@@ -34,6 +34,8 @@ Route::get('/view/part/{id?}', 'App\Http\Controllers\FrontController@partview')-
 Route::get('/view/category/{id?}', 'App\Http\Controllers\FrontController@catrgoryview')->name('category.index');
 Route::get('/view/detail/{id}', 'App\Http\Controllers\FrontController@partdetail')->name('part.detail');
 
+Route::post('/save-contact-info', 'App\Http\Controllers\FrontController@saveContactForm')->name('contact_info.save');
+
 Route::get('/user/login', 'App\Http\Controllers\UserRegistrationController@loginPage')->name('user.login');
 Route::get('/user/registration', 'App\Http\Controllers\UserRegistrationController@registerationPage')->name('user.registration');
 Route::post('/user/registration/save', 'App\Http\Controllers\UserRegistrationController@saveUser')->name('user.registration.save');
@@ -58,11 +60,11 @@ Route::post('/user/password/{id}', 'App\Http\Controllers\FrontLoginController@pa
 Auth::routes();
 
 Route::post('profile/password', [
-        'as' => 'profile.password',
-        'uses' => 'App\Http\Controllers\ProfileController@password'
-    ]);
-    Route::post('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\Admin\ProfileController@update']);
-    Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\Admin\ProfileController@edit']);
+    'as' => 'profile.password',
+    'uses' => 'App\Http\Controllers\ProfileController@password'
+]);
+Route::post('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\Admin\ProfileController@update']);
+Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\Admin\ProfileController@edit']);
 
 // Admin routes
 Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () {
@@ -160,22 +162,29 @@ Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () 
     Route::get('/follow/delete/{id}', 'App\Http\Controllers\Admin\followController@destroy')->name('follow.remove');
     Route::get('/follow/status/{id}', 'App\Http\Controllers\Admin\followController@status')->name('follow.status');
 
+    Route::resource('tool', 'App\Http\Controllers\Admin\ToolController');
+    Route::post('/update/tool/{id}', 'App\Http\Controllers\Admin\ToolController@update')->name('tool.up');
+    Route::get('/tool/delete/{id}', 'App\Http\Controllers\Admin\ToolController@destroy')->name('tool.remove');
+    Route::get('/tool/status/{id}', 'App\Http\Controllers\Admin\ToolController@status')->name('tool.status');
 
+    Route::get('/contact-info', 'App\Http\Controllers\Admin\ContactInfoController@index')->name('c_info.index');
+    Route::get('/contact-info/delete/{id}', 'App\Http\Controllers\Admin\ContactInfoController@destroy')->name('c_info.remove');
 
 });
 
 // Vendor Routes
 // Route::middleware(['auth', 'check.role:2',''])->prefix('vendor')->group(function () {
 //     Route::resource('vparts', 'App\Http\Controllers\Merch\PartsController');
-    // Route::post('/v/update/parts/{id}', 'App\Http\Controllers\Merch\partsController@update')->name('v.parts.up');
-    // Route::get('/v/parts/delete/{id}', 'App\Http\Controllers\Merch\partsController@destroy')->name('v.parts.remove');
-    // Route::get('/v/parts/status/{id}', 'App\Http\Controllers\Merch\partsController@status')->name('v.parts.status');
+// Route::post('/v/update/parts/{id}', 'App\Http\Controllers\Merch\partsController@update')->name('v.parts.up');
+// Route::get('/v/parts/delete/{id}', 'App\Http\Controllers\Merch\partsController@destroy')->name('v.parts.remove');
+// Route::get('/v/parts/status/{id}', 'App\Http\Controllers\Merch\partsController@status')->name('v.parts.status');
 // });
 Route::middleware(['auth', 'check.role:2'])->prefix('vendor')->group(function () {
     Route::resource('vparts', 'App\Http\Controllers\Merch\vPartsController');
     Route::post('/v/update/parts/{id}', 'App\Http\Controllers\Merch\vPartsController@update')->name('vparts.up');
     Route::get('/v/parts/delete/{id}', 'App\Http\Controllers\Merch\vPartsController@destroy')->name('vparts.remove');
-    Route::get('/v/parts/status/{id}', 'App\Http\Controllers\Merch\vPartsController@status')->name('vparts.status');});
+    Route::get('/v/parts/status/{id}', 'App\Http\Controllers\Merch\vPartsController@status')->name('vparts.status');
+});
 
 // Route for unauthorized access
 Route::get('/unauthorized', function () {
@@ -187,3 +196,5 @@ Route::get('/get-model-options/{parentId}', 'App\Http\Controllers\DropdownContro
 Route::get('/get-state-options/{parentId}', 'App\Http\Controllers\DropdownController@getstate')->name('get.state.options');
 Route::get('/get-SubCat-options/{parentId}', 'App\Http\Controllers\DropdownController@getSubCats')->name('get.subcat.options');
 Route::get('/get-state-options-mk/{parentId}', 'App\Http\Controllers\DropdownController@getstateMK')->name('get.subcat.options.mk');
+Route::get('/add-to-fav/{ct}', 'App\Http\Controllers\DropdownController@AddToFav')->name('add.fav');
+Route::get('/rem-to-fav/{ct}', 'App\Http\Controllers\DropdownController@RemoveFav')->name('rem.fav');

@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{SubCate, CarModel, Part};
+use App\Models\{SubCate, CarModel, Part, Favourite};
+use Auth;
 
 class DropdownController extends Controller
 {
     public function getSubCats($parentId)
     {
         $childOptions = SubCate::where('category_id', $parentId)->pluck('name', 'id');
-
         return response()->json($childOptions);
     }
     public function getModel($parentId)
@@ -40,5 +40,25 @@ class DropdownController extends Controller
 
         // Now, filter the CarModel query based on the filtered IDs
         return response()->json($carModelIds);
+    }
+
+    public function AddToFav($ct)
+    {
+        if(Auth::user()){
+            Favourite::create([
+                'user_id' => Auth::id(),
+                'product_id' => $ct
+            ]);
+            return response()->json(['status'=>true ,'message'=>'added']);
+        }else{
+            return response()->json(['status'=>false ,'message'=>'login']);
+
+        }
+
+    }
+    public function RemoveFav($ct)
+    {
+        Favourite::where('user_id', Auth::id())->where('product_id', $ct)->delete();
+        return response()->json(['status'=>true ,'message'=>'removed']);
     }
 }

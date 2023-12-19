@@ -165,7 +165,7 @@
                         </ul> --}}
 
                     {{-- </nav> --}}
-                    {{ $parts->links() }}
+                    {{-- {{ $parts->links() }} --}}
 
                 </div>
             </div>

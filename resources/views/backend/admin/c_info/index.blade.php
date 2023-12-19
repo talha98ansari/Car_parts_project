@@ -7,17 +7,17 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">Sub Catatories Listing</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">Contact Listing</h6>
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                             <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                            {{-- <li class="breadcrumb-item"><a href="javasctipt:void(0)">subcategories</a></li> --}}
-                            <li class="breadcrumb-item active" aria-current="page">Sub Catatories</li>
+                            {{-- <li class="breadcrumb-item"><a href="javasctipt:void(0)">users</a></li> --}}
+                            {{-- <li class="breadcrumb-item active" aria-current="page">users</li> --}}
                         </ol>
                     </nav>
                 </div>
                 <div class="col-lg-6 col-5 text-right">
-                    <a href="{{route('subcategories.create')}}" class="btn btn-sm btn-neutral">
+                    <a href="{{route('users.create')}}" class="btn btn-sm btn-neutral">
                         New
                         <i class="ni ni-fat-add"></i>
 
@@ -62,14 +62,16 @@
                             <tr>
                                 <th>#</th>
                                 <th scope="col" class="sort" data-sort="name">Name</th>
-                                <th scope="col" class="sort" data-sort="category">Category</th>
-                                <th scope="col" class="sort" data-sort="completion">Status</th>
+                                <th scope="col" class="sort" data-sort="budget">Phone</th>
+                                <th scope="col">Email</th>
+                                <th scope="col" class="sort" data-sort="status">Subject</th>
+                                <th scope="col" class="sort" data-sort="completion">Detail</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody class="list">
                             @php $i=1; @endphp
-                            @foreach ($subcat as $u )
+                            @foreach ($users as $u )
 
                             <tr>
                                 <td class="budget">
@@ -77,30 +79,27 @@
                                 </td>
                                 <th scope="row">
                                     <div class="media align-items-center">
-                                        <a href="#" class="avatar rounded-circle mr-3">
-                                            <img alt="Image placeholder" src="{{asset($u->image)}}">
-                                        </a>
+                                        {{-- <a href="#" class="avatar rounded-circle mr-3">
+                                            <img alt="Image placeholder" src="{{asset($u->profile_picture)}}">
+                                        </a> --}}
                                         <div class="media-body">
                                             <span class="name mb-0 text-sm">{{$u->name ?? ''}}</span>
                                         </div>
                                     </div>
                                 </th>
-                                <td>
-                                    <div class="media-body">
-                                        <span class="name mb-0 text-sm">{{$u->category->name ?? ''}}</span>
-                                    </div>
+                                <td class="budget">
+                                    {{$u->phone ?? ''}}
                                 </td>
-                                <td>
-                                    <span class="badge badge-dot mr-4">
-                                        @if($u->is_active == 1)
-                                        <i class="bg-primary"></i>
-                                        <span class="status">Active</span>
-                                        @else
-                                        <i class="bg-danger"></i>
-                                        <span class="status">In-Active</span>
-                                        @endif
-                                    </span>
+                                <td class="budget">
+                                    {{$u->email ?? ''}}
                                 </td>
+                                <td class="budget">
+                                    {{$u->subject ?? ''}}
+                                </td>
+                                <td class="budget">
+                                    {{$u->detail ?? ''}}
+                                </td>
+
                                 <td class="text-right">
                                     <div class="dropdown">
                                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
@@ -108,9 +107,9 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="{{route('subcategories.edit' , $u->id)}}">Edit</a>
-                                            <a class="dropdown-item" href="{{route('subcategories.remove' , $u->id)}}">Delete</a>
-                                            <a class="dropdown-item" href="{{route('subcategories.status' , $u->id)}}">Change Status</a>
+                                            {{-- <a class="dropdown-item" href="{{route('users.edit' , $u->id)}}">Edit</a> --}}
+                                            <a class="dropdown-item" href="{{route('c_info.remove' , $u->id)}}">Delete</a>
+                                            {{-- <a class="dropdown-item" href="{{route('users.status' , $u->id)}}">Change Status</a> --}}
                                         </div>
                                     </div>
                                 </td>
@@ -123,31 +122,31 @@
                     </table>
                 </div>
                 <!-- Card footer -->
-                {{-- <div class="card-footer py-4">
-                    <nav aria-label="...">
-                        <ul class="pagination justify-content-end mb-0">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">
-                                    <i class="fas fa-angle-left"></i>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">
-                                    <i class="fas fa-angle-right"></i>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div> --}}
+                    {{-- <div class="card-footer py-4">
+                        <nav aria-label="...">
+                            <ul class="pagination justify-content-end mb-0">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">
+                                        <i class="fas fa-angle-left"></i>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">
+                                        <i class="fas fa-angle-right"></i>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div> --}}
             </div>
         </div>
     </div>

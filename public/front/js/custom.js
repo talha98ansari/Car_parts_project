@@ -1,75 +1,75 @@
 // PRE LOADER JS
 
-setTimeout(function() {
+setTimeout(function () {
     $('#ctn-preloader').addClass('loaded');
     // Una vez haya terminado el preloader aparezca el scroll
     $('body').removeClass('no-scroll-y');
 
     if ($('#ctn-preloader').hasClass('loaded')) {
-      // Es para que una vez que se haya ido el preloader se elimine toda la seccion preloader
-      $('#preloader').delay(1000).queue(function() {
-        $(this).remove();
-      });
+        // Es para que una vez que se haya ido el preloader se elimine toda la seccion preloader
+        $('#preloader').delay(1000).queue(function () {
+            $(this).remove();
+        });
     }
 }, 600);
 
 $('.banner-carousel').owlCarousel({
-  loop:true,
-  margin:10,
-  nav:false,
-  responsive:{
-      0:{
-          items:1
-      },
-      600:{
-          items:1
-      },
-      1000:{
-          items:1
-      }
-  }
+    loop: true,
+    margin: 10,
+    nav: false,
+    responsive: {
+        0: {
+            items: 1
+        },
+        600: {
+            items: 1
+        },
+        1000: {
+            items: 1
+        }
+    }
 })
 
 $('.testimonial-carousel').owlCarousel({
-  loop:true,
-  margin:10,
-  nav:false,
-  dots: false,
-  responsive:{
-      0:{
-          items:1
-      },
-      768:{
-          items:2
-      },
-      1000:{
-          items:3
-      }
-  }
+    loop: true,
+    margin: 10,
+    nav: false,
+    dots: false,
+    responsive: {
+        0: {
+            items: 1
+        },
+        768: {
+            items: 2
+        },
+        1000: {
+            items: 3
+        }
+    }
 })
 
 $('.product-carousel').owlCarousel({
-  loop:true,
-  margin:10,
-  nav:false,
-  responsive:{
-      0:{
-          items:1
-      },
-      768:{
-          items:2
-      },
-      1000:{
-          items:3
-      }
-  }
+    loop: true,
+    margin: 10,
+    nav: false,
+    responsive: {
+        0: {
+            items: 1
+        },
+        768: {
+            items: 2
+        },
+        1000: {
+            items: 3
+        }
+    }
 })
 
-$(document).ready(function() {
-  $('.js-example-basic-single').select2();
+$(document).ready(function () {
+    $('.js-example-basic-single').select2();
 });
 
-$('#new-password, #confirm-new-password').on('keyup', function() {
+$('#new-password, #confirm-new-password').on('keyup', function () {
     if ($('#new-password').val() == '' || $('#new-password').val() == null) {
         $('#message').html('').css('color', 'green');
         $("#password").prop('disabled', true);
@@ -106,16 +106,16 @@ $(document).ready(function () {
         var x = '/view/part?';
 
 
-        if(modelId != null){
+        if (modelId != null) {
             var x = x + 'model=' + modelId;
         }
-        if(state != null){
+        if (state != null) {
             var x = x + '&state=' + state;
         }
-        if(maker != null){
+        if (maker != null) {
             var x = x + '&maker_id=' + maker;
         }
-        window.location.href  = x ;
+        window.location.href = x;
 
     });
     $(".searchButton2").on("click", function (e) {
@@ -130,20 +130,20 @@ $(document).ready(function () {
         var price = $(".price").val();
         var x = '/view/part?';
 
-        if(vehicle_type != null){
+        if (vehicle_type != null) {
             var x = x + 'vehicle_type=' + vehicle_type;
         }
-        if(statechange != null){
+        if (statechange != null) {
             var x = x + '&state=' + statechange;
         }
 
-        if(price != null){
+        if (price != null) {
             var x = x + '&price=' + price;
         }
-        if(manufacturer != null){
+        if (manufacturer != null) {
             var x = x + '&manufacturer=' + manufacturer;
         }
-        window.location.href  = x ;
+        window.location.href = x;
 
     });
 });
@@ -205,7 +205,6 @@ $(document).ready(function () {
 });
 
 
-
 $(document).ready(function () {
     $('.maker_change_st').click(function () {
         var parentId = $(this).val();
@@ -232,4 +231,41 @@ $(document).ready(function () {
             $('.st_change').empty();
         }
     });
+});
+
+$(document).on("click", "#ic", function () {
+
+    st = $(this).attr('data-status');
+    ct = $(this).attr('data-ct');
+    if (st == 0) {
+        $(this).attr('src', '/assets/img/heart.png');
+        st = $(this).attr('data-status', 1);
+        $.ajax({
+            type: 'GET',
+            url: '/add-to-fav/' + ct,
+            success: function (data) {
+                if (!data['status']) {
+                    location.href = '/user/login';
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    } else {
+        $(this).attr('src', '/assets/img/heartfill.png');
+        st = $(this).attr('data-status', 0);
+
+        $.ajax({
+            type: 'GET',
+            url: '/rem-to-fav/' + ct,
+            success: function (data) {
+
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
 });

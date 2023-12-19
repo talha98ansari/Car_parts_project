@@ -66,7 +66,7 @@
                                 <th scope="col" class="sort" data-sort="status">Address</th>
                                 <th scope="col">Email</th>
                                 <th scope="col" class="sort" data-sort="completion">Status</th>
-                                <th scope="col"></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody class="list">
@@ -128,7 +128,7 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- Card footer -->
+                {{-- <!-- Card footer -->
                 <div class="card-footer py-4">
                     <nav aria-label="...">
                         <ul class="pagination justify-content-end mb-0">
@@ -153,7 +153,7 @@
                             </li>
                         </ul>
                     </nav>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
