@@ -143,4 +143,6 @@ class SiteController extends Controller
             ->with('success', 'Data Has Been Updated');
 
     }
+
+    
 }

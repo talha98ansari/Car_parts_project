@@ -101,6 +101,8 @@ $(document).ready(function () {
         // Get selected values from the dropdowns
         var modelId = $("#model").val();
         var state = $("#state").val();
+        var cat = $("#cat").val();
+        var subCat = $("#sub-cat").val();
         var maker = $(".maker_change_st").val();
 
         var x = '/view/part?';
@@ -112,9 +114,16 @@ $(document).ready(function () {
         if (state != null) {
             var x = x + '&state=' + state;
         }
+        if (cat != null) {
+            var x = x + '&cat=' + cat;
+        }
+         if (subCat != null) {
+            var x = x + '&subCat=' + subCat;
+        }
         if (maker != null) {
             var x = x + '&maker_id=' + maker;
         }
+
         window.location.href = x;
 
     });
@@ -268,4 +277,65 @@ $(document).on("click", "#ic", function () {
         });
     }
 
+});
+$("#searchbox").keyup(function () {
+    q = $(this).val();
+    $.ajax({
+        type: 'GET',
+        url: '/search-for-pro',
+        data: { q: q },
+        success: function (response) {
+            if (response != '' && response != null) {
+                $("#search-results").removeClass('d-none');
+
+                var resultsHtml = "";
+                $.each(response, function (index, result) {
+                    resultsHtml += "<li><a href='/view/detail/"+result.id +"'>" + result.name + "<a/></li>"; // Adjust as needed
+                });
+                $("#search-results").html(resultsHtml);
+            } else {
+                var resultsHtml = "";
+                $("#search-results").addClass('d-none');
+                $("#search-results").html(resultsHtml);
+
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        }
+    })
+})
+$(document).ready(function () {
+    $('.categroy_dropdown').change(function () {
+        var parentId = $(this).val();
+
+        if (parentId) {
+            $.ajax({
+                type: 'GET',
+                url: '/get-SubCat-options/' + parentId,
+                success: function (data) {
+                    // Clear existing child options
+                    $('.subCatDropDown').empty();
+
+                    // Append new child options
+                    $.each(data, function (id, name) {
+                        $('.subCatDropDown').append(new Option(name, id));
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        } else {
+            // If no parent selected, clear child options
+            $('.subCatDropDown').empty();
+        }
+    });
+});
+$(document).ready(function () {
+    // Show/hide categories when the "Shop Now" button is clicked
+    $('#showMoreButton').click(function () {
+        $('.my-3.d-none').slice(0, 4).removeClass('d-none');
+        $(this).hide(); // Hide the button after all categories are shown
+    });
 });

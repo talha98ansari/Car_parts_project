@@ -113,7 +113,7 @@
 
                 // Serialize the form data
                 var form = $("#this_form");
-var formData = form.serialize();
+                var formData = form.serialize();
                 // Make an Ajax request
                 $.ajax({
                     type: 'POST', // You can use 'GET' as well

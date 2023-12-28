@@ -170,6 +170,11 @@ Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () 
     Route::get('/contact-info', 'App\Http\Controllers\Admin\ContactInfoController@index')->name('c_info.index');
     Route::get('/contact-info/delete/{id}', 'App\Http\Controllers\Admin\ContactInfoController@destroy')->name('c_info.remove');
 
+    Route::resource('slider', 'App\Http\Controllers\Admin\SliderController');
+    Route::post('/update/slider/{id}', 'App\Http\Controllers\Admin\SliderController@update')->name('slider.up');
+    Route::get('/slider/delete/{id}', 'App\Http\Controllers\Admin\SliderController@destroy')->name('slider.remove');
+    Route::get('/slider/status/{id}', 'App\Http\Controllers\Admin\SliderController@status')->name('slider.status');
+
 });
 
 // Vendor Routes
@@ -198,3 +203,4 @@ Route::get('/get-SubCat-options/{parentId}', 'App\Http\Controllers\DropdownContr
 Route::get('/get-state-options-mk/{parentId}', 'App\Http\Controllers\DropdownController@getstateMK')->name('get.subcat.options.mk');
 Route::get('/add-to-fav/{ct}', 'App\Http\Controllers\DropdownController@AddToFav')->name('add.fav');
 Route::get('/rem-to-fav/{ct}', 'App\Http\Controllers\DropdownController@RemoveFav')->name('rem.fav');
+Route::get('/search-for-pro', 'App\Http\Controllers\DropdownController@searchForPro')->name('search.pro');

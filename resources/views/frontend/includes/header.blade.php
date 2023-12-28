@@ -145,12 +145,12 @@ $parttypes = PartType::get();
                                     </select>
                                 </li>
                                 <li class="nav-item">
-                                    <div class="d-flex gap-1 align-items-center">
-                                        <input type="text" placeholder="Enter the part number or name"
-                                            class="header-input">
-                                        <button class="site-btn header-btn searchButton2">Search</button>
+                                    <div class="d-flex gap-1 align-items-start"> <input type="text" id="searchbox" placeholder="Enter the part number or name" class="header-input">
+                                      <div id="search-results" class="d-none"></div>
+                                      <button class="site-btn header-btn searchButton2">Search</button>
                                     </div>
-                                </li>
+                                  </li>
+
                                 {{-- <li class="nav-item">
                                     <div class="d-flex gap-3 align-items-center">
                                         <a href=""><i class="fas fa-heart"></i></a>
@@ -189,9 +189,9 @@ $parttypes = PartType::get();
                             <li class="nav-item dropdown dropdown-mega position-relative">
                                 <a class="nav-link dropdown-toggle p-0" href="#_" data-bs-toggle="dropdown"
                                     data-bs-auto-close="outside">Tools</a>
-                                    <?php Use App\Models\Tool;
-                                        $tools = Tool::where('is_active' , 1)->get();
-                                    ?>
+                                <?php use App\Models\Tool;
+                                $tools = Tool::where('is_active', 1)->get();
+                                ?>
                                 <div class="dropdown-menu mega-menuu shadow">
                                     <div class="mega-content px-4">
                                         <div class="container-fluid">
@@ -200,8 +200,10 @@ $parttypes = PartType::get();
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <ul>
-                                                                @foreach ($tools as $t )
-                                                                <li><a href="{{url($t->link ?? '#')}}">{{$t->name}}</a></li>
+                                                                @foreach ($tools as $t)
+                                                                    <li><a
+                                                                            href="{{ url($t->link ?? '#') }}">{{ $t->name }}</a>
+                                                                    </li>
                                                                 @endforeach
 
                                                             </ul>

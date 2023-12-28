@@ -1159,3 +1159,28 @@ footer .blue-text{color: #0067D6;}
       font-size: 35px !important;
   }
   /* vendor login and signup  */
+#search-results{
+    position: absolute;
+    top: 64%;
+    border: 0;
+    background: white;
+    padding: 10px 20px;
+    width: 510px;
+    z-index:99;
+}
+#search-results a {
+    color:black !important;
+}
+#search-results li {
+    background-color: #fff; /* Assuming a white background */
+    transition: background-color 0.2s ease-in-out; /* Smooth transition */
+    padding: 10px 0px;
+
+  }
+
+  #search-results li:hover {
+    background-color: #f5f5f5;
+    color: #333; /* Darker text color on hover */
+
+    /* Slightly darker background on hover */
+  }

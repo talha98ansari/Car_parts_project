@@ -319,6 +319,11 @@
                     <div class="collapse " id="navbar-site">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('slider.index') }}">
+                                    {{ __('Slider') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('site.about') }}">
                                     {{ __('About Us') }}
                                 </a>

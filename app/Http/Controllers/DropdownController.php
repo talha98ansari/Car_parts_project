@@ -61,4 +61,20 @@ class DropdownController extends Controller
         Favourite::where('user_id', Auth::id())->where('product_id', $ct)->delete();
         return response()->json(['status'=>true ,'message'=>'removed']);
     }
+
+
+    public function searchForPro(Request $request){
+        $searchTerm = $request->input('q') ?? '';
+        $results = [];
+        if($searchTerm != ''){
+
+            $results = Part::where('name', 'LIKE', "%{$searchTerm}%")->get();
+        return response()->json($results);
+
+        }else{
+        return response()->json($results);
+
+        }
+
+      }
 }

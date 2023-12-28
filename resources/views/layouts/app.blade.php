@@ -27,10 +27,10 @@
 
 <body class="{{ $class ?? '' }}">
     @auth()
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
-    @include('layouts.navbars.sidebar')
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        @include('layouts.navbars.sidebar')
     @endauth
 
     <div class="main-content">
@@ -39,74 +39,72 @@
     </div>
 
     @guest()
-    @include('layouts.footers.guest')
+        @include('layouts.footers.guest')
     @endguest
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
-<style>
-/* #DataTables_Table_0_length{
+    <style>
+        /* #DataTables_Table_0_length{
     display: none;
 } */
-table.dataTable.no-footer {
-    /* border-bottom: 1px solid #111; */
-    border:none !important;
-}
-
-</style>
+        table.dataTable.no-footer {
+            /* border-bottom: 1px solid #111; */
+            border: none !important;
+        }
+    </style>
     <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
 
     <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
 
     <script src="https://nightly.datatables.net/js/dataTables.bootstrap4.min.js "></script>
     <script>
-          $(document).ready(function() {
-        // Select all tables and apply DataTable
+        $(document).ready(function() {
+            // Select all tables and apply DataTable
 
-        $('table').DataTable({
-        responsive: true,
-        searching: false,
-        language: {
-    paginate: {
-        next: '<i class="fas fa-angle-right"></i>', // or '→'
-      previous: '<i class="fas fa-angle-left"></i>' // or '←'
-    }
-  }
-        // other DataTable options...
+            $('table').DataTable({
+                responsive: true,
+                // searching: false,
+                language: {
+                    paginate: {
+                        next: '<i class="fas fa-angle-right"></i>', // or '→'
+                        previous: '<i class="fas fa-angle-left"></i>' // or '←'
+                    }
+                }
+                // other DataTable options...
 
-    });
-    });
+            });
+        });
 
         const images = document.querySelectorAll('img');
 
         images.forEach(img => {
-          img.addEventListener('error', function handleError() {
-            const defaultImage ="{{asset('black.png')}}";
-            img.src = defaultImage;
-            img.alt = 'default';
-          });
+            img.addEventListener('error', function handleError() {
+                const defaultImage = "{{ asset('black.png') }}";
+                img.src = defaultImage;
+                img.alt = 'default';
+            });
         });
 
         $(document).ready(function() {
-        // $('#job_description').summernote();
+            // $('#job_description').summernote();
 
-        const text = document.querySelectorAll('textarea');
+            const text = document.querySelectorAll('textarea');
 
-        $('.text-editor').summernote({
-            placeholder: '',
-            tabsize: 90,
-            height: 280,
-            toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link']],
-            // ['view', ['fullscreen', 'codeview', 'help']]
-            ]
+            $('.text-editor').summernote({
+                placeholder: '',
+                tabsize: 90,
+                height: 280,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link']],
+                    // ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
         });
-    });
-
     </script>
     <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
