@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Slider, Category, Partner, Review, AboutUs, ContactUs, OtherPages, Part, PartType, SubCate, CarModel, Maker, ContactInfo};
+use App\Models\{Slider, Category, Partner, Review, AboutUs, ContactUs, OtherPages, Part, PartType, SubCate, CarModel, Maker, ContactInfo, Tool};
 
 class FrontController extends Controller
 {
@@ -18,7 +18,8 @@ class FrontController extends Controller
         $model = CarModel::get();
         $maker = Maker::get();
         $sliders = Slider::get();
-        return view('frontend.index', compact('categories', 'partners', 'reviews', 'model', 'maker', 'sliders'));
+        $services = Tool::get();
+        return view('frontend.index', compact('categories', 'partners', 'reviews', 'model', 'maker', 'sliders','services'));
     }
 
     public function about_us()
