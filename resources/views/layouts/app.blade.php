@@ -114,8 +114,6 @@
     <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
     <script src="{{ asset('argon') }}/js/summernote-lite.min.js"></script>
 
-
-
 </body>
 
 </html>

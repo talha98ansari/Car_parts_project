@@ -274,6 +274,54 @@
         </div>
     </section>
     <!-- parts catalogue section ends here  -->
+<section id="cars_logo">
+   <div class="container">
+    <div class="row">
+        <div class="col-12">
+                    <h6 class="p-md mb-3 text-uppercase">Search By Company</h6>
+        </div>
+        <div class="col-md-12">
+            <div class = "owl-carousel img-slider owl-theme">
+               <div class = "item">
+                <a href="" class = "img-logo">
+                    <img src="{{asset('assets/home_images/honda.png')}}" alt="" class="img-fluid">
+                </a>
+               </div>
+               <div class = "item">
+                <a href="" class = "img-logo">
+                    <img src="{{asset('assets/home_images/toyota.png')}}" alt="" class="img-fluid">
+                </a>
+               </div>
+               <div class = "item">
+                <a href="" class = "img-logo">
+                    <img src="{{asset('assets/home_images/suzuki.png')}}" alt="" class="img-fluid">
+                </a>
+               </div>
+               <div class = "item">
+                <a href="" class = "img-logo">
+                    <img src="{{asset('assets/home_images/pagani.png')}}" alt="" class="img-fluid">
+                </a>
+               </div>
+               <div class = "item">
+                <a href="" class = "img-logo">
+                    <img src="{{asset('assets/home_images/volkswagon.png')}}" alt="" class="img-fluid">
+                </a>
+               </div>
+               <div class = "item">
+                <a href="" class = "img-logo">
+                    <img src="{{asset('assets/home_images/lamborgini.png')}}" alt="" class="img-fluid">
+                </a>
+               </div>
+               <div class = "item">
+                <a href="" class = "img-logo">
+                    <img src="{{asset('assets/home_images/Hyundai.png')}}" alt="" class="img-fluid">
+                </a>
+               </div>
+            </div>
+        </div>
+    </div>
+   </div>
+</section>
 
     <!-- testimonials section starts here  -->
     <section class="testimonials text-center py-5">
@@ -338,4 +386,5 @@
 
 
     <!-- our app section ends here  -->
+
 @endsection
