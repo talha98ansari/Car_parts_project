@@ -53,7 +53,7 @@
                                     </span>
                                 @endif
                             </div>
-
+{{-- 
                             <div class="form-group {{ $errors->has('link') ? ' has-danger' : '' }} col-md-9">
                                 <label class="form-control-label" for="input-link">{{ __('link') }}</label>
                                 <input type="text" name="link" id="input-link" class="form-control form-control-alternative{{ $errors->has('link') ? ' is-invalid' : '' }}" placeholder="{{ __('link') }}" value="{{ old('link',$data->link) }}" required autofocus>
@@ -63,7 +63,18 @@
                                         <strong>{{ $errors->first('link') }}</strong>
                                     </span>
                                 @endif
-                            </div>
+                            </div> --}}
+                            <div class="form-group {{ $errors->has('image') ? ' has-danger' : '' }} col-md-9">
+                            <label class="form-control-label" for="input-image">{{ __('Profile picture') }}</label>
+                            <input type="file" name="image" id="input-image" class="form-control form-control-alternative"
+                                placeholder="{{ __('image') }}">
+
+                            @if ($errors->has('image'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('image') }}</strong>
+                            </span>
+                            @endif
+                        </div>
                         </div>
                             <div class="text-right">
                                 <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>

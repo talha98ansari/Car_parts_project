@@ -39,16 +39,27 @@ class MakerController extends Controller
     public function store(Request $request)
     {
         $path = '';
+        <div class="form-group {{ $errors->has('image') ? ' has-danger' : '' }} col-md-9">
+        <label class="form-control-label" for="input-image">{{ __('Profile picture') }}</label>
+        <input type="file" name="image" id="input-image" class="form-control form-control-alternative"
+            placeholder="{{ __('image') }}">
 
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
+        @if ($errors->has('image'))
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $errors->first('image') }}</strong>
+        </span>
+        @endif
+    </div><div class="form-group {{ $errors->has('image') ? ' has-danger' : '' }} col-md-9">
+    <label class="form-control-label" for="input-image">{{ __('Profile picture') }}</label>
+    <input type="file" name="image" id="input-image" class="form-control form-control-alternative"
+        placeholder="{{ __('image') }}">
 
-            $randomString = Str::random(10);
-            $extension = $file->getClientOriginalExtension();
-            $fileName = $randomString . '_' . time() . '.' . $extension;
-
-            $path = $file->move('uploads/makers', $fileName);
-        }
+    @if ($errors->has('image'))
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $errors->first('image') }}</strong>
+    </span>
+    @endif
+</div>
 
         $data = [
             'name' => $request->name,

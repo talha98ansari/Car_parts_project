@@ -179,12 +179,12 @@ class FrontLoginController extends Controller
         ';
         $email = $request->email ?? '' ;
 
-        // Mail::send([], [], function (Message $message) use ($body , $email) {
-        //     $message->to('muhammad.sam.q.005@gmail.com');
-        //     $message->subject('Simple HTML Email');
-        //     $message->from('infodriveandvan@quick4solutions.com', 'HR');
-        //     $message->setBody($body, 'text/html'); // Set the email content as HTML
-        // });
+        Mail::send([], [], function (Message $message) use ($body , $email) {
+            $message->to('muhammad.sam.q.005@gmail.com');
+            $message->subject('Simple HTML Email');
+            $message->from('infodriveandvan@quick4solutions.com', 'HR');
+            $message->setBody($body, 'text/html'); // Set the email content as HTML
+        });
 
         // $mailData['title'] ='sa';
         // $mailData['body'] ='sa';

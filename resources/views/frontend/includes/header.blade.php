@@ -135,7 +135,7 @@ $parttypes = PartType::get();
 
                                 <li class="nav-item">
                                     <select name="" id="" class="header-select vehicle_type">
-                                        <option value="" selected disabled>Vechicle Type</option>
+                                        <option value="" selected disabled>Part Type</option>
 
                                         @foreach ($parttypes as $m)
                                             <option
@@ -188,7 +188,7 @@ $parttypes = PartType::get();
                         <ul class="navbar-nav w-100 gap-4 justify-content-between">
                             <li class="nav-item dropdown dropdown-mega position-relative">
                                 <a class="nav-link dropdown-toggle p-0" href="#_" data-bs-toggle="dropdown"
-                                    data-bs-auto-close="outside">Tools</a>
+                                    data-bs-auto-close="outside">Services</a>
                                 <?php use App\Models\Tool;
                                 $tools = Tool::where('is_active', 1)->get();
                                 ?>
@@ -202,7 +202,7 @@ $parttypes = PartType::get();
                                                             <ul>
                                                                 @foreach ($tools as $t)
                                                                     <li><a
-                                                                            href="{{ url($t->link ?? '#') }}">{{ $t->name }}</a>
+                                                                            href="javascript:(void:0)">{{ $t->name }}</a>
                                                                     </li>
                                                                 @endforeach
 

@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tool extends Model
 {
-    protected $fillable = ['name', 'link' , 'is_active'];
+    protected $guarded = [];
 }

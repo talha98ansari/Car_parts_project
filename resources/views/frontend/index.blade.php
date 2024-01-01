@@ -282,41 +282,13 @@
         </div>
         <div class="col-md-12">
             <div class = "owl-carousel img-slider owl-theme">
-               <div class = "item">
-                <a href="" class = "img-logo">
-                    <img src="{{asset('assets/home_images/honda.png')}}" alt="" class="img-fluid">
-                </a>
-               </div>
-               <div class = "item">
-                <a href="" class = "img-logo">
-                    <img src="{{asset('assets/home_images/toyota.png')}}" alt="" class="img-fluid">
-                </a>
-               </div>
-               <div class = "item">
-                <a href="" class = "img-logo">
-                    <img src="{{asset('assets/home_images/suzuki.png')}}" alt="" class="img-fluid">
-                </a>
-               </div>
-               <div class = "item">
-                <a href="" class = "img-logo">
-                    <img src="{{asset('assets/home_images/pagani.png')}}" alt="" class="img-fluid">
-                </a>
-               </div>
-               <div class = "item">
-                <a href="" class = "img-logo">
-                    <img src="{{asset('assets/home_images/volkswagon.png')}}" alt="" class="img-fluid">
-                </a>
-               </div>
-               <div class = "item">
-                <a href="" class = "img-logo">
-                    <img src="{{asset('assets/home_images/lamborgini.png')}}" alt="" class="img-fluid">
-                </a>
-               </div>
-               <div class = "item">
-                <a href="" class = "img-logo">
-                    <img src="{{asset('assets/home_images/Hyundai.png')}}" alt="" class="img-fluid">
-                </a>
-               </div>
+           @foreach ($maker as $m)
+           <div class = "item">
+            <a href="{{url('/view/part?&maker_id='.$m->id)}}" class = "img-logo">
+                <img src="{{asset($m->image ?? '')}}" alt="" class="img-fluid">
+            </a>
+           </div>
+           @endforeach
             </div>
         </div>
     </div>

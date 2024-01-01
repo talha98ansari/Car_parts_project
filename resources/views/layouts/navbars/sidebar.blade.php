@@ -345,7 +345,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('tool.index') }}">
-                                    {{ __('Tools') }}
+                                    {{ __('Services') }}
                                 </a>
                             </li>
                             <li class="nav-item">

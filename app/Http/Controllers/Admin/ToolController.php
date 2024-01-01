@@ -38,9 +38,21 @@ class ToolController extends Controller
      */
     public function store(Request $request)
     {
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+
+            $randomString = Str::random(10);
+            $extension = $file->getClientOriginalExtension();
+            $fileName = $randomString . '_' . time() . '.' . $extension;
+
+            $path = $file->move('uploads/service', $fileName);
+        }
+        $data['image'] = $path;
+
         $data = [
             'name' => $request->name,
-            'link' => $request->link,
+            'image' => $path,
         ];
         Tool::create($data);
         return redirect('admin/tool/')->with('success', 'Tool Added!');
@@ -79,8 +91,19 @@ class ToolController extends Controller
     public function update(Request $request, $id)
     {
         $tool = Tool::find($id);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+
+            $randomString = Str::random(10);
+            $extension = $file->getClientOriginalExtension();
+            $fileName = $randomString . '_' . time() . '.' . $extension;
+
+            $path = $file->move('uploads/service', $fileName);
+        }
+        $data['image'] = $path;
+
         $data['name'] = $request->name;
-        $data['link'] = $request->link;
 
         $tool->update($data);
 

@@ -76,9 +76,9 @@
                                 </td>
                                 <th scope="row">
                                     <div class="media align-items-center">
-                                        {{-- <a href="#" class="avatar rounded-circle mr-3">
+                                        <a href="#" class="avatar rounded-circle mr-3">
                                             <img alt="Image placeholder" src="{{asset($u->image)}}">
-                                        </a> --}}
+                                        </a>
                                         <div class="media-body">
                                             <span class="name mb-0 text-sm">{{$u->name ?? ''}}</span>
                                         </div>
