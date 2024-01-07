@@ -95,7 +95,7 @@
                 @foreach ($data as $d)
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="product-card">
-                        <div class="badge">Hot</div>
+                        {{-- <div class="badge">Hot</div> --}}
                         <a href="{{route('part.detail' , $d->id)}}" style="width:100%">
 
                             <div class="product-tumb">
@@ -103,15 +103,23 @@
                             </div>
                             <div class="product-details">
                                 <span class="product-catagory">{{$d->category->name ??''}} </span>
-                                <h4><a>{{$d->name ?? ''}}</a></h4>
+                                <h4><a  href="{{route('part.detail' , $d->id)}}">{{$d->name ?? ''}}</a></h4>
                                 <p>{{$d->description ?? ''}}</p>
                                 <div class="product-bottom-details">
                                     <div class="product-price">
                                         <p class="small">Starting From</p><small></small>{{$d->price}}
                                     </div>
                                     <div class="product-links ">
-                                        <a href=""><i class="fa fa-heart"></i></a>
+                                        <a class="hov"><span style="color: #FF4E00; font-size: 15px;">
+                                            @if ($d->checkFav)
+                                            <img src="{{asset('/assets/img/heartfill.png')}}" id="ic" data-ct="{{ $d->id }}"width="18"
+                                            data-status = '1'></i>
+                                            @else
 
+                                                    <img id="ic" class="" src="{{asset('/assets/img/heart.png')}}" data-ct="{{ $d->id }}"
+                                                    width="18" data-status = '0'></i>
+                                            @endif
+                                        </span></a>
                                     </div>
                                 </div>
                         </a>

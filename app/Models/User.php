@@ -28,7 +28,8 @@ class User extends Authenticatable
         'vendor_type',
         'business_id',
         'first_name',
-        'last_name'
+        'last_name',
+        'remember_token'
     ];
 
     /**

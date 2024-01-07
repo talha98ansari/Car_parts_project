@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'autopartz.ae'),
-            'port' => env('MAIL_PORT', 465),
+            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+            'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('admin@autopartz.ae'),
-            'password' => env('Autopartz1234'),
+            'username' => env('MAIL_USERNAME','autopartz15@gmail.com'),
+            'password' => env('MAIL_PASSWORD','rvdkipvmckfungxo'),
             'timeout' => null,
             'auth_mode' => null,
         ],

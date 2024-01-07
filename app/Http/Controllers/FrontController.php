@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favourite;
 use Illuminate\Http\Request;
 use App\Models\{Slider, Category, Partner, Review, AboutUs, ContactUs, OtherPages, Part, PartType, SubCate, CarModel, Maker, ContactInfo, Tool};
-
+use Auth;
 class FrontController extends Controller
 {
 
@@ -131,6 +132,13 @@ class FrontController extends Controller
         $categories = Category::get();
         return view('frontend.product', compact('data', 'categories'));
     }
+     public function serviceDetail($id)
+    {
+        $data = Tool::where('id', $id)->first();
+        // dd($data);
+        $categories = Category::get();
+        return view('frontend.service_detail', compact('data', 'categories'));
+    }
 
     public function saveContactForm(Request $request)
     {
@@ -138,5 +146,15 @@ class FrontController extends Controller
         // dd($request->all());
         ContactInfo::create($input);
         return 'ok';
+    }
+    public function favourites(Request $request, $id = null)
+    {
+        $partInfo = OtherPages::where('title', 'part_type')->first();
+        $data = Favourite::join('parts','parts.id','=','favourites.product_id')
+        ->where('parts.is_active', 1)
+        ->where('favourites.user_id', Auth::id())
+        ->get();
+        return view('frontend.favourites', compact('data', 'partInfo'));
+
     }
 }

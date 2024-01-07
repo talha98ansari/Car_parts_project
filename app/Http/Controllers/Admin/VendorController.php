@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Mail\Activated;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\BusinessInfo;
 use Illuminate\Support\Str;
 use Hash;
+use Illuminate\Support\Facades\Mail;
 
 class VendorController extends Controller
 {
@@ -112,28 +114,28 @@ class VendorController extends Controller
     {
         $path = '';
         $user = User::find($id);
-if($user->business_id != null && $user->business_id == 0 ){
-    $business = BusinessInfo::create([
+            if($user->business_id != null && $user->business_id == 0 ){
+                $business = BusinessInfo::create([
 
-'b_name' => $request->b_name,
-'niche' => $request->niche,
-'phone' => $request->b_phone,
-'address' => $request->b_address,
+            'b_name' => $request->b_name,
+            'niche' => $request->niche,
+            'phone' => $request->b_phone,
+            'address' => $request->b_address,
 
-]);
+            ]);
 
-$data['business_id'] =$business->id;
-ddd($data);
-}else{
-    $business = BusinessInfo::where('id' , $user->business_id)->update([
+            $data['business_id'] =$business->id;
+            ddd($data);
+            }else{
+                $business = BusinessInfo::where('id' , $user->business_id)->update([
 
-'b_name' => $request->b_name,
-'niche' => $request->niche,
-'phone' => $request->b_phone,
-'address' => $request->b_address,
+            'b_name' => $request->b_name,
+            'niche' => $request->niche,
+            'phone' => $request->b_phone,
+            'address' => $request->b_address,
 
-]);
-}
+            ]);
+            }
 
         if ($request->hasFile('profile_picture')) {
             $file = $request->file('profile_picture');
@@ -181,6 +183,9 @@ ddd($data);
         if ($user->is_active == 0) {
             $user->is_active = 1;
             $user->save();
+            $email = $user->email;
+            $mailData['email'] = $user->id;
+            Mail::to($email)->send(new Activated($mailData));
             return redirect('admin/vendors/')->with('success', 'Vendor Has Been Changed To Active!');
         } elseif ($user->is_active == 1) {
             $user->is_active = 0;

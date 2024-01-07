@@ -47,13 +47,15 @@ class ToolController extends Controller
             $fileName = $randomString . '_' . time() . '.' . $extension;
 
             $path = $file->move('uploads/service', $fileName);
-        }
         $data['image'] = $path;
 
-        $data = [
-            'name' => $request->name,
-            'image' => $path,
-        ];
+        }
+        $data['name'] = $request->name;
+        $data['phone'] = $request->phone;
+        $data['description'] = $request->description;
+        $data['location'] = $request->location;
+        $data['price'] = $request->name;
+
         Tool::create($data);
         return redirect('admin/tool/')->with('success', 'Tool Added!');
     }
@@ -100,10 +102,15 @@ class ToolController extends Controller
             $fileName = $randomString . '_' . time() . '.' . $extension;
 
             $path = $file->move('uploads/service', $fileName);
+            $data['image'] = $path;
+        
         }
-        $data['image'] = $path;
 
         $data['name'] = $request->name;
+        $data['phone'] = $request->phone;
+        $data['description'] = $request->description;
+        $data['location'] = $request->location;
+        $data['price'] = $request->name;
 
         $tool->update($data);
 

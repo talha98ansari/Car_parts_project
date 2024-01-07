@@ -4,7 +4,7 @@
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Password Reset</title>
+            <title>Account Activation</title>
             <style>
                 /* Add your CSS styles here */
                 body {
@@ -38,11 +38,10 @@
         <body >
             <div class="container" style="background-color:#2B3134">
                 <img src="https://autopartz.ae/front/images/logo.png" width="200px" />
-                <h1 style="color:white">Reset Your Password</h1>
-                <h2 style="color:white">AutoPartz Password Reset</h2>
+                <h1 style="color:white">Account Activation Status</h1>
                 <p style="color: #ff5722;
-                font-size: 14px;">Click on the Button Given Below to Reset Your Password</p>
-                <a href="https://autopartz.ae/reset/user/password/<?php echo $mailData['token'] ?>" class="button" style="color:white">Reset Password</a>
+                font-size: 14px;">Your account activation is complete! Please click the button below to log in and access your account</p>
+                <a href="https://autopartz.ae/vendor/login" class="button" style="color:white">Login</a>
             </div>
         </body>
         </html>

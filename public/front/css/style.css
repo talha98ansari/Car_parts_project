@@ -824,7 +824,12 @@ footer .blue-text{color: #0067D6;}
   transition: 0.5s all;
 }
 
-
+.hov
+{
+background:white !important;
+border-radius: 36px !important;
+padding: 2px 6.5px !important;
+}
 /* single_category */
 
 .section-products {

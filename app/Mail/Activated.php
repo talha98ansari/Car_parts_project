@@ -3,10 +3,11 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class TestMail extends Mailable
+class Activated extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -27,6 +28,7 @@ class TestMail extends Mailable
      */
     public function build()
     {
-        return $this->view('email.test'); // Assuming you have a blade view at resources/views/emails/test.blade.php
+        return $this->subject('Account Activated')
+        ->view('email.activation');
     }
 }

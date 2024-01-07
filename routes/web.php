@@ -33,6 +33,8 @@ Route::get('/privacy-policy', 'App\Http\Controllers\FrontController@privacy_poli
 Route::get('/view/part/{id?}', 'App\Http\Controllers\FrontController@partview')->name('parts');
 Route::get('/view/category/{id?}', 'App\Http\Controllers\FrontController@catrgoryview')->name('category.index');
 Route::get('/view/detail/{id}', 'App\Http\Controllers\FrontController@partdetail')->name('part.detail');
+Route::get('/service/detail/{id}', 'App\Http\Controllers\FrontController@serviceDetail')->name('service.detail');
+Route::get('/favourites', 'App\Http\Controllers\FrontController@favourites')->name('favourites');
 
 Route::post('/save-contact-info', 'App\Http\Controllers\FrontController@saveContactForm')->name('contact_info.save');
 

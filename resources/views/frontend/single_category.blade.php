@@ -36,7 +36,7 @@
                 @foreach ($data as $d)
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="product-card">
-                        <div class="badge">Hot</div>
+                        {{-- <div class="badge">Hot</div> --}}
                         <a href="{{route('parts' , $d->id)}}" style="width:100%">
 
                             <div class="product-tumb">
@@ -44,16 +44,16 @@
                             </div>
                             <div class="product-details">
                                 <span class="product-catagory">{{$d->category->name ??''}} </span>
-                                <h4><a href="">{{$d->name ?? ''}}</a></h4>
+                                <h4><a  href="{{route('part.detail' , $d->id)}}">{{$d->name ?? ''}}</a></h4>
                                 <p>{{$d->description ?? ''}}</p>
                                 <div class="product-bottom-details">
                                     <div class="product-price">
                                         <p class="small">Starting From</p><small></small>{{$d->price}}
                                     </div>
-                                    <div class="product-links ">
+                                    {{-- <div class="product-links ">
                                         <a href=""><i class="fa fa-heart"></i></a>
 
-                                    </div>
+                                    </div> --}}
                                 </div>
                         </a>
                     </div>

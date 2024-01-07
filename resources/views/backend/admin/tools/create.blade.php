@@ -57,18 +57,49 @@
                             @endif
                         </div>
 
-                        {{-- <div class="form-group {{ $errors->has('link') ? ' has-danger' : '' }} col-md-9">
-                            <label class="form-control-label" for="input-link">{{ __('link') }}</label>
-                            <input type="text" name="link" id="input-link"
-                                class="form-control form-control-alternative{{ $errors->has('link') ? ' is-invalid' : '' }}"
-                                placeholder="{{ __('link') }}" value="{{ old('link') }}" required autofocus>
+                        <div class="form-group {{ $errors->has('phone') ? ' has-danger' : '' }} col-md-9">
+                            <label class="form-control-label" for="input-phone">{{ __('phone') }}</label>
+                            <input type="text" name="phone" id="input-phone" class="form-control form-control-alternative{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="{{ __('phone') }}" value="{{ old('phone') }}" required autofocus>
 
-                            @if ($errors->has('link'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('link') }}</strong>
-                            </span>
+                            @if ($errors->has('phone'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('phone') }}</strong>
+                                </span>
                             @endif
-                        </div> --}}
+                        </div>
+
+                        <div class="form-group {{ $errors->has('price') ? ' has-danger' : '' }} col-md-9">
+                            <label class="form-control-label" for="input-price">{{ __('price') }}</label>
+                            <input type="text" name="price" id="input-price" class="form-control form-control-alternative{{ $errors->has('price') ? ' is-invalid' : '' }}" placeholder="{{ __('price') }}" value="{{ old('price') }}" required autofocus>
+
+                            @if ($errors->has('price'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('price') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="form-group {{ $errors->has('location') ? ' has-danger' : '' }} col-md-9">
+                            <label class="form-control-label" for="input-location">{{ __('location') }}</label>
+                            <input type="text" name="location" id="input-location" class="form-control form-control-alternative{{ $errors->has('location') ? ' is-invalid' : '' }}" placeholder="{{ __('location') }}" value="{{ old('location') }}" required autofocus>
+
+                            @if ($errors->has('location'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('location') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="form-group {{ $errors->has('description') ? ' has-danger' : '' }} col-md-9">
+                            <label class="form-control-label" for="input-description">{{ __('Description') }}</label>
+                            <textarea type="" name="description" id="input-description" class="form-control form-control-alternative{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="{{ __('description') }}" value="{{ old('description') }}" required autofocus>
+                                {{ old('description') }}
+                            </textarea>
+                            @if ($errors->has('description'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('description') }}</strong>
+                                </span>
+                            @endif
+                        </div>
                         <div class="form-group {{ $errors->has('image') ? ' has-danger' : '' }} col-md-9">
                             <label class="form-control-label" for="input-image">{{ __('Profile picture') }}</label>
                             <input type="file" name="image" id="input-image" class="form-control form-control-alternative"

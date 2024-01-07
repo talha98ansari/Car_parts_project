@@ -4,7 +4,7 @@
         <div class="animation-preloader">
             <div class="spinner"></div>
             <img src="{{ asset('front/images/logo.png') }}" alt="logo" class="img-fluid loader-logo">
-            <div class="txt-loading">
+            {{-- <div class="txt-loading">
                 <span data-text-preloader="L" class="letters-loading">
                     L
                 </span>
@@ -26,7 +26,7 @@
                 <span data-text-preloader="G" class="letters-loading">
                     G
                 </span>
-            </div>
+            </div> --}}
         </div>
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
@@ -72,6 +72,10 @@ $parttypes = PartType::get();
                                         {{ Auth::user()->name }}
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="{{ route('favourites') }}">
+                                            Favourites</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('password.change') }}">Change
+                                            Password</a></li>
                                         <li>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 style="display: none;">
@@ -79,13 +83,12 @@ $parttypes = PartType::get();
                                             </form>
                                             <a href="{{ route('logout') }}" class="dropdown-item"
                                                 onclick="event.preventDefault();
-                                  document.getElementById('logout-form').submit();">
+                                             document.getElementById('logout-form').submit();">
                                                 <i class="ni ni-user-run"></i>
                                                 <span>{{ __('Logout') }}</span>
                                             </a>
                                         </li>
-                                        <li><a class="dropdown-item" href="{{ route('password.change') }}">Change
-                                                Password</a></li>
+
 
                                     </ul>
                                 </div>
@@ -145,11 +148,12 @@ $parttypes = PartType::get();
                                     </select>
                                 </li>
                                 <li class="nav-item">
-                                    <div class="d-flex gap-1 align-items-start"> <input type="text" id="searchbox" placeholder="Enter the part number or name" class="header-input">
-                                      <div id="search-results" class="d-none"></div>
-                                      <button class="site-btn header-btn searchButton2">Search</button>
+                                    <div class="d-flex gap-1 align-items-start"> <input type="text" id="searchbox"
+                                            placeholder="Enter the part number or name" class="header-input">
+                                        <div id="search-results" class="d-none"></div>
+                                        <button class="site-btn header-btn searchButton2">Search</button>
                                     </div>
-                                  </li>
+                                </li>
 
                                 {{-- <li class="nav-item">
                                     <div class="d-flex gap-3 align-items-center">
@@ -202,7 +206,7 @@ $parttypes = PartType::get();
                                                             <ul>
                                                                 @foreach ($tools as $t)
                                                                     <li><a
-                                                                            href="javascript:(void:0)">{{ $t->name }}</a>
+                                                                            href="{{ route('service.detail', $t->id) }}">{{ $t->name }}</a>
                                                                     </li>
                                                                 @endforeach
 
