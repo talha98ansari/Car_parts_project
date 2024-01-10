@@ -16,7 +16,7 @@ public function category(){
 }
 
 public function partType(){
-        return $this->belongsTo(partType::class);
+        return $this->belongsTo(PartsType::class);
     }
 public function creator(){
     return $this->belongsTo(User::class);
