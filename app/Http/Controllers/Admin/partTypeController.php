@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\partType;
+use App\Models\PartsType;
 use Illuminate\Support\Str;
 use Hash;
 
@@ -16,7 +16,7 @@ class partTypeController extends Controller
      */
      public function index()
     {
-        $partType = partType::get();
+        $partType = PartsType::get();
         return view('backend.admin.partType.index', compact('partType'));
     }
 
@@ -54,7 +54,7 @@ class partTypeController extends Controller
             'name' => $request->name,
             'image' => $path,
         ];
-        partType::create($data);
+        PartsType::create($data);
         return redirect('admin/partType/')->with('success', 'Part Type Added!');
     }
 
@@ -77,7 +77,7 @@ class partTypeController extends Controller
      */
     public function edit($id)
     {
-        $data = partType::find($id);
+        $data = PartsType::find($id);
         return view('backend.admin.partType.edit', compact('data'));
     }
 
@@ -91,7 +91,7 @@ class partTypeController extends Controller
     public function update(Request $request, $id)
     {
         $path = '';
-        $partType = partType::find($id);
+        $partType = PartsType::find($id);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
 
@@ -118,7 +118,7 @@ class partTypeController extends Controller
      */
     public function destroy($id)
     {
-        $partType = partType::find($id);
+        $partType = PartsType::find($id);
         if ($partType) {
             $partType->delete();
             return redirect('admin/partType/')->with('error', 'Part Type Deleted!');
@@ -127,7 +127,7 @@ class partTypeController extends Controller
     }
     public function status($id)
     {
-        $partType = partType::find($id);
+        $partType = PartsType::find($id);
         if ($partType->is_active == 0) {
             $partType->is_active = 1;
             $partType->save();

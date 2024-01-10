@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\{Part,partType,Category, SubCate, Manufacturer, CarModel, Maker};
+use App\Models\{Part,partType,Category, SubCate, Manufacturer, CarModel, Maker,PartsType};
 use Illuminate\Support\Str;
 use Hash;
 use Auth;
@@ -30,7 +30,7 @@ class PartsController extends Controller
     {
         $categories = Category::get();
         $sub_categories = SubCate::get();
-        $partType = partType::get();
+        $partType = PartsType::get();
         $manufacturer = Manufacturer::get();
         $models = CarModel::get();
         $maker = Maker::get();
@@ -100,7 +100,7 @@ class PartsController extends Controller
         $data = Part::find($id);
         $categories = Category::get();
         $sub_categories = SubCate::get();
-        $partType = partType::get();
+        $partType = PartsType::get();
         $manufacturer = Manufacturer::get();
         $models = CarModel::get();
         $maker = Maker::get();
