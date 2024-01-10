@@ -247,7 +247,7 @@ $(document).on("click", "#ic", function () {
     st = $(this).attr('data-status');
     ct = $(this).attr('data-ct');
     if (st == 0) {
-        $(this).attr('src', '/assets/img/heartfill.png');
+        $(this).attr('src', '/public/assets/img/heartfill.png');
         st = $(this).attr('data-status', 1);
         $.ajax({
             type: 'GET',
@@ -262,7 +262,7 @@ $(document).on("click", "#ic", function () {
             }
         });
     } else {
-        $(this).attr('src', '/assets/img/heart.png');
+        $(this).attr('src', '/public/assets/img/heart.png');
         st = $(this).attr('data-status', 0);
 
         $.ajax({
