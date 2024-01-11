@@ -19,7 +19,8 @@ class FrontController extends Controller
         $model = CarModel::get();
         $maker = Maker::get();
         $sliders = Slider::get();
-        $services = Tool::get();
+        $services = Tool::where('is_active' , 1)->get();
+
         return view('frontend.index', compact('categories', 'partners', 'reviews', 'model', 'maker', 'sliders','services'));
     }
 
