@@ -1,4 +1,6 @@
 @extends('frontend.includes.layout')
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
 @section('content')
     <!-- Breadcrumb -->
     <div class="card">
@@ -44,14 +46,112 @@
 
         <div class="row">
 
-            <div class="col-md-6  py-5 mt-5">
+            <div class="col-md-7  py-5 mt-5">
                 <div class="row">
                     <div class="col-12 d-flex justify-content-center">
-                        <div class="tab-content" id="nav-tabContent">
+                        {{-- <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                                 aria-labelledby="nav-home-tab"><img src="{{ asset($data->image) }}" class="img-fluid"
                                     alt="">
                             </div>
+                        </div> --}}
+
+                        {{-- product slider script is added at the bottom of this view --}}
+                        <div id="slider_product">
+                            <section class="banner-section container">
+                                <div class="container">
+                                    <div class="vehicle-detail-banner banner-content clearfix">
+                                        <div class="banner-slider">
+                                            <div class="slider slider-for">
+                                                <div class="slider-banner-image">
+                                                    <img src="https://images.unsplash.com/photo-1570942872213-1242607a35eb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Car-Image">
+                                                </div>
+                                                <div class="slider-banner-image">
+                                                    <img src="https://images.unsplash.com/photo-1570171278960-d6c2b316f3b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Car-Image">
+                                                </div>
+                                                <div class="slider-banner-image">
+                                                    <img src="https://images.unsplash.com/photo-1564376130023-5360fbb7c91b?ixlib=rb-1.2.1&auto=format&fit=crop&w=724&q=80" alt="Car-Image">
+                                                </div>
+                                                 <div class="slider-banner-image">
+                                                    <img src="https://images.unsplash.com/photo-1570942872213-1242607a35eb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Car-Image">
+                                                </div>
+                                                <div class="slider-banner-image">
+                                                    <img src="https://images.unsplash.com/photo-1570171278960-d6c2b316f3b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Car-Image">
+                                                </div>
+                                                <div class="slider-banner-image">
+                                                    <img src="https://images.unsplash.com/photo-1564376130023-5360fbb7c91b?ixlib=rb-1.2.1&auto=format&fit=crop&w=724&q=80" alt="Car-Image">
+                                                </div>
+                                                 <div class="slider-banner-image">
+                                                    <img src="https://images.unsplash.com/photo-1570942872213-1242607a35eb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Car-Image">
+                                                </div>
+                                                <div class="slider-banner-image">
+                                                    <img src="https://images.unsplash.com/photo-1570171278960-d6c2b316f3b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Car-Image">
+                                                </div>
+                                                <div class="slider-banner-image">
+                                                    <img src="https://images.unsplash.com/photo-1564376130023-5360fbb7c91b?ixlib=rb-1.2.1&auto=format&fit=crop&w=724&q=80" alt="Car-Image">
+                                                </div>
+                                            </div>
+                                            <div class="slider slider-nav thumb-image">
+                                                <div class="thumbnail-image">
+                                                    <div class="thumbImg">
+                                                        <img src="https://images.unsplash.com/photo-1570942872213-1242607a35eb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="slider-img">
+                                                    </div>
+                                                    <span>White Pearl Crystal Shine1</span>
+                                                </div>
+                                                <div class="thumbnail-image">
+                                                    <div class="thumbImg">
+                                                        <img src="https://images.unsplash.com/photo-1570171278960-d6c2b316f3b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="slider-img">
+                                                    </div>
+                                                    <span>White Pearl Crystal Shine2</span>
+                                                </div>
+                                                <div class="thumbnail-image">
+                                                    <div class="thumbImg">
+                                                        <img src="https://images.unsplash.com/photo-1564376130023-5360fbb7c91b?ixlib=rb-1.2.1&auto=format&fit=crop&w=724&q=80" alt="slider-img">
+                                                    </div>
+                                                    <span>White Pearl Crystal Shine3</span>
+                                                </div>
+                                                  <div class="thumbnail-image">
+                                                    <div class="thumbImg">
+                                                        <img src="https://images.unsplash.com/photo-1570942872213-1242607a35eb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="slider-img">
+                                                    </div>
+                                                    <span>White Pearl Crystal Shine1</span>
+                                                </div>
+                                                <div class="thumbnail-image">
+                                                    <div class="thumbImg">
+                                                        <img src="https://images.unsplash.com/photo-1570171278960-d6c2b316f3b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="slider-img">
+                                                    </div>
+                                                    <span>White Pearl Crystal Shine2</span>
+                                                </div>
+                                                <div class="thumbnail-image">
+                                                    <div class="thumbImg">
+                                                        <img src="https://images.unsplash.com/photo-1564376130023-5360fbb7c91b?ixlib=rb-1.2.1&auto=format&fit=crop&w=724&q=80" alt="slider-img">
+                                                    </div>
+                                                    <span>White Pearl Crystal Shine3</span>
+                                                </div>
+                                                  <div class="thumbnail-image">
+                                                    <div class="thumbImg">
+                                                        <img src="https://images.unsplash.com/photo-1570942872213-1242607a35eb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="slider-img">
+                                                    </div>
+                                                    <span>White Pearl Crystal Shine1</span>
+                                                </div>
+                                                <div class="thumbnail-image">
+                                                    <div class="thumbImg">
+                                                        <img src="https://images.unsplash.com/photo-1570171278960-d6c2b316f3b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="slider-img">
+                                                    </div>
+                                                    <span>White Pearl Crystal Shine2</span>
+                                                </div>
+                                                <div class="thumbnail-image">
+                                                    <div class="thumbImg">
+                                                        <img src="https://images.unsplash.com/photo-1564376130023-5360fbb7c91b?ixlib=rb-1.2.1&auto=format&fit=crop&w=724&q=80" alt="slider-img">
+                                                    </div>
+                                                    <span>White Pearl Crystal Shine3</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
 
                     </div>
@@ -60,7 +160,7 @@
             </div>
 
 
-            <div class="col-md-4 mt-2">
+            <div class="col-md-5 mt-2">
                 {{-- <p class="color fst-italic">SKU #1161014</p> --}}
                 <h6 class="texts">{{ $data->name }}</h6>
                 <div class="d-flex text-muted mt-2" id="stars">
@@ -164,5 +264,55 @@
         </div>
     </section>
 
-    <script></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <script>
+
+$('.slider-for').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    asNavFor: '.slider-nav'
+});
+$('.slider-nav').slick({
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    vertical:true,
+    asNavFor: '.slider-for',
+    dots: false,
+    focusOnSelect: true,
+    verticalSwiping:true,
+    responsive: [
+    {
+        breakpoint: 992,
+        settings: {
+          vertical: false,
+        }
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        vertical: false,
+      }
+    },
+    {
+      breakpoint: 580,
+      settings: {
+        vertical: false,
+        slidesToShow: 3,
+      }
+    },
+    {
+      breakpoint: 380,
+      settings: {
+        vertical: false,
+        slidesToShow: 2,
+      }
+    }
+    ]
+});
+
+    </script>
 @endsection()
