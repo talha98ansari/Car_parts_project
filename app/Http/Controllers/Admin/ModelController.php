@@ -99,6 +99,12 @@ class ModelController extends Controller
         $Category = CarModel::find($id);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
+            $old_file = $Category->image ?? 'none';
+            $filePath = public_path(str_replace('/', DIRECTORY_SEPARATOR, $old_file));
+            // Delete the file from the storage
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
 
             $randomString = Str::random(10);
             $extension = $file->getClientOriginalExtension();

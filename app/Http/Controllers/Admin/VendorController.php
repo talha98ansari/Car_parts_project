@@ -125,7 +125,6 @@ class VendorController extends Controller
             ]);
 
             $data['business_id'] =$business->id;
-            ddd($data);
             }else{
                 $business = BusinessInfo::where('id' , $user->business_id)->update([
 
@@ -139,6 +138,12 @@ class VendorController extends Controller
 
         if ($request->hasFile('profile_picture')) {
             $file = $request->file('profile_picture');
+            $old_file = $user->image ?? 'none';
+            $filePath = public_path(str_replace('/', DIRECTORY_SEPARATOR, $old_file));
+            // Delete the file from the storage
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
 
             $randomString = Str::random(10);
             $extension = $file->getClientOriginalExtension();
