@@ -135,6 +135,7 @@ Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () 
     Route::post('/update/parts/{id}', 'App\Http\Controllers\Admin\partsController@update')->name('parts.up');
     Route::get('/parts/delete/{id}', 'App\Http\Controllers\Admin\partsController@destroy')->name('parts.remove');
     Route::get('/parts/status/{id}', 'App\Http\Controllers\Admin\partsController@status')->name('parts.status');
+    Route::get('/parts/images/{id}', 'App\Http\Controllers\Admin\partsController@destroyImage');
 
     Route::get('/site-setting/about-us', 'App\Http\Controllers\Admin\SiteController@aboutUs')->name('site.about');
     Route::post('/site-setting/about-us/{id}', 'App\Http\Controllers\Admin\SiteController@storeAboutUs')->name('store.site.about');

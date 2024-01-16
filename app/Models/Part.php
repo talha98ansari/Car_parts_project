@@ -24,4 +24,7 @@ public function creator(){
 public function checkFav(){
     return $this->belongsTo(Favourite::class,'id' , 'product_id')->where('user_id' , Auth::id());
 }
+public function images(){
+    return $this->hasMany(Image::class,'product_id');
+}
 }

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Image;
 use Illuminate\Http\Request;
-use App\Models\{Part,partType,Category, SubCate, Manufacturer, CarModel, Maker,PartsType};
+use App\Models\{Part, partType, Category, SubCate, Manufacturer, CarModel, Maker, PartsType};
 use Illuminate\Support\Str;
 use Hash;
 use Auth;
@@ -16,7 +17,7 @@ class PartsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function index()
+    public function index()
     {
         $parts = Part::get();
 
@@ -37,7 +38,7 @@ class PartsController extends Controller
         $models = CarModel::get();
         $maker = Maker::get();
 
-        return view('backend.admin.parts.create' ,compact('sub_categories','categories','partType','manufacturer','models','maker'));
+        return view('backend.admin.parts.create', compact('sub_categories', 'categories', 'partType', 'manufacturer', 'models', 'maker'));
     }
 
     /**
@@ -49,16 +50,7 @@ class PartsController extends Controller
     public function store(Request $request)
     {
         $path = '';
-dd($request->all());
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
 
-            $randomString = Str::random(10);
-            $extension = $file->getClientOriginalExtension();
-            $fileName = $randomString . '_' . time() . '.' . $extension;
-
-            $path = $file->move('uploads/Parts', $fileName);
-        }
         $data['price'] = $request->price;
         $data['name'] = $request->name;
         $data['category_id'] = $request->category_id;
@@ -75,7 +67,34 @@ dd($request->all());
         $data['location'] = $request->location;
 
         $data['creator_id'] = Auth::user()->id;
-        Part::create($data);
+        $id = Part::create($data);
+        if ($request->hasFile('image')) {
+            if (is_array($request->image)) {
+                foreach ($request->image as $key => $value) {
+
+                    $file = $value;
+
+                    $randomString = Str::random(10);
+                    $extension = $file->getClientOriginalExtension();
+                    $fileName = $randomString . '_' . time() . '.' . $extension;
+                    $path = $file->move('uploads/Parts', $fileName);
+                    $i_data['path']=$path;
+                    $i_data['product_id'] = $id->id;
+                    $image = Image::create($i_data);
+                }
+            } else {
+                $file = $request->file('image');
+
+                $randomString = Str::random(10);
+                $extension = $file->getClientOriginalExtension();
+                $fileName = $randomString . '_' . time() . '.' . $extension;
+
+                $path = $file->move('uploads/Parts', $fileName);
+                $i_data['path']=$path;
+                $i_data['product_id'] = $id->id;
+                $image = Image::create($i_data);
+            }
+        }
         return redirect('admin/parts/')->with('success', 'Part Added!');
     }
 
@@ -107,7 +126,7 @@ dd($request->all());
         $models = CarModel::get();
         $maker = Maker::get();
 
-        return view('backend.admin.parts.edit', compact('sub_categories','categories','partType','data','manufacturer','models','maker'));
+        return view('backend.admin.parts.edit', compact('sub_categories', 'categories', 'partType', 'data', 'manufacturer', 'models', 'maker'));
     }
 
     /**
@@ -123,23 +142,31 @@ dd($request->all());
         $path = '';
         $part = Part::find($id);
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
+            if (is_array($request->image)) {
+                foreach ($request->image as $key => $value) {
 
-            $old_file = $part->image ?? 'none';
-            $filePath = public_path(str_replace('/', DIRECTORY_SEPARATOR, $old_file));
-            // Delete the file from the storage
-            if (file_exists($filePath)) {
-                unlink($filePath);
+                    $file = $value;
+
+                    $randomString = Str::random(10);
+                    $extension = $file->getClientOriginalExtension();
+                    $fileName = $randomString . '_' . time() . '.' . $extension;
+                    $path = $file->move('uploads/Parts', $fileName);
+                    $i_data['path']=$path;
+                    $i_data['product_id'] = $id;
+                    $image = Image::create($i_data);
+                }
+            } else {
+                $file = $request->file('image');
+
+                $randomString = Str::random(10);
+                $extension = $file->getClientOriginalExtension();
+                $fileName = $randomString . '_' . time() . '.' . $extension;
+
+                $path = $file->move('uploads/Parts', $fileName);
+                $i_data['path']=$path;
+            $i_data['product_id'] = $id;
+                $image = Image::create($i_data);
             }
-
-
-            $randomString = Str::random(10);
-            $extension = $file->getClientOriginalExtension();
-            $fileName = $randomString . '_' . time() . '.' . $extension;
-
-            $path = $file->move('uploads/Parts', $fileName);
-            $data['image'] =$path;
-
         }
         $data['price'] = $request->price;
         $data['name'] = $request->name;
@@ -192,5 +219,18 @@ dd($request->all());
         } else {
             return redirect('admin/parts/')->with('error', 'Unable to Change Status!');
         }
+    }
+    public function destroyImage($id)
+    {
+        $image = Image::findOrFail($id);
+        $old_file = $image->image ?? 'none';
+            $filePath = public_path(str_replace('/', DIRECTORY_SEPARATOR, $old_file));
+            // Delete the file from the storage
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        $image->delete();
+
+        return response()->json(['success' => true]);
     }
 }

@@ -216,7 +216,7 @@
                             @endif
                         </div>
                         <div class="form-group {{ $errors->has('image') ? ' has-danger' : '' }} col-md-9">
-                            <label class="form-control-label" for="input-image">{{ __('Profile picture') }}
+                            <label class="form-control-label" for="input-image">{{ __(' picture') }}
                                     <button class="btn btn-success addd_img" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
                             </label>
                             <div class="input-group control-group increment" >

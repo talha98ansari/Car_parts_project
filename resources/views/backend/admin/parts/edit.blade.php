@@ -171,9 +171,27 @@
                                 @endif
                             </div>
                             <div class="form-group {{ $errors->has('image') ? ' has-danger' : '' }} col-md-9">
-                                <label class="form-control-label" for="input-image">{{ __('Profile picture') }}</label>
-                                <input type="file" name="image" id="input-image" class="form-control form-control-alternative" placeholder="{{ __('image') }}" >
+                                <label class="form-control-label" for="input-image">{{ __('Picture') }}
+                                    @foreach ($data->images as $image )
 
+                                    <img src="{{ asset( $image->path) }}" alt="Image" width="100">
+                                    <a class="badge badge-danger delete-image" data-id="{{ $image->id }}">Delete</a>
+                                    @endforeach
+
+                                    <button class="btn btn-success addd_img" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
+                            </label>
+                            <div class="input-group control-group increment" >
+                                <input type="file" name="image[]" class="form-control form-control form-control-alternative">
+
+                              </div>
+                              <div class="clone d-none">
+                                <div class="control-group input-group" style="margin-top:10px">
+                                  <input type="file" name="image[]" class="form-control form-control form-control-alternative">
+                                  <div class="input-group-btn">
+                                    <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+                                  </div>
+                                </div>
+                              </div>
                                 @if ($errors->has('image'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('image') }}</strong>
@@ -206,6 +224,43 @@
 
     @include('layouts.footers.auth')
 </div>
+<script src="{{asset('front/js/jquery.min.js')}}"></script>
 
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+      $(".addd_img").click(function(){
+          var html = $(".clone").html();
+          $(".increment").after(html);
+      });
+
+      $("body").on("click",".btn-danger",function(){
+          $(this).parents(".control-group").remove();
+      });
+
+    });
+    $('.delete-image').click(function () {
+        $(this).parent().remove();
+
+                var imageId = $(this).data('id');
+                var deleteUrl = '../images/' + imageId;
+
+                $.ajax({
+                    type: 'GET',
+                    url: deleteUrl,
+                    success: function (response) {
+                        // Handle success, update UI, etc.
+                        console.log(response);
+                        // Update the UI to remove the deleted image
+                        $(this).parent().remove();
+                    },
+                    error: function (error) {
+                        // Handle error, display error message, etc.
+                        console.error(error);
+                    }
+                });
+            });
+</script>
 @endsection
 
