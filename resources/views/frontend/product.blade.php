@@ -71,6 +71,7 @@
                                                 </div>
                                                 @endforeach
 @endif
+
                                             </div>
                                             <div class="slider slider-nav thumb-image">
                                                 @if($check != '' && !empty($check))

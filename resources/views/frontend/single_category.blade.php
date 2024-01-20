@@ -44,11 +44,13 @@
                             </div>
                             <div class="product-details">
                                 <span class="product-catagory">{{$d->category->name ??''}} </span>
-                                <h4><a  href="{{route('part.detail' , $d->id)}}">{{$d->name ?? ''}}</a></h4>
+                                <h4><a  href="{{route('parts' , $d->id)}}">{{$d->name ?? ''}}</a></h4>
                                 <p>{{$d->description ?? ''}}</p>
                                 <div class="product-bottom-details">
                                     <div class="product-price">
-                                        <p class="small">Starting From</p><small></small>{{$d->price}}
+                                        <span class="text-muted small">Starting From  </span>
+                                        <span style="float:right">   {{$d->getshortprice($d->id) ?? '-'}}
+                                        </span>
                                     </div>
                                     {{-- <div class="product-links ">
                                         <a href=""><i class="fa fa-heart"></i></a>
