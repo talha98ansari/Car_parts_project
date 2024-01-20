@@ -135,8 +135,8 @@
                         #
                         {{ $data->creator->phone ?? '' }}</a>
                     {{-- @endguest --}}
-                    <a type="button"
-                        href="{{ url('https://www.google.com/maps/place/Sector+6+Surjani+Town,+Karachi,+Karachi+City,+Sindh,+Pakistan/@25.0355337,67.0522113,16z/data=!3m1!4b1!4m6!3m5!1s0x3eb343d79a415ead:0xc3da7417a41cf454!8m2!3d25.0357978!4d67.0553953!16s%2Fg%2F11f36vzj10?entry=ttu') }}"
+                    <a type="button" target="_blank"
+                        href="{{ url($data->location ?? 'https://www.google.com/maps') }}"
                         class="btn3 btn btn-lg mx-3">View Location</a>
                 </div>
                 <h6 class="fw-bold mt-5">FOLLOW US</h6>

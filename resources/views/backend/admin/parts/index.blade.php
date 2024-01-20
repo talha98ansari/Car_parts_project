@@ -80,7 +80,15 @@
                                 <th scope="row">
                                     <div class="media align-items-center">
                                         <a href="#" class="avatar rounded-circle mr-3">
-                                            <img alt="Image placeholder" src="{{asset($u->image)}}">
+                                                                         @php $check = $d->images ?? [] @endphp
+                                                @if($check != '' && !empty($check))
+                                                @foreach ($check as  $c)
+                                                                                            <img alt="Image placeholder" src="{{asset($c->path)}}">
+
+                                                                                 @break;
+
+                                                @endforeach
+@endif
                                         </a>
                                         <div class="media-body">
                                             <span class="name mb-0 text-sm">{{$u->name ?? ''}}</span>

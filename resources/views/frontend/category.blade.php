@@ -99,8 +99,15 @@
                         <a href="{{route('part.detail' , $d->id)}}" style="width:100%">
 
                             <div class="product-tumb">
-                                <img src="{{asset($d->image)}}" alt="" class="img-fluid">
-                            </div>
+                                                         @php $check = $d->images ?? [] @endphp
+                                                @if($check != '' && !empty($check))
+                                                @foreach ($check as  $c)
+                                                                                <img src="{{asset($c->path)}}" alt="" class="img-fluid">
+                                                                                @break;
+
+                                                @endforeach
+@endif
+                             </div>
                             <div class="product-details">
                                 <span class="product-catagory">{{$d->category->name ??''}} </span>
                                 <h4><a  href="{{route('part.detail' , $d->id)}}">{{$d->name ?? ''}}</a></h4>
