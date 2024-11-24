@@ -27,5 +27,8 @@ public function checkFav(){
 public function images(){
     return $this->hasMany(Image::class,'product_id');
 }
+public function addedToCart(){
+    return $this->belongsTo(Cart::class,'id' , 'product_id')->where('user_id' , Auth::id());
+}
 
 }

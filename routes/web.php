@@ -178,6 +178,11 @@ Route::middleware(['auth', 'check.role:1'])->prefix('admin')->group(function () 
     Route::get('/slider/delete/{id}', 'App\Http\Controllers\Admin\SliderController@destroy')->name('slider.remove');
     Route::get('/slider/status/{id}', 'App\Http\Controllers\Admin\SliderController@status')->name('slider.status');
 
+    Route::get('/orders', 'App\Http\Controllers\Admin\OrderController@index')->name('order.index');
+    Route::get('/order/detail/{id}', 'App\Http\Controllers\Admin\OrderController@detail')->name('order.details');
+    Route::post('/order/checkout/update-status', 'App\Http\Controllers\Admin\OrderController@updateStatus')->name('checkout.updateStatus');
+
+
 });
 
 // Vendor Routes
@@ -207,3 +212,13 @@ Route::get('/get-state-options-mk/{parentId}', 'App\Http\Controllers\DropdownCon
 Route::get('/add-to-fav/{ct}', 'App\Http\Controllers\DropdownController@AddToFav')->name('add.fav');
 Route::get('/rem-to-fav/{ct}', 'App\Http\Controllers\DropdownController@RemoveFav')->name('rem.fav');
 Route::get('/search-for-pro', 'App\Http\Controllers\DropdownController@searchForPro')->name('search.pro');
+Route::get('/add-to-cart/{ct}', 'App\Http\Controllers\DropdownController@AddToCart')->name('add.Cart');
+Route::get('/rem-to-cart/{ct}', 'App\Http\Controllers\DropdownController@RemoveCart')->name('rem.Cart');
+Route::get('/cart', 'App\Http\Controllers\FrontController@cart')->name('cart');
+Route::get('/checkout', 'App\Http\Controllers\CheckoutController@checkout')->name('checkout');
+Route::post('/checkout', 'App\Http\Controllers\CheckoutController@storeCheckout')->name('checkout.submit');
+Route::post('/checkout', 'App\Http\Controllers\CheckoutController@storeCheckout')->name('checkout.submit');
+
+Route::get('/thank-you', function () {
+    return view('frontend.thankyou');
+})->name('thankyou');

@@ -61,7 +61,7 @@
         $(document).ready(function() {
             // Select all tables and apply DataTable
 
-            $('table').DataTable({
+            $('.table').DataTable({
                 responsive: true,
                 // searching: false,
                 language: {

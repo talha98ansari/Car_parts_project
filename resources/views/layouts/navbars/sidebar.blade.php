@@ -356,6 +356,24 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="#navbar-manufacturer" data-toggle="collapse" role="button"
+                        aria-expanded="true" aria-controls="navbar-manufacturer">
+                        <i class="ni ni-basket" style="color: #f4645f;"></i>
+                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Orders') }}</span>
+                    </a>
+
+                    <div class="collapse " id="navbar-manufacturer">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('order.index') }}">
+                                    {{ __('List') }}
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
                 {{--
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('icons') }}">

@@ -63,28 +63,26 @@
                                         <div class="banner-slider">
                                             <div class="slider slider-for">
                                                 @php $check = $data->images ?? [] @endphp
-                                                @if($check != '' && !empty($check))
-                                                @foreach ($check as  $c)
-                                                <div class="slider-banner-image">
-                                                    <img src="{{asset($c->path)}}"
-                                                        alt="Car-Image">
-                                                </div>
-                                                @endforeach
-@endif
+                                                @if ($check != '' && !empty($check))
+                                                    @foreach ($check as $c)
+                                                        <div class="slider-banner-image">
+                                                            <img src="{{ asset($c->path) }}" alt="Car-Image">
+                                                        </div>
+                                                    @endforeach
+                                                @endif
 
                                             </div>
                                             <div class="slider slider-nav thumb-image">
-                                                @if($check != '' && !empty($check))
-                                                @foreach ($check as  $c)
-                                                <div class="thumbnail-image">
-                                                    <div class="thumbImg">
-                                                        <img src="{{asset($c->path)}}"
-                                                            alt="slider-img">
-                                                    </div>
-                                                    {{-- <span>White Pearl Crystal Shine1</span> --}}
-                                                </div>
-                                                @endforeach
-                                               @endif
+                                                @if ($check != '' && !empty($check))
+                                                    @foreach ($check as $c)
+                                                        <div class="thumbnail-image">
+                                                            <div class="thumbImg">
+                                                                <img src="{{ asset($c->path) }}" alt="slider-img">
+                                                            </div>
+                                                            {{-- <span>White Pearl Crystal Shine1</span> --}}
+                                                        </div>
+                                                    @endforeach
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -131,29 +129,36 @@
     <div class="gap d-flex mt-4"> <a href="{{route('user.login')}}" class="btn2 btn btn-lg text-white">Sign In To See
             Number</a>
         @else --}}
-                <div class="gap d-flex mt-4"> <a href="tel:{{ $data->creator->phone ?? '' }}"
+                <div class="gap mt-4"> <a href="tel:{{ $data->creator->phone ?? '' }}"
                         class="btn2 btn btn-lg text-white">Phone
                         #
                         {{ $data->creator->phone ?? '' }}</a>
                     {{-- @endguest --}}
-                    <a type="button" target="_blank"
-                        href="{{ url($data->location ?? 'https://www.google.com/maps') }}"
-                        class="btn3 btn btn-lg mx-3">View Location</a>
+                        <a type="button" target="_blank" href="{{ url($data->location ?? 'https://www.google.com/maps') }}"
+                            class="btn3 btn btn-lg mx-3">View Location</a>
+                        {{-- cart --}}
+
+
+                        @if ($data->addedToCart)
+                        <img src="{{ asset('/assets/img/market-o.png') }}"
+                        id="addtocart" data-ct="{{ $data->id }}"width="54"
+                        data-status = '1'></i>
+                    @else
+                        <img id="addtocart" class=""
+                            src="{{ asset('/assets/img/shopping-cart-o.png') }}"
+                            data-ct="{{ $data->id }}" width="54"
+                            data-status = '0'></i>
+
+                    @endif
                 </div>
                 <h6 class="fw-bold mt-5">FOLLOW US</h6>
                 <div class="d-flex">
                     <div id="social">
                         <ul>
                             <?php use App\Models\Follow;
-                            $fb = Follow::where('name', 'facebook')
-                                ->where('is_active', 1)
-                                ->first();
-                            $ins = Follow::where('name', 'instagram')
-                                ->where('is_active', 1)
-                                ->first();
-                            $twi = Follow::where('name', 'twitter')
-                                ->where('is_active', 1)
-                                ->first();
+                            $fb = Follow::where('name', 'facebook')->where('is_active', 1)->first();
+                            $ins = Follow::where('name', 'instagram')->where('is_active', 1)->first();
+                            $twi = Follow::where('name', 'twitter')->where('is_active', 1)->first();
                             ?>
                             <li>
                                 <a href="{{ url($fb->link ?? '#') }}"><i class="fa-brands fa-facebook-f"></i></a>
@@ -258,6 +263,5 @@
                 }
             ]
         });
-
     </script>
 @endsection()

@@ -73,9 +73,9 @@ $parttypes = PartType::get();
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         <li><a class="dropdown-item" href="{{ route('favourites') }}">
-                                            Favourites</a></li>
+                                                Favourites</a></li>
                                         <li><a class="dropdown-item" href="{{ route('password.change') }}">Change
-                                            Password</a></li>
+                                                Password</a></li>
                                         <li>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 style="display: none;">
@@ -154,19 +154,28 @@ $parttypes = PartType::get();
                                         <button class="site-btn header-btn searchButton2">Search</button>
                                     </div>
                                 </li>
-
-                                {{-- <li class="nav-item">
+                                <?php
+                                use App\Models\Cart;
+                                if (Auth::user()) {
+                                    $count = Cart::where('user_id', Auth::user()->id)
+                                        ->get()
+                                        ->count();
+                                } else {
+                                    $count = 0;
+                                }
+                                ?>
+                                <li class="nav-item">
                                     <div class="d-flex gap-3 align-items-center">
-                                        <a href=""><i class="fas fa-heart"></i></a>
+                                        <a href="{{ route('favourites') }}"><i class="fas fa-heart"></i></a>
                                         <div class="flex-shrink-0 position-relative">
-                                            <a href=""><img src="{{asset('front/images/cart.png')}}" alt=""
-                                class="img-fluid"></a>
-                                <span class="cart-count">1</span>
-                        </div>
-                        <div class="">
-                        </div>
-                </div>
-                </li> --}}
+                                            <a href="{{ route('cart') }}"><img src="{{ asset('front/images/cart.png') }}"
+                                                    alt="" class="img-fluid"></a>
+                                            <span class="cart-count">{{ $count ?? 0 }}</span>
+                                        </div>
+                                        <div class="">
+                                        </div>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </nav>

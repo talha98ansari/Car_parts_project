@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Favourite;
 use Illuminate\Http\Request;
 use App\Models\{Slider, Category, Partner, Review, AboutUs, ContactUs, OtherPages, Part, PartType, SubCate, CarModel, Maker, ContactInfo, Tool};
@@ -158,4 +159,20 @@ class FrontController extends Controller
         return view('frontend.favourites', compact('data', 'partInfo'));
 
     }
+    public function cart(){
+        $partInfo = OtherPages::where('title', 'part_type')->first();
+            $data = Cart::join('parts','parts.id','=','carts.product_id')
+            ->where('parts.is_active', 1)
+            ->where('carts.user_id', Auth::id())
+        ->get();
+
+
+        $totalPrice =0;
+        foreach($data as $pn){
+            $totalPrice += $pn->price;
+        }
+        return view('frontend.cart', compact('data', 'totalPrice','partInfo'));
+    }
+
+
 }

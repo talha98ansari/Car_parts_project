@@ -361,4 +361,42 @@ $('.img-slider').owlCarousel({
 })
 
 
+$(document).on("click", "#addtocart", function () {
 
+    st = $(this).attr('data-status');
+    ct = $(this).attr('data-ct');
+    if (st == 0) {
+        $(this).attr('src', '/assets/img/market-o.png');
+        st = $(this).attr('data-status', 1);
+        $.ajax({
+            type: 'GET',
+            url: '/add-to-cart/' + ct,
+            success: function (data) {
+                if (!data['status']) {
+                    location.href = '/user/login';
+                }else{
+                    $('.cart-count').text(data['count'])
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    } else {
+        $(this).attr('src', '/assets/img/shopping-cart-o.png');
+        st = $(this).attr('data-status', 0);
+
+        $.ajax({
+            type: 'GET',
+            url: '/rem-to-cart/' + ct,
+            success: function (data) {
+                $('.cart-count').text(data['count'])
+
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+});
